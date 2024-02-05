@@ -35,6 +35,13 @@ Make sure to load the data and use inline code for some of this information.
 
 The two questions you want to answer.
 
+The two questions you want to answer.
+- Question 1:
+  * Which party wins in each state for general election on a map of USA
+- Question 2:
+  * How does is the mode of voting influenced by district population and how does that influence who loses
+
+
 ## Analysis plan
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
