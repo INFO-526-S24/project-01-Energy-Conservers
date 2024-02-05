@@ -33,14 +33,9 @@ Make sure to load the data and use inline code for some of this information.
 
 ## Questions
 
-The two questions you want to answer.
+Question 1: Which party wins in each state for the general election on a map of the USA?
 
-The two questions you want to answer.
-- Question 1:
-  * Which party wins in each state for general election on a map of USA
-- Question 2:
-  * How does is the mode of voting influenced by district population and how does that influence who loses
-
+Question 2: How is the mode of voting influenced by district population and how does that influence who loses?
 
 ## Analysis plan
 
