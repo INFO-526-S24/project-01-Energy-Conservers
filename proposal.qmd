@@ -34,14 +34,17 @@ sumStats <- house |> dlookr::describe()
 View(sumStats)
 
 ```
+The dataset, sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
 
-A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
+This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate's name, votes received, and various indicators such as whether it was a runoff election or if the candidate ran as a write-in.
 
 Make sure to load the data and use inline code for some of this information.
 
 ## Questions
 
-The two questions you want to answer.
+Question 1: Which party wins in each state for the general election on a map of the USA?
+
+Question 2: How is the mode of voting influenced by district population and how does that influence who loses?
 
 ## Analysis plan
 
