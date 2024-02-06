@@ -14,7 +14,10 @@ if(!require(pacman))
 
 pacman::p_load(tidyverse,
                here,
+               devtools,
                dlookr)
+
+devtools::install_github("choonghyunryu/dlookr")
 ```
 
 ## Dataset
@@ -25,6 +28,11 @@ pacman::p_load(tidyverse,
 
 tuesdata <- tidytuesdayR::tt_load('2023-11-07')
 house <- tuesdata$house
+
+# Summary statistics
+sumStats <- house |> dlookr::describe()
+View(sumStats)
+
 ```
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
