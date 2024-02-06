@@ -3,11 +3,14 @@ title: "Proposal title"
 subtitle: "Proposal"
 format: html
 editor: visual
+echo : FALSE
+warning : FALSE  
+message : FALSE  
 ---
 
 ```{r}
 #| label: load-pkgs
-#| message: false
+#| message: FALSE
 
 if(!require(pacman))
   install.packages("pacman")
@@ -17,18 +20,27 @@ pacman::p_load(tidyverse,
                devtools,
                dlookr)
 
-devtools::install_github("choonghyunryu/dlookr")
+# devtools::install_github("choonghyunryu/dlookr")
 ```
 
 ## Dataset
 
 ```{r}
 #| label: load-dataset
-#| message: false
+#| message: FALSE
+#| warrning: FALSE
 
+
+house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-07/house.csv')
+
+
+#<<<<<<< HEAD
 tuesdata <- tidytuesdayR::tt_load('2023-11-07')
 house <- tuesdata$house
+#>>>>>>> 47992bad2915cb6574cb17fda302331d6ce3c4a4
 ```
+=======
+
 
 | Variable | Description                                                                        |
 |-----------------------|------------------------------------------------|
@@ -40,15 +52,17 @@ house <- tuesdata$house
 
 ```{r}
 #| label: Summary Statistics
-#| message: false
+#| message: FALSE
+
 # Summary statistics
 house |> dlookr::describe()
 ```
-The dataset, sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
+
+About the dataset: The dataset,[US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
 
 This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate's name, votes received, and various indicators such as whether it was a runoff election or if the candidate ran as a write-in.
 
-Make sure to load the data and use inline code for some of this information.
+Reason for choosing: The US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project
 
 ## Questions
 
