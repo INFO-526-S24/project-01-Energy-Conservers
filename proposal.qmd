@@ -40,14 +40,18 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 
 ```
 
-| Variable         | Description                                       |
-|------------------|---------------------------------------------------|
-| `year`           | Year in which election was held.                  |
-| `state_po`       | State name.                                       |
-| `party`          | Party of the candidate.                           |
-| `mode`           | Mode of voting.                                   |
-| `candidatevotes` | No. of votes the candidate received.              |
-| `fusion ticket`  | candidate will receive votes from multiple party. |
+| Variable         | Description                                                    |
+|------------------|----------------------------------------------------------------|
+| `year`           | Year in which election was held.                               |
+| `state_po`       | State name.                                                    |
+| `party`          | Party of the candidate.                                        |
+| `mode`           | Mode of voting.                                                |
+| `candidate`      | Name of the candidate as it appears in the House Clerk report. |
+| `candidatevotes` | No. of votes the candidate received.                           |
+| `fusion ticket`  | candidate will receive votes from multiple party.              |
+| `district`       | District number.                                               |
+| `runoff`         | Runoff election.                                               |
+| `special`        | Special Election.                                              |
 
 ```{r}
 #| label: Summary Statistics
