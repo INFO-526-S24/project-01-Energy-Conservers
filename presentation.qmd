@@ -1,7 +1,7 @@
 ---
-title: "Project title"
-subtitle: "INFO 526 - Fall 2023 - Project 1"
-author: "Author names"
+title: "The Power of Voters"
+subtitle: "INFO 526 - Spring 2024 - Project 1"
+author: "Energy-Conservers"
 title-slide-attributes:
   data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
   data-background-size: stretch
