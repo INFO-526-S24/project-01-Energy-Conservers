@@ -1,16 +1,19 @@
 ---
-title: "Proposal title"
+title: "The Power of Voters" 
 subtitle: "Proposal"
-format: html
+format: 
+  html: 
+   embed-resources: true
+toc: true
 editor: visual
-echo : FALSE
-warning : FALSE  
-message : FALSE  
+execute: 
+  echo: false
 ---
 
 ```{r}
 #| label: load-pkgs
 #| message: FALSE
+#| warning: false
 
 if(!require(pacman))
   install.packages("pacman")
@@ -20,59 +23,106 @@ pacman::p_load(tidyverse,
                devtools,
                dlookr)
 
-# devtools::install_github("choonghyunryu/dlookr")
+#devtools::install_github("choonghyunryu/dlookr")
 ```
 
 ## Dataset
+
 #### US House Election Results
+
 ```{r}
 #| label: load-dataset
-#| message: FALSE
-#| warrning: FALSE
-
+#| message: false
+#| warning: false
 
 house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-07/house.csv')
 
-
-#<<<<<<< HEAD
-#tuesdata <- tidytuesdayR::tt_load('2023-11-07')
-#house <- tuesdata$house
-#>>>>>>> 47992bad2915cb6574cb17fda302331d6ce3c4a4
 ```
-=======
 
-
-| Variable | Description                                                                        |
-|-----------------------|------------------------------------------------|
-| `year` | Year in which election was held                                                        |
-| `state`     | State name                               |
-| `party`      |  Party of the candidate |
-| `mode`      |  Mode of voting |
-| `writein`      |  Vote totals associated with write-in candidates |
-
-
-##### Summary Statistics
+| Variable         | Description                                      |
+|------------------|--------------------------------------------------|
+| `year`           | Year in which election was held                  |
+| `state_po`       | State name                                       |
+| `party`          | Party of the candidate                           |
+| `mode`           | Mode of voting                                   |
+| `candidatevotes` | No. of votes the candidate received.             |
+| `fusion ticket`  | candidate will receive votes from multiple party |
 
 ```{r}
 #| label: Summary Statistics
-#| message: FALSE
+#| warning: false
+#| message: false
 
 # Summary statistics
-house |> dlookr::describe()
+# house |> dlookr::describe()
 ```
 
-About the dataset: The dataset,[US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
+About the dataset:
+
+The dataset,[US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
 
 This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate's name, votes received, and various indicators such as whether it was a runoff election or if the candidate ran as a write-in.
 
-Reason for choosing: The US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project
+Reason for choosing:
+
+The US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project
 
 ## Questions
 
 Question 1: Which party wins in each state for the general election on a map of the USA?
 
-Question 2: How is the mode of voting influenced by district population and how does that influence who loses?
+Question 2: How is the type of voting influenced by population and how does that influence who looses?
 
 ## Analysis plan
 
--   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
+**For Question 1:**
+
+*Variables Involved:*
+
+-   **`state_po`**: The two-letter postal abbreviation for the state.
+
+-   **`party`**: The political party of the candidate.
+
+-   **`year`**: Year of the election, focusing on the most recent general election or a specific year of interest.
+
+-   **`candidatevotes`**: The number of votes the candidate received.
+
+**Analysis Approach:**
+
+1.  **Filter Data**: Data selection from the general elections (**`stage`** variable) for the most recent year or a specific year of interest.
+
+2.  **Determine Winners**: For each state, identify the party with the highest aggregate **`candidatevotes`** in the general election.
+
+3.  **Visualization**: Create a map of the USA, coloring each state based on the winning party. This visualization will clearly depict the political landscape across the states for the selected election year.
+
+**For Question 2:**
+
+*Variables Involved:*
+
+-   **`district`**: The congressional district number.
+
+-   **`fusion ticket`** : allowing candidate to receive votes from multiple party.
+
+-   **`runoff`** : second election held to determine a winner
+
+-   **`party`**: The political party of the candidate.
+
+-   **`candidatevotes`**: The number of votes the candidate received.
+
+*Variables to be Created:*
+
+-   **`population`**: This will require merging external data containing population
+
+*Analysis Approach:*
+
+1.  **Merge External Data**: Incorporate population data from a reliable source (e.g. U.S. Census Bureau).
+
+2.  **Analyze Voting Type by Population**: Examine the relationship between population and the predominant type of voting, using statistical analysis.
+
+3.  **Correlate with Election Outcomes**: Assess how the type of voting and population correlate with the election outcomes, focusing on which party tends to loose with certain characteristics.
+
+*Visualization and Reporting:*
+
+-   Use scatter plots or heat maps to show the relationship between population and mode of voting.
+
+-   Create comparative visualizations to illustrate how these factors influence election outcomes, potentially using pie charts or bar charts.
