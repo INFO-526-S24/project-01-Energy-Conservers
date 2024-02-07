@@ -1,5 +1,5 @@
 ---
-title: "Project title"
+title: "The Power of Voters"
 subtitle: "INFO 526 - Project 1"
 author: "Team name"
 format: html
