@@ -40,18 +40,20 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 
 ```
 
-| Variable         | Description                                                    |
-|------------------|----------------------------------------------------------------|
-| `year`           | Year in which election was held.                               |
-| `state_po`       | State name.                                                    |
-| `party`          | Party of the candidate.                                        |
-| `mode`           | Mode of voting.                                                |
-| `candidate`      | Name of the candidate as it appears in the House Clerk report. |
-| `candidatevotes` | No. of votes the candidate received.                           |
-| `fusion ticket`  | candidate will receive votes from multiple party.              |
-| `district`       | District number.                                               |
-| `runoff`         | Runoff election.                                               |
-| `special`        | Special Election.                                              |
+| Variable         | Description                                                                               |
+|------------------|------------------------------------------------------|
+| `year`           | Year in which election was held.                                                          |
+| `state_po`       | State name.                                                                               |
+| `party`          | Party of the candidate.                                                                   |
+| `mode`           | method of voting.                                                                         |
+| `candidate`      | Name of the candidate as it appears in the House Clerk report.                            |
+| `candidatevotes` | No. of votes the candidate received.                                                      |
+| `fusion ticket`  | Same Candidate will receive votes from multiple party.                                    |
+| `district`       | District number in state                                                                  |
+| `runoff`         | Second election held to determine a winner                                                |
+| `special`        | Special Election.                                                                         |
+| `totalvotes`     | Total Votes in District                                                                   |
+| `Writein`        | Candidate name does not appear on the ballot and must be physically written in by voters. |
 
 ```{r}
 #| label: Summary Statistics
@@ -62,27 +64,25 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 # house |> dlookr::describe()
 ```
 
-** About the dataset : **
+\*\* About the dataset : \*\*
 
 The dataset,[US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
 
 This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate's name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.
 
-** Reason for choosing: **
+\*\* Reason for choosing: \*\*
 
 The US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project.
 
 ## Questions
 
-Question 1: How do election outcomes vary by political party across different states in the USA over a 4-year period (1976-2022), and what demographic factors may influence these variations?
+Question 1: Which party wins in each state for the general election on a map of the USA?
 
 Question 2: How is the type of voting influenced by population and how does that influence who looses?
 
 ## Analysis plan
 
 **For Question 1:**
-
-PART 1:   How do election outcomes vary by political party across different states in the USA over a 4-year period (1976-2022)?                                                                    
 
 *Variables Involved:*
 
@@ -102,51 +102,6 @@ Analysis Approach:
 
 3.  **Visualization**: Create a map of the USA, coloring each state based on the winning party. This visualization will clearly depict the political landscape across the states for the selected election year.
 
-PART 2: what demographic factors may influence these variations?
-
-*Variables Involved:*
-       
-        Internal Data Source:
--   **`State_po`**: Name or code representing a U.S. state.
--   **`Party`**: Political affiliation of a candidate.
--   **`CandidateVotes`**: Number of votes received by a candidate.
--   **`Year`**: Year in which the election was held.
-       
-        Demographic Data from External Sources
--   **`Population Demographics`**: Characteristics of a population, such as size and density.
--   **`Voter Demographics`**: Characteristics of voters, including registration and turnout rates.
--   **`Income Levels`**: Distribution of income among residents.
--   **`Education Levels`**: Distribution of educational attainment.
--   **`Race/Ethnicity Distributions`**: Distribution of racial and ethnic groups within the population
-
-Analysis Approach:
-
-Scatter Plot for Demographic Analysis:
-
-1)  **Filter Data**:
-Combining election outcome data with demographic data, ensuring alignment based on common identifiers such as state names or codes. 
-
-2)  **Visualization**
-Generating a scatter plot, with each data point representing a state and its election outcome correlated with the corresponding demographic factor like population, income, voter, education, race/ethnicity distributions
-
-Heatmap for Correlation Analysis:
-
-1)  **Filter Data**:
-Combining election outcome data with demographic data, ensuring alignment based on common identifiers such as state names or codes. 
-
-2)  **Visualization**:
-Calculating  the correlation coefficients between the election outcomes  and each demographic factor like population, income, voter, education, race/ethnicity distributions and analyzing the heatmap, we can identify which demographic factors have the strongest correlation with election outcomes and understand how they influence political dynamics.
-
-
-***Key Points***:
-•	The analysis integrates both internal and external data sources, combining election outcome data with demographic data obtained from external sources
-
-
-
-
-
-
-
 **For Question 2:**
 
 *Variables Involved:*
@@ -161,9 +116,13 @@ Calculating  the correlation coefficients between the election outcomes  and eac
 
 -   **`party`**: The political party of the candidate.
 
+-   **`year`**: Year of the election, focusing on the most recent general election or a specific year of interest.
+
 -   **`candidatevotes`**: The number of votes the candidate received.
 
 -   **`candidate`**: Name of candidate
+
+-   **`totalvotes`**: Total Votes in District
 
 *Variables to be Created:*
 
