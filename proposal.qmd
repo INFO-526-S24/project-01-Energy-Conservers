@@ -127,7 +127,7 @@ Scatter Plot for Demographic Analysis:
 Combining election outcome data with demographic data, ensuring alignment based on common identifiers such as state names or codes. 
 
 2)  **Visualization**
-Generating a scatter plot, .with each data point representing a state and its election outcome correlated with the corresponding demographic factor like population, income, voter, education, race/ethnicity distributions
+Generating a scatter plot, with each data point representing a state and its election outcome correlated with the corresponding demographic factor like population, income, voter, education, race/ethnicity distributions
 
 Heatmap for Correlation Analysis:
 
@@ -135,8 +135,7 @@ Heatmap for Correlation Analysis:
 Combining election outcome data with demographic data, ensuring alignment based on common identifiers such as state names or codes. 
 
 2)  **Visualization**:
-Calculating  the correlation coefficients between the election outcomes (DV) and each demographic factor like population, income, voter, education, race/ethnicity distributions 
-analyzing the heatmap, we can identify which demog.raphic factors have the strongest correlation with election outcomes and understand how they influence political dynamics.
+Calculating  the correlation coefficients between the election outcomes  and each demographic factor like population, income, voter, education, race/ethnicity distributions and analyzing the heatmap, we can identify which demographic factors have the strongest correlation with election outcomes and understand how they influence political dynamics.
 
 
 ***Key Points***:
