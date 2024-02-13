@@ -1,54 +1,5 @@
 [
   {
-    "objectID": "proposal.html",
-    "href": "proposal.html",
-    "title": "The Power of Voters",
-    "section": "",
-    "text": "Variable\nDescription\n\n\n\n\nyear\nYear in which election was held.\n\n\nstate_po\nState name.\n\n\nparty\nParty of the candidate.\n\n\ncandidate\nName of the candidate as it appears in the House Clerk report.\n\n\ncandidatevotes\nNo. of votes the candidate received.\n\n\nfusion ticket\nSame Candidate will receive votes from multiple party.\n\n\ndistrict\nDistrict number in state\n\n\nrunoff\nSecond election held to determine a winner\n\n\nspecial\nSpecial Election.\n\n\ntotalvotes\nTotal Votes in District\n\n\nWritein\nCandidate name does not appear on the ballot and must be physically written in by voters.\n\n\n\nPreview of dataset\n\n\n# A tibble: 5 × 11\n   year state_po party    candidate candidatevotes fusion_ticket district runoff\n  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt; &lt;lgl&gt;         &lt;chr&gt;    &lt;lgl&gt; \n1  1976 AL       DEMOCRAT BILL DAV…          58906 FALSE         001      FALSE \n2  1976 AK       REPUBLI… DON YOUNG          83722 FALSE         000      FALSE \n3  1976 CA       DEMOCRAT ROBERT L…          75844 FALSE         004      FALSE \n4  1976 FL       DEMOCRAT GABRIEL …          80821 FALSE         006      FALSE \n5  1976 HI       REPUBLI… FREDERIC…          53745 FALSE         001      FALSE \n# ℹ 3 more variables: special &lt;lgl&gt;, totalvotes &lt;dbl&gt;, writein &lt;lgl&gt;\n\n\nAbout the dataset\nThe dataset, US House Election Results sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.\nThis dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate’s name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.\nReason for choosing dataset\nThe US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project."
-  },
-  {
-    "objectID": "proposal.html#dataset",
-    "href": "proposal.html#dataset",
-    "title": "The Power of Voters",
-    "section": "",
-    "text": "Variable\nDescription\n\n\n\n\nyear\nYear in which election was held.\n\n\nstate_po\nState name.\n\n\nparty\nParty of the candidate.\n\n\ncandidate\nName of the candidate as it appears in the House Clerk report.\n\n\ncandidatevotes\nNo. of votes the candidate received.\n\n\nfusion ticket\nSame Candidate will receive votes from multiple party.\n\n\ndistrict\nDistrict number in state\n\n\nrunoff\nSecond election held to determine a winner\n\n\nspecial\nSpecial Election.\n\n\ntotalvotes\nTotal Votes in District\n\n\nWritein\nCandidate name does not appear on the ballot and must be physically written in by voters.\n\n\n\nPreview of dataset\n\n\n# A tibble: 5 × 11\n   year state_po party    candidate candidatevotes fusion_ticket district runoff\n  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt; &lt;lgl&gt;         &lt;chr&gt;    &lt;lgl&gt; \n1  1976 AL       DEMOCRAT BILL DAV…          58906 FALSE         001      FALSE \n2  1976 AK       REPUBLI… DON YOUNG          83722 FALSE         000      FALSE \n3  1976 CA       DEMOCRAT ROBERT L…          75844 FALSE         004      FALSE \n4  1976 FL       DEMOCRAT GABRIEL …          80821 FALSE         006      FALSE \n5  1976 HI       REPUBLI… FREDERIC…          53745 FALSE         001      FALSE \n# ℹ 3 more variables: special &lt;lgl&gt;, totalvotes &lt;dbl&gt;, writein &lt;lgl&gt;\n\n\nAbout the dataset\nThe dataset, US House Election Results sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.\nThis dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate’s name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.\nReason for choosing dataset\nThe US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project."
-  },
-  {
-    "objectID": "proposal.html#questions",
-    "href": "proposal.html#questions",
-    "title": "The Power of Voters",
-    "section": "Questions",
-    "text": "Questions\nQuestion 1: How did US voting trends change in the 2016-2020 presidential term?\nQuestion 2: How is the type of voting influenced by population and how does that influence who looses?"
-  },
-  {
-    "objectID": "proposal.html#analysis-plan",
-    "href": "proposal.html#analysis-plan",
-    "title": "The Power of Voters",
-    "section": "Analysis plan",
-    "text": "Analysis plan\nFor Question 1:\nVariables Involved:\n\nstate_po: The two-letter postal abbreviation for the state.\nparty: The political party of the candidate.\nyear: Year of the election, focusing on the most recent general election or a specific year of interest.\ncandidatevotes: The number of votes the candidate received.\n\nAnalysis Approach:\n\nFilter Data: Data selection from the general elections (stage variable) for the most recent year or a specific year of interest.\nDetermine Winners: For each state, identify the party with the highest aggregate candidatevotes in the general election.\nVisualization: Create a map of the USA, coloring each state based on the winning party. This visualization will clearly depict the political landscape across the states for the selected election year.\n\nFor Question 2:\nVariables Involved:\n\ndistrict: The congressional district number.\nfusion ticket : allowing candidate to receive votes from multiple party.\nrunoff : second election held to determine a winner\nspecial : Special election\nparty: The political party of the candidate.\nyear: Year of the election, focusing on the most recent general election or a specific year of interest.\ncandidatevotes: The number of votes the candidate received.\ncandidate: Name of candidate\ntotalvotes: Total Votes in District\n\nVariables to be Created:\n\npopulation: This will require merging external data containing population\n\nAnalysis Approach:\n\nMerge External Data: The first step involves incorporating population data from a reliable source, such as the U.S. Census Bureau. This additional dataset will provide information on the population within each congressional district, which is essential for analyzing the relationship between population and voting type.\nAnalyze Voting Type by Population: Examine the relationship between population and the type of voting, using statistical analysis .how the type of voting (e.g., fusion ticket, runoff, special elections) varies with population size. This analysis could involve methods such as regression analysis, chi-square tests, or other appropriate statistical techniques to identify any significant relationships or patterns.\nCorrelate with Election Outcomes: Focusing on which party tends to loose with certain characteristics.the next step is to assess how these factors correlate with election outcomes. Specifically, the focus will be on understanding which party tends to lose under certain conditions.\n\nVisualization and Reporting:\n\nUse scatter plots or heat maps to show the relationship between population and mode of voting.\nCreate comparative visualizations to illustrate how these factors influence election outcomes, potentially using bar charts and pie chart"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Project title",
-    "section": "",
-    "text": "Add project abstract here."
-  },
-  {
-    "objectID": "index.html#abstract",
-    "href": "index.html#abstract",
-    "title": "Project title",
-    "section": "",
-    "text": "Add project abstract here."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This project was developed by [Team Name] For INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
-  },
-  {
     "objectID": "data/README 2.html",
     "href": "data/README 2.html",
     "title": "Data",
@@ -68,6 +19,13 @@
     "title": "Data",
     "section": "Data Types:",
     "text": "Data Types:\n\nColumn: data type"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was developed by [Team Name] For INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
   },
   {
     "objectID": "presentation.html#quarto",
@@ -131,5 +89,47 @@
     "title": "The Power of Voters",
     "section": "Feeling adventurous?",
     "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Project title",
+    "section": "",
+    "text": "Add project abstract here."
+  },
+  {
+    "objectID": "index.html#abstract",
+    "href": "index.html#abstract",
+    "title": "Project title",
+    "section": "",
+    "text": "Add project abstract here."
+  },
+  {
+    "objectID": "proposal.html",
+    "href": "proposal.html",
+    "title": "The Power of Voters",
+    "section": "",
+    "text": "Variable\nDescription\n\n\n\n\nyear\nYear in which election was held.\n\n\nstate_po\nState name.\n\n\nparty\nParty of the candidate.\n\n\ncandidate\nName of the candidate as it appears in the House Clerk report.\n\n\ncandidatevotes\nNo. of votes the candidate received.\n\n\nfusion ticket\nSame Candidate will receive votes from multiple party.\n\n\ndistrict\nDistrict number in state\n\n\nrunoff\nSecond election held to determine a winner\n\n\nspecial\nSpecial Election.\n\n\ntotalvotes\nTotal Votes in District\n\n\nWritein\nCandidate name does not appear on the ballot and must be physically written in by voters.\n\n\n\nPreview of dataset\n\n\n# A tibble: 5 × 11\n   year state_po party    candidate candidatevotes fusion_ticket district runoff\n  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt; &lt;lgl&gt;         &lt;chr&gt;    &lt;lgl&gt; \n1  1976 AL       DEMOCRAT BILL DAV…          58906 FALSE         001      FALSE \n2  1976 AK       REPUBLI… DON YOUNG          83722 FALSE         000      FALSE \n3  1976 CA       DEMOCRAT ROBERT L…          75844 FALSE         004      FALSE \n4  1976 FL       DEMOCRAT GABRIEL …          80821 FALSE         006      FALSE \n5  1976 HI       REPUBLI… FREDERIC…          53745 FALSE         001      FALSE \n# ℹ 3 more variables: special &lt;lgl&gt;, totalvotes &lt;dbl&gt;, writein &lt;lgl&gt;\n\n\nAbout the dataset\nThe dataset, US House Election Results sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.\nThis dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate’s name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.\nReason for choosing dataset\nThe US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project."
+  },
+  {
+    "objectID": "proposal.html#dataset",
+    "href": "proposal.html#dataset",
+    "title": "The Power of Voters",
+    "section": "",
+    "text": "Variable\nDescription\n\n\n\n\nyear\nYear in which election was held.\n\n\nstate_po\nState name.\n\n\nparty\nParty of the candidate.\n\n\ncandidate\nName of the candidate as it appears in the House Clerk report.\n\n\ncandidatevotes\nNo. of votes the candidate received.\n\n\nfusion ticket\nSame Candidate will receive votes from multiple party.\n\n\ndistrict\nDistrict number in state\n\n\nrunoff\nSecond election held to determine a winner\n\n\nspecial\nSpecial Election.\n\n\ntotalvotes\nTotal Votes in District\n\n\nWritein\nCandidate name does not appear on the ballot and must be physically written in by voters.\n\n\n\nPreview of dataset\n\n\n# A tibble: 5 × 11\n   year state_po party    candidate candidatevotes fusion_ticket district runoff\n  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt; &lt;lgl&gt;         &lt;chr&gt;    &lt;lgl&gt; \n1  1976 AL       DEMOCRAT BILL DAV…          58906 FALSE         001      FALSE \n2  1976 AK       REPUBLI… DON YOUNG          83722 FALSE         000      FALSE \n3  1976 CA       DEMOCRAT ROBERT L…          75844 FALSE         004      FALSE \n4  1976 FL       DEMOCRAT GABRIEL …          80821 FALSE         006      FALSE \n5  1976 HI       REPUBLI… FREDERIC…          53745 FALSE         001      FALSE \n# ℹ 3 more variables: special &lt;lgl&gt;, totalvotes &lt;dbl&gt;, writein &lt;lgl&gt;\n\n\nAbout the dataset\nThe dataset, US House Election Results sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.\nThis dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate’s name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.\nReason for choosing dataset\nThe US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project."
+  },
+  {
+    "objectID": "proposal.html#questions",
+    "href": "proposal.html#questions",
+    "title": "The Power of Voters",
+    "section": "Questions",
+    "text": "Questions\nQuestion 1: How did US voting trends change in the 2016-2020 presidential term?\nQuestion 2: How is the type of voting influenced by population and how does that influence who looses?"
+  },
+  {
+    "objectID": "proposal.html#analysis-plan",
+    "href": "proposal.html#analysis-plan",
+    "title": "The Power of Voters",
+    "section": "Analysis plan",
+    "text": "Analysis plan\nFor Question 1:\nVariables Involved:\n\nstate_po: The two-letter postal abbreviation for the state.\nparty: The political party of the candidate.\nyear: Year of the election, focusing on the most recent general election or a specific year of interest.\ncandidatevotes: The number of votes the candidate received.\n\nAnalysis Approach:\n\nFilter Data: Data selection from the general elections (**`stage`** variable) for the most recent year or a specific year of interest.The analysis focuses on data from the general elections (stage variable) for the most recent year or a specific year of interest within the 2016-2020 presidential term. This data includes information such as the two-letter postal abbreviation for each state (state_po), the political party of the candidate (party), the year of the election (year), and the number of votes each candidate received (candidatevotes).\nDetermine Winners: For each state, the analysis identifies the party with the highest aggregate candidate votes in the general election. This involves summing up the candidate votes for each party within each state and selecting the party with the highest total votes as the winner for that state.\nVisualization: Create a map of the USA, coloring each state based on the winning party. This visualization provides a clear depiction of the political landscape across the states for the selected election year, highlighting which party won each state.\n\nFor Question 2:\nVariables Involved:\n\ndistrict: The congressional district number.\nfusion ticket : allowing candidate to receive votes from multiple party.\nrunoff : second election held to determine a winner\nspecial : Special election\nparty: The political party of the candidate.\nyear: Year of the election, focusing on the most recent general election or a specific year of interest.\ncandidatevotes: The number of votes the candidate received.\ncandidate: Name of candidate\ntotalvotes: Total Votes in District\n\nVariables to be Created:\n\npopulation: This will require merging external data containing population\n\nAnalysis Approach:\n\nMerge External Data: The first step involves incorporating population data from a reliable source, such as the U.S. Census Bureau. This additional dataset will provide information on the population within each congressional district, which is essential for analyzing the relationship between population and voting type.\nAnalyze Voting Type by Population: Examine the relationship between population and the type of voting, using statistical analysis .how the type of voting (e.g., fusion ticket, runoff, special elections) varies with population size. This analysis could involve methods such as regression analysis, chi-square tests, or other appropriate statistical techniques to identify any significant relationships or patterns.\nCorrelate with Election Outcomes: Focusing on which party tends to loose with certain characteristics.the next step is to assess how these factors correlate with election outcomes. Specifically, the focus will be on understanding which party tends to lose under certain conditions.\n\nVisualization and Reporting:\n\nUse scatter plots or heat maps to show the relationship between population and mode of voting.\nCreate comparative visualizations to illustrate how these factors influence election outcomes, potentially using bar charts and pie chart"
   }
 ]
