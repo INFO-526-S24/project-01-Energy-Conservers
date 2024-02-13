@@ -12,34 +12,20 @@ execute:
   warning: false
 ---
 
-```{r}
-#| label: load-pkgs
-#| message: FALSE
-#| warning: false
+::: {.cell}
 
-if(!require(pacman))
-  install.packages("pacman")
+:::
 
-pacman::p_load(tidyverse,
-               here,
-               devtools,
-               dlookr)
-
-#devtools::install_github("choonghyunryu/dlookr")
-```
 
 ## Dataset
 
 #### US House Election Results
 
-```{r}
-#| label: load-dataset
-#| message: false
-#| warning: false
 
-house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-11-07/house.csv')
+::: {.cell}
 
-```
+:::
+
 
 | Variable         | Description                                                                               |
 |-------------------|-----------------------------------------------------|
@@ -57,37 +43,30 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 
 **Preview of dataset**
 
-```{r}
-#| label: Dataset Preview
-#| warning: false
-#| message: false
 
-housePrev <- house[c(1,20,51,199,249),
-                   c("year", 
-                     "state_po",
-                     "party",
-                     "candidate",
-                     "candidatevotes",
-                     "fusion_ticket",
-                     "district",
-                     "runoff",
-                     "special",
-                     "totalvotes",
-                     "writein")]
-
-head(housePrev, n = 5)
-
+::: {.cell}
+::: {.cell-output .cell-output-stdout}
 
 ```
-
-```{r}
-#| label: Summary Statistics
-#| warning: false
-#| message: false
-
-# Summary statistics
-# house |> dlookr::describe()
+# A tibble: 5 × 11
+   year state_po party    candidate candidatevotes fusion_ticket district runoff
+  <dbl> <chr>    <chr>    <chr>              <dbl> <lgl>         <chr>    <lgl> 
+1  1976 AL       DEMOCRAT BILL DAV…          58906 FALSE         001      FALSE 
+2  1976 AK       REPUBLI… DON YOUNG          83722 FALSE         000      FALSE 
+3  1976 CA       DEMOCRAT ROBERT L…          75844 FALSE         004      FALSE 
+4  1976 FL       DEMOCRAT GABRIEL …          80821 FALSE         006      FALSE 
+5  1976 HI       REPUBLI… FREDERIC…          53745 FALSE         001      FALSE 
+# ℹ 3 more variables: special <lgl>, totalvotes <dbl>, writein <lgl>
 ```
+
+
+:::
+:::
+
+::: {.cell}
+
+:::
+
 
 **About the dataset**
 
@@ -166,3 +145,4 @@ Analysis Approach:
 -   Use scatter plots or heat maps to show the relationship between population and mode of voting.
 
 -   Create comparative visualizations to illustrate how these factors influence election outcomes, potentially using bar charts and pie chart
+
