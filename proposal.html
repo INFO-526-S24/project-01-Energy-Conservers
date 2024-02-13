@@ -4676,11 +4676,8 @@ vertical-align: -.125em;
    
   <ul>
   <li><a href="#dataset" id="toc-dataset" class="nav-link active" data-scroll-target="#dataset">Dataset</a></li>
-  <li><a href="#the-datasetus-house-election-results-sourced-from-mit-election-data-and-science-lab-medsl-offers-a-comprehensive-overview-of-us-house-elections." id="toc-the-datasetus-house-election-results-sourced-from-mit-election-data-and-science-lab-medsl-offers-a-comprehensive-overview-of-us-house-elections." class="nav-link" data-scroll-target="#the-datasetus-house-election-results-sourced-from-mit-election-data-and-science-lab-medsl-offers-a-comprehensive-overview-of-us-house-elections.">The dataset,US House Election Results sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.</a>
-  <ul class="collapse">
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
   <li><a href="#analysis-plan" id="toc-analysis-plan" class="nav-link" data-scroll-target="#analysis-plan">Analysis plan</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -4707,32 +4704,89 @@ vertical-align: -.125em;
 </header>
 
 
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-The downloaded binary packages are in
-    /var/folders/6n/cwl6lb1j5j54r8zxq47cqpbr0000gn/T//RtmpfTvS6k/downloaded_packages
-Error in download.file(url, destfile, method, mode = &quot;wb&quot;, ...) : 
-  cannot open URL &#39;http://cran.rstudio.com/bin/macosx/big-sur-arm64/contrib/4.3/dlookr_0.6.2.tgz&#39;
-
-The downloaded binary packages are in
-    /var/folders/6n/cwl6lb1j5j54r8zxq47cqpbr0000gn/T//RtmpfTvS6k/downloaded_packages</code></pre>
-</div>
-</div>
 <section id="dataset" class="level2">
 <h2 class="anchored" data-anchor-id="dataset">Dataset</h2>
 <section id="us-house-election-results" class="level4">
 <h4 class="anchored" data-anchor-id="us-house-election-results">US House Election Results</h4>
-<p>&lt;&lt;&lt;&lt; Updated upstream | Variable | Description | |——————|————————————————–| | <code>year</code> | Year in which election was held | | <code>state_po</code> | State name | | <code>party</code> | Party of the candidate | | <code>mode</code> | Mode of voting | | <code>candidatevotes</code> | No. of votes the candidate received. | | <code>fusion ticket</code> | candidate will receive votes from multiple party |</p>
-<p>About the dataset:</p>
+<table class="table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>year</code></td>
+<td>Year in which election was held.</td>
+</tr>
+<tr class="even">
+<td><code>state_po</code></td>
+<td>State name.</td>
+</tr>
+<tr class="odd">
+<td><code>party</code></td>
+<td>Party of the candidate.</td>
+</tr>
+<tr class="even">
+<td><code>candidate</code></td>
+<td>Name of the candidate as it appears in the House Clerk report.</td>
+</tr>
+<tr class="odd">
+<td><code>candidatevotes</code></td>
+<td>No. of votes the candidate received.</td>
+</tr>
+<tr class="even">
+<td><code>fusion ticket</code></td>
+<td>Same Candidate will receive votes from multiple party.</td>
+</tr>
+<tr class="odd">
+<td><code>district</code></td>
+<td>District number in state</td>
+</tr>
+<tr class="even">
+<td><code>runoff</code></td>
+<td>Second election held to determine a winner</td>
+</tr>
+<tr class="odd">
+<td><code>special</code></td>
+<td>Special Election.</td>
+</tr>
+<tr class="even">
+<td><code>totalvotes</code></td>
+<td>Total Votes in District</td>
+</tr>
+<tr class="odd">
+<td><code>Writein</code></td>
+<td>Candidate name does not appear on the ballot and must be physically written in by voters.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Preview of dataset</strong></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 11
+   year state_po party    candidate candidatevotes fusion_ticket district runoff
+  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt; &lt;lgl&gt;         &lt;chr&gt;    &lt;lgl&gt; 
+1  1976 AL       DEMOCRAT BILL DAV…          58906 FALSE         001      FALSE 
+2  1976 AK       REPUBLI… DON YOUNG          83722 FALSE         000      FALSE 
+3  1976 CA       DEMOCRAT ROBERT L…          75844 FALSE         004      FALSE 
+4  1976 FL       DEMOCRAT GABRIEL …          80821 FALSE         006      FALSE 
+5  1976 HI       REPUBLI… FREDERIC…          53745 FALSE         001      FALSE 
+# ℹ 3 more variables: special &lt;lgl&gt;, totalvotes &lt;dbl&gt;, writein &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<p><strong>About the dataset</strong></p>
+<p>The dataset, <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07">US House Election Results</a> sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.</p>
+<p>This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate’s name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.</p>
+<p><strong>Reason for choosing dataset</strong></p>
+<p>The US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project.</p>
 </section>
 </section>
-<section id="the-datasetus-house-election-results-sourced-from-mit-election-data-and-science-lab-medsl-offers-a-comprehensive-overview-of-us-house-elections." class="level1">
-<h1>The dataset,<a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07">US House Election Results</a> sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.</h1>
-<p>The dataset, sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections. &gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</p>
-<p>This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate’s name, votes received, and various indicators such as whether it was a runoff election or if the candidate ran as a write-in.</p>
-<p>Reason for choosing:</p>
-<p>The US House Election dataset offers a rich and comprehensive source of data, encompassing multiple variables such as election years, state information, candidate details, and voting outcomes. This abundance of data provides ample opportunities for rigorous analysis and exploration within the scope of the academic project</p>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
 <p>Question 1: Which party wins in each state for the general election on a map of the USA?</p>
@@ -4748,7 +4802,7 @@ The downloaded binary packages are in
 <li><p><strong><code>year</code></strong>: Year of the election, focusing on the most recent general election or a specific year of interest.</p></li>
 <li><p><strong><code>candidatevotes</code></strong>: The number of votes the candidate received.</p></li>
 </ul>
-<p><strong>Analysis Approach:</strong></p>
+<p>Analysis Approach:</p>
 <ol type="1">
 <li><p><strong>Filter Data</strong>: Data selection from the general elections (<strong><code>stage</code></strong> variable) for the most recent year or a specific year of interest.</p></li>
 <li><p><strong>Determine Winners</strong>: For each state, identify the party with the highest aggregate <strong><code>candidatevotes</code></strong> in the general election.</p></li>
@@ -4760,27 +4814,30 @@ The downloaded binary packages are in
 <li><p><strong><code>district</code></strong>: The congressional district number.</p></li>
 <li><p><strong><code>fusion ticket</code></strong> : allowing candidate to receive votes from multiple party.</p></li>
 <li><p><strong><code>runoff</code></strong> : second election held to determine a winner</p></li>
+<li><p><strong><code>special</code></strong> : Special election</p></li>
 <li><p><strong><code>party</code></strong>: The political party of the candidate.</p></li>
+<li><p><strong><code>year</code></strong>: Year of the election, focusing on the most recent general election or a specific year of interest.</p></li>
 <li><p><strong><code>candidatevotes</code></strong>: The number of votes the candidate received.</p></li>
+<li><p><strong><code>candidate</code></strong>: Name of candidate</p></li>
+<li><p><strong><code>totalvotes</code></strong>: Total Votes in District</p></li>
 </ul>
 <p><em>Variables to be Created:</em></p>
 <ul>
 <li><strong><code>population</code></strong>: This will require merging external data containing population</li>
 </ul>
-<p><em>Analysis Approach:</em></p>
+<p><strong><em>Analysis Approach:</em></strong></p>
 <ol type="1">
 <li><p><strong>Merge External Data</strong>: Incorporate population data from a reliable source (e.g. U.S. Census Bureau).</p></li>
-<li><p><strong>Analyze Voting Type by Population</strong>: Examine the relationship between population and the predominant type of voting, using statistical analysis.</p></li>
+<li><p><strong>Analyze Voting Type by Population</strong>: Examine the relationship between population and the type of voting, using statistical analysis .</p></li>
 <li><p><strong>Correlate with Election Outcomes</strong>: Assess how the type of voting and population correlate with the election outcomes, focusing on which party tends to loose with certain characteristics.</p></li>
 </ol>
-<p><em>Visualization and Reporting:</em></p>
+<p><strong><em>Visualization and Reporting:</em></strong></p>
 <ul>
 <li><p>Use scatter plots or heat maps to show the relationship between population and mode of voting.</p></li>
-<li><p>Create comparative visualizations to illustrate how these factors influence election outcomes, potentially using pie charts or bar charts.</p></li>
+<li><p>Create comparative visualizations to illustrate how these factors influence election outcomes, potentially using bar charts and pie chart</p></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
