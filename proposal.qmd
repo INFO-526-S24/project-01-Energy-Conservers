@@ -4,7 +4,6 @@ subtitle: "Proposal"
 format: 
   html: 
    embed-resources: true
-   code-fold: true
 toc: true
 editor: visual
 execute:
@@ -42,7 +41,7 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 ```
 
 | Variable         | Description                                                                               |
-|-------------------|-----------------------------------------------------|
+|------------------|------------------------------------------------------|
 | `year`           | Year in which election was held.                                                          |
 | `state_po`       | State name.                                                                               |
 | `party`          | Party of the candidate.                                                                   |
@@ -56,7 +55,6 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 | `Writein`        | Candidate name does not appear on the ballot and must be physically written in by voters. |
 
 **Preview of dataset**
-
 ```{r}
 #| label: Dataset Preview
 #| warning: false
@@ -88,6 +86,8 @@ head(housePrev, n = 5)
 # Summary statistics
 # house |> dlookr::describe()
 ```
+
+
 
 **About the dataset**
 
@@ -121,11 +121,11 @@ Question 2: How is the type of voting influenced by population and how does that
 
 Analysis Approach:
 
-1.  **Filter Data**: Data selection from the general elections (**`stage`** variable) for the most recent year or a specific year of interest.The analysis focuses on data from the general elections (stage variable) for the most recent year or a specific year of interest within the 2016-2020 presidential term. This data includes information such as the two-letter postal abbreviation for each state (state_po), the political party of the candidate (party), the year of the election (year), and the number of votes each candidate received (candidatevotes).
+1.  **Filter Data**: Data selection from the general elections (**`stage`** variable) for the most recent year or a specific year of interest.
 
-2.  **Determine Winners**: For each state, the analysis identifies the party with the highest aggregate candidate votes in the general election. This involves summing up the candidate votes for each party within each state and selecting the party with the highest total votes as the winner for that state.
+2.  **Determine Winners**: For each state, identify the party with the highest aggregate **`candidatevotes`** in the general election.
 
-3.  **Visualization**: Create a map of the USA, coloring each state based on the winning party. This visualization provides a clear depiction of the political landscape across the states for the selected election year, highlighting which party won each state.
+3.  **Visualization**: Create a map of the USA, coloring each state based on the winning party. This visualization will clearly depict the political landscape across the states for the selected election year.
 
 **For Question 2:**
 
