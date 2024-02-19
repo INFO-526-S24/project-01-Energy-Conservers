@@ -168,3 +168,11 @@ Analysis Approach:
 -   Use scatter plots or heat maps to show the relationship between population and mode of voting.
 
 -   Create comparative visualizations to illustrate how these factors influence election outcomes, potentially using bar charts and pie chart
+
+**LIMITATIONS:**
+
+Limited Demographic Data: Obtaining and processing extensive demographic data spanning 47 years pose significant challenges. As a result, only basic demographic information such as population size is included in the analysis. Detailed demographic variables like age, race, and income level is not included  due to data availability constraints.
+
+Limited Economic and Social Data: Similarly, accessing economic indicators, education levels, and other social factors at the district level for a 47-year period could also be challenging and so we are not including that in air analysis too
+
+
