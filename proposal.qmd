@@ -169,7 +169,7 @@ Analysis Approach:
 
 -   Create comparative visualizations to illustrate how these factors influence election outcomes, potentially using bar charts and pie chart
 
-**LIMITATIONS:**
+<span style="color:red;">**LIMITATIONS**:</span> 
 
 Limited Demographic Data: Obtaining and processing extensive demographic data spanning 47 years pose significant challenges. As a result, only basic demographic information such as population size is included in the analysis. Detailed demographic variables like age, race, and income level is not included  due to data availability constraints.
 
