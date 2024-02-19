@@ -40,21 +40,22 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 
 ```
 
-| Variable         | Description                                                                               |
-|------------------|------------------------------------------------------|
-| `year`           | Year in which election was held.                                                          |
-| `state_po`       | State name.                                                                               |
-| `party`          | Party of the candidate.                                                                   |
-| `candidate`      | Name of the candidate as it appears in the House Clerk report.                            |
-| `candidatevotes` | No. of votes the candidate received.                                                      |
-| `fusion ticket`  | Same Candidate will receive votes from multiple party.                                    |
-| `district`       | District number in state                                                                  |
-| `runoff`         | Second election held to determine a winner                                                |
-| `special`        | Special Election.                                                                         |
-| `totalvotes`     | Total Votes in District                                                                   |
-| `Writein`        | Candidate name does not appear on the ballot and must be physically written in by voters. |
+| Variable         | Type  | Description  |
+|------------------|------------------|----------------------|
+| `year`           | integer | Year in which election was held.|
+| `state_po`       | character | State name.  |
+| `party`          | character |Party of the candidate. |
+| `candidate`      | character |Name of the candidate as it appears in the House Clerk report.|
+| `candidatevotes` | integer |No. of votes the candidate received.                                                      |
+| `fusion ticket`  | logical |Same Candidate will receive votes from multiple party.|
+| `district`       | character |District number in state |
+| `runoff`         | logical |Second election held to determine a winner |
+| `special`        | logical | Special Election.|
+| `totalvotes`     | integer | Total Votes in District |
+| `Writein`        | logical |Candidate name does not appear on the ballot and must be physically written in by voters. |
 
 **Preview of dataset**
+
 ```{r}
 #| label: Dataset Preview
 #| warning: false
@@ -86,8 +87,6 @@ head(housePrev, n = 5)
 # Summary statistics
 # house |> dlookr::describe()
 ```
-
-
 
 **About the dataset**
 
