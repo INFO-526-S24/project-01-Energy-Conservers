@@ -41,7 +41,7 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 ```
 
 | Variable         | Type      | Description                                                                               |
-|-----------------------|-----------------------|---------------------------|
+|------------------|-----------|-------------------------------------------------------------------------------------------|
 | `year`           | integer   | Year in which election was held.                                                          |
 | `state_po`       | character | State name.                                                                               |
 | `party`          | character | Party of the candidate.                                                                   |
@@ -108,7 +108,7 @@ Question 2: How is the type of voting influenced by population and how does that
 
 **For Question 1:**
 
-Introduction: 
+Introduction:
 
 using the election data of 2016-2020 presidential term, we aim to filter the data for the most recent or a specific year of interest.Then to determine the wining party for each state by calculating the total votes as the winner. Finally, we create a a map of the USA is created to visualize the political landscape, coloring each state based on the wining party.
 
@@ -166,7 +166,29 @@ By merging the population data with existing election data to analyze how type o
 
 2.  **Analyze Voting Type by Population**: Examine the relationship between population and the type of voting, using statistical analysis .how the type of voting (e.g., fusion ticket, runoff, special elections) varies with population size. This analysis could involve methods such as regression analysis, chi-square tests, or other appropriate statistical techniques to identify any significant relationships or patterns.
 
-3.  **Correlate with Election Outcomes**: Focusing on which party tends to loose with certain characteristics.the next step is to assess how these factors correlate with election outcomes. Specifically, the focus will be on understanding which party tends to lose under certain conditions.
+3.  **Merge External Data**: The first step involves incorporating population data from a reliable source, such as the U.S. Census Bureau. This additional dataset will provide information on the population within each congressional district, which is essential for analyzing the relationship between population and voting type.
+
+4.  **Analyze Voting Type by Population**: Examine the relationship between population and the type of voting, using statistical analysis .how the type of voting (e.g., fusion ticket, runoff, special elections) varies with population size. This analysis could involve methods such as regression analysis, chi-square tests, or other appropriate statistical techniques to identify any significant relationships or patterns.
+
+    **i. Statistical analysis techniques:**
+
+    -   **Regression Analysis:** We plan to use **Logistic Regression** to predict the probability of a party winning in a district based on variables such as population size, type of voting (e.g., fusion ticket, runoff, special elections), and demographic factors. Logistic regression is chosen because the outcome variable (win/lose) is binary. We will also explore **Multiple linear regression models** to understand the relationship between the number of votes received (continuous outcome variable) and predictors like population density and election type.
+
+    -   **Chi-Square Tests:** Chi-square tests will be utilized to examine the association between categorical variables, such as the presence of a fusion ticket and the winning party. This will help us identify if the distribution of election outcomes differs significantly across categories like election type (general, runoff, special) or district characteristics.
+
+    -   **Time-Series Analysis:** For a longitudinal examination of voting trends, we will implement time-series analysis to assess changes over multiple election cycles. This includes using **ARIMA** **(Auto Regressive Integrated Moving Average)** , **Exponential smoothing models** to forecast voting patterns based on historical data. Additionally, **Holt-Winters Seasonal Method** , **Time-series decomposition** will also be employed to identify seasonal effects, trends, and residuals in voting behaviors, which can be correlated with major political or social events.
+
+    #### ii. Structured Comparative Analysis Over Time
+
+    To systematically address changes in US voting trends over time, our approach will include:
+
+    -   **Segmented Time-Series Analysis:** We will divide the dataset into distinct time segments based on significant political or social milestones (e.g., changes in administration, major legislative changes, social movements). This will allow us to compare voting patterns before and after these events, providing insights into their impact on electoral outcomes.
+
+    -   **Cross-Election Cycle Comparison:** By comparing data across different election cycles, we aim to identify shifts in voter preferences, party dominance, and the effectiveness of various campaign strategies. This comparison will be visualized through line graphs and heat maps to illustrate trends and deviations over time.
+
+    -   **Interaction Effects in Regression Models:** To understand the complex interplay between different factors influencing voting trends, we will include interaction terms in our regression models. This will help us examine how the impact of one variable (e.g., population size) on voting outcomes might change under different conditions (e.g., during special elections versus general elections).
+
+5.  **Correlate with Election Outcomes**: Focusing on which party tends to loose with certain characteristics.the next step is to assess how these factors correlate with election outcomes. Specifically, the focus will be on understanding which party tends to lose under certain conditions.
 
 ***Visualization and Reporting:***
 
