@@ -199,3 +199,5 @@ By merging the population data with existing election data to analyze how type o
 **Limited Demographic Data:** Obtaining and processing extensive demographic data spanning 47 years pose significant challenges. As a result, only basic demographic information such as population size is included in the analysis. Detailed demographic variables like age, race, and income level is not included due to data availability constraints.
 
 **Limited Economic and Social Data:** Similarly, accessing economic indicators, education levels, and other social factors at the district level for a 47-year period could also be challenging and so we are not including that in the analysis too
+
+![](images/Timeline Template - Frame 1 (2).jpg)
