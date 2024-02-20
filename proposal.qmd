@@ -40,22 +40,19 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 
 ```
 
-
-| Variable         | Type  | Description  |
-|------------------|------------------|----------------------|
-| `year`           | integer | Year in which election was held.|
-| `state_po`       | character | State name.  |
-| `party`          | character |Party of the candidate. |
-| `candidate`      | character |Name of the candidate as it appears in the House Clerk report.|
-| `candidatevotes` | integer |No. of votes the candidate received.                                                      |
-| `fusion ticket`  | logical |Same Candidate will receive votes from multiple party.|
-| `district`       | character |District number in state |
-| `runoff`         | logical |Second election held to determine a winner |
-| `special`        | logical | Special Election.|
-| `totalvotes`     | integer | Total Votes in District |
-| `Writein`        | logical |Candidate name does not appear on the ballot and must be physically written in by voters. |
- 
- 
+| Variable         | Type      | Description                                                                               |
+|-----------------------|-----------------------|---------------------------|
+| `year`           | integer   | Year in which election was held.                                                          |
+| `state_po`       | character | State name.                                                                               |
+| `party`          | character | Party of the candidate.                                                                   |
+| `candidate`      | character | Name of the candidate as it appears in the House Clerk report.                            |
+| `candidatevotes` | integer   | No. of votes the candidate received.                                                      |
+| `fusion ticket`  | logical   | Same Candidate will receive votes from multiple party.                                    |
+| `district`       | character | District number in state                                                                  |
+| `runoff`         | logical   | Second election held to determine a winner                                                |
+| `special`        | logical   | Special Election.                                                                         |
+| `totalvotes`     | integer   | Total Votes in District                                                                   |
+| `Writein`        | logical   | Candidate name does not appear on the ballot and must be physically written in by voters. |
 
 **Preview of dataset**
 
@@ -111,6 +108,10 @@ Question 2: How is the type of voting influenced by population and how does that
 
 **For Question 1:**
 
+Introduction: 
+
+using the election data of 2016-2020 presidential term, we aim to filter the data for the most recent or a specific year of interest.Then to determine the wining party for each state by calculating the total votes as the winner. Finally, we create a a map of the USA is created to visualize the political landscape, coloring each state based on the wining party.
+
 *Variables Involved:*
 
 -   **`state_po`**: The two-letter postal abbreviation for the state.
@@ -130,6 +131,10 @@ Analysis Approach:
 3.  **Visualization**: Create a map of the USA, coloring each state based on the winning party. This visualization provides a clear depiction of the political landscape across the states for the selected election year, highlighting which party won each state.
 
 **For Question 2:**
+
+Introduction:
+
+By merging the population data with existing election data to analyze how type of voting vary according to the population size in congressional districts. using statistical approach to identify relationships between population and voting type, and also to determine which party tends to loose under certain conditions.
 
 *Variables Involved:*
 
@@ -169,10 +174,8 @@ Analysis Approach:
 
 -   Create comparative visualizations to illustrate how these factors influence election outcomes, potentially using bar charts and pie chart
 
-<span style="color:red;">**LIMITATIONS**:</span> 
+[**LIMITATIONS**:]{style="color:red;"}
 
-Limited Demographic Data: Obtaining and processing extensive demographic data spanning 47 years pose significant challenges. As a result, only basic demographic information such as population size is included in the analysis. Detailed demographic variables like age, race, and income level is not included  due to data availability constraints.
+Limited Demographic Data: Obtaining and processing extensive demographic data spanning 47 years pose significant challenges. As a result, only basic demographic information such as population size is included in the analysis. Detailed demographic variables like age, race, and income level is not included due to data availability constraints.
 
 Limited Economic and Social Data: Similarly, accessing economic indicators, education levels, and other social factors at the district level for a 47-year period could also be challenging and so we are not including that in the analysis too
-
-
