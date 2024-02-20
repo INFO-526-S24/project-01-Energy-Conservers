@@ -42,18 +42,17 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 
 ```
 
-| Variable         | Type      | Description                                                                               |
+| Variable         | Type      | Description                                                    |
 |-----------------------|-----------------------|---------------------------|
-| `year`           | integer   | Year in which election was held.                                                          |
-| `state_po`       | character | State name.                                                                               |
-| `party`          | character | Party of the candidate.                                                                   |
-| `candidate`      | character | Name of the candidate as it appears in the House Clerk report.                            |
-| `candidatevotes` | integer   | No. of votes the candidate received.                                                      |
-| `district`       | character | District number in state                                                                  |
-| `runoff`         | logical   | Second election held to determine a winner                                                |
-| `special`        | logical   | Special Election.                                                                         |
-| `totalvotes`     | integer   | Total Votes in District                                                                   |
-
+| `year`           | integer   | Year in which election was held.                               |
+| `state_po`       | character | State name.                                                    |
+| `party`          | character | Party of the candidate.                                        |
+| `candidate`      | character | Name of the candidate as it appears in the House Clerk report. |
+| `candidatevotes` | integer   | No. of votes the candidate received.                           |
+| `district`       | character | District number in state                                       |
+| `runoff`         | logical   | Second election held to determine a winner                     |
+| `special`        | logical   | Special Election.                                              |
+| `totalvotes`     | integer   | Total Votes in District                                        |
 
 **Preview of dataset**
 
@@ -163,23 +162,21 @@ By merging the population data with existing election data to analyze how type o
 
 1.  **Merge External Data**: The first step involves incorporating population data from a reliable source, such as the U.S. Census Bureau. This additional dataset will provide information on the population within each congressional district, which is essential for analyzing the relationship between population and voting type.
 
-2. **Handling missing data or NA values**: The dataset has various missing data points and NA values where data was either unable to be gathered, or there is simply no available data. To handle missing and NA values in discrete data, we as interpolation or imputation is not possible. For continuous data that is missing or NA, we will use mid-points, interpolation, or imputation to replace missing values. In the case that a row has missing continuous and discrete data, we will default to the rules we established for discrete data and remove the row entirely.
+2.  **Handling missing data or NA values**: The dataset has various missing data points and NA values where data was either unable to be gathered, or there is simply no available data. To handle missing and NA values in discrete data, we as interpolation or imputation is not possible. For continuous data that is missing or NA, we will use mid-points, interpolation, or imputation to replace missing values. In the case that a row has missing continuous and discrete data, we will default to the rules we established for discrete data and remove the row entirely.
 
-3.  **Analyze Voting Type by Population**: Examine the relationship between population and the type of voting, using statistical analysis .how the type of voting (e.g., fusion ticket, runoff, special elections) varies with population size. This analysis could involve methods such as regression analysis, chi-square tests, or other appropriate statistical techniques to identify any significant relationships or patterns.
+3.  **Merge External Data**: The first step involves incorporating population data from a reliable source, such as the U.S. Census Bureau. This additional dataset will provide information on the population within each congressional district, which is essential for analyzing the relationship between population and voting type.
 
-4.  **Merge External Data**: The first step involves incorporating population data from a reliable source, such as the U.S. Census Bureau. This additional dataset will provide information on the population within each congressional district, which is essential for analyzing the relationship between population and voting type.
-
-5.  **Analyze Voting Type by Population**: Examine the relationship between population and the type of voting, using statistical analysis .how the type of voting (e.g., fusion ticket, runoff, special elections) varies with population size. This analysis could involve methods such as regression analysis, chi-square tests, or other appropriate statistical techniques to identify any significant relationships or patterns.
+4.  **Analyze Voting Type by Population**: Examine the relationship between population and the type of voting, using statistical analysis .how the type of voting (e.g., fusion ticket, runoff, special elections) varies with population size. This analysis could involve methods such as regression analysis, chi-square tests, or other appropriate statistical techniques to identify any significant relationships or patterns.
 
     **i. Statistical analysis techniques:**
 
     -   **Regression Analysis:** We plan to use **Logistic Regression** to predict the probability of a party winning in a district based on variables such as population size, type of voting (e.g., fusion ticket, runoff, special elections), and demographic factors. Logistic regression is chosen because the outcome variable (win/lose) is binary. We will also explore **Multiple linear regression models** to understand the relationship between the number of votes received (continuous outcome variable) and predictors like population density and election type.
 
-    -   **Chi-Square Tests:** Chi-square tests will be utilized to examine the association between categorical variables, such as the presence of a fusion ticket and the winning party. This will help us identify if the distribution of election outcomes differs significantly across categories like election type (general, runoff, special) or district characteristics.
+    -   **Chi-Square Tests:** Chi-square tests will be utilized to examine the association between **categorical variables**, such as the presence of a fusion ticket and the winning party. This will help us identify if the distribution of election outcomes differs significantly across categories like election type (general, runoff, special) or district characteristics.
 
     -   **Time-Series Analysis:** For a longitudinal examination of voting trends, we will implement time-series analysis to assess changes over multiple election cycles. This includes using **ARIMA** **(Auto Regressive Integrated Moving Average)** , **Exponential smoothing models** to forecast voting patterns based on historical data. Additionally, **Holt-Winters Seasonal Method** , **Time-series decomposition** will also be employed to identify seasonal effects, trends, and residuals in voting behaviors, which can be correlated with major political or social events.
 
-    #### ii. Structured Comparative Analysis Over Time
+    **ii. Structured Comparative Analysis Over Time**
 
     To systematically address changes in US voting trends over time, our approach will include:
 
@@ -189,7 +186,7 @@ By merging the population data with existing election data to analyze how type o
 
     -   **Interaction Effects in Regression Models:** To understand the complex interplay between different factors influencing voting trends, we will include interaction terms in our regression models. This will help us examine how the impact of one variable (e.g., population size) on voting outcomes might change under different conditions (e.g., during special elections versus general elections).
 
-6.  **Correlate with Election Outcomes**: Focusing on which party tends to loose with certain characteristics.the next step is to assess how these factors correlate with election outcomes. Specifically, the focus will be on understanding which party tends to lose under certain conditions.
+5.  **Correlate with Election Outcomes**: Focusing on which party tends to loose with certain characteristics.the next step is to assess how these factors correlate with election outcomes. Specifically, the focus will be on understanding which party tends to lose under certain conditions.
 
 ***Visualization and Reporting:***
 
@@ -199,6 +196,6 @@ By merging the population data with existing election data to analyze how type o
 
 [**LIMITATIONS**:]{style="color:red;"}
 
-Limited Demographic Data: Obtaining and processing extensive demographic data spanning 47 years pose significant challenges. As a result, only basic demographic information such as population size is included in the analysis. Detailed demographic variables like age, race, and income level is not included due to data availability constraints.
+**Limited Demographic Data:** Obtaining and processing extensive demographic data spanning 47 years pose significant challenges. As a result, only basic demographic information such as population size is included in the analysis. Detailed demographic variables like age, race, and income level is not included due to data availability constraints.
 
-Limited Economic and Social Data: Similarly, accessing economic indicators, education levels, and other social factors at the district level for a 47-year period could also be challenging and so we are not including that in the analysis too
+**Limited Economic and Social Data:** Similarly, accessing economic indicators, education levels, and other social factors at the district level for a 47-year period could also be challenging and so we are not including that in the analysis too
