@@ -27,15 +27,39 @@ Add new sections as necessary [DELETE BEFORE TURNING IN]
 ```{r}
 elec <- readr::read_csv('data/house.csv')
 describe(elec)
-elec16to20 <- elec |>
-  filter(between(year,2016,2020)) #filter years to between 2016 and 2020
-
+#ggplot(elec) |> #create a plot to show change house elections from entire dataset
 
 
 ```
 
 ## Data Wrangling
 ```{r}
+elec16to20 <- elec |>
+  filter(between(year,2016,2020))  #filter years to between 2016 and 2020
+ 
+for (date in c(2016, #aggregate state mode of party to determine which party has the 
+               2018, #majority
+               2020)) {
+  result <- elec16to20 |>
+    filter(year == date) |>
+    group_by(state) |>
+    summarize(winnerByHouseMajority = names(which.max(table(party))))
+  assign(paste0('partyMaj', 
+                date), 
+         result)
+}
+  
+for(date in c(2016,2018,2020)) { #for each state determine which party got the most votes
+  result <- elec16to20 |>
+    filter(year == date) |>
+    group_by(state) |>
+    summarize(winnerByTotalVotes = party[which.max(candidatevotes)], 
+              partyVotes = sum(candidatevotes))
+  assign(paste0('genMaj',
+                date), 
+         result)
+}
+
 
 
 ```
