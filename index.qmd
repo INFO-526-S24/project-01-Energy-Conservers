@@ -18,12 +18,18 @@ if(!require(pacman))
 pacman::p_load(tidyverse, #Add new packages as necessary
                here,
                devtools,
-               dlookr)
+               dlookr,
+               dplyr)
 ```
 Add new sections as necessary [DELETE BEFORE TURNING IN]
 
 ## EDA
 ```{r}
+elec <- readr::read_csv('data/house.csv')
+describe(elec)
+elec16to20 <- elec |>
+  filter(between(year,2016,2020)) #filter years to between 2016 and 2020
+
 
 
 ```

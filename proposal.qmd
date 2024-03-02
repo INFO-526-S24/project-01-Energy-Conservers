@@ -43,7 +43,7 @@ house <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidy
 ```
 
 | Variable         | Type      | Description                                                    |
-|-----------------------|-----------------------|---------------------------|
+|------------------|-----------|----------------------------------------------------------------|
 | `year`           | integer   | Year in which election was held.                               |
 | `state_po`       | character | State name.                                                    |
 | `party`          | character | Party of the candidate.                                        |
@@ -200,4 +200,4 @@ By merging the population data with existing election data to analyze how type o
 
 **Limited Economic and Social Data:** Similarly, accessing economic indicators, education levels, and other social factors at the district level for a 47-year period could also be challenging and so we are not including that in the analysis too
 
-![](images/Timeline Template - Frame 1 (2).jpg)
+![](images/Timeline%20Template%20-%20Frame%201%20(2).jpg)
