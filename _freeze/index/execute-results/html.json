@@ -1,0 +1,15 @@
+{
+  "hash": "02b0c5c5ba000f888584143de22453ff",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Project title\"\nsubtitle: \"INFO 526 - Project 1\"\nauthor: \"Team name\"\nformat: html\neditor: visual\n---\n\n\n## Abstract\n\nAdd project abstract here.\n\n## Setup\n\n::: {.cell}\n\n```{.r .cell-code}\nif(!require(pacman))\n  install.packages(\"pacman\") #utilize pacman to load each package, while ensuring nothing is redownloaded unnecesarily\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nLoading required package: pacman\n```\n\n\n:::\n\n```{.r .cell-code}\npacman::p_load(tidyverse, #Add new packages as necessary\n               here,\n               devtools,\n               dlookr)\n```\n:::\n\nAdd new sections as necessary [DELETE BEFORE TURNING IN]\n\n## EDA\n\n::: {.cell}\n\n:::\n\n\n## Data Wrangling\n\n::: {.cell}\n\n:::\n\n\n\n## Data Visualization\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

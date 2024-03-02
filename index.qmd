@@ -9,3 +9,35 @@ editor: visual
 ## Abstract
 
 Add project abstract here.
+
+## Setup
+```{r}
+if(!require(pacman))
+  install.packages("pacman") #utilize pacman to load each package, while ensuring nothing is redownloaded unnecesarily
+
+pacman::p_load(tidyverse, #Add new packages as necessary
+               here,
+               devtools,
+               dlookr)
+```
+Add new sections as necessary [DELETE BEFORE TURNING IN]
+
+## EDA
+```{r}
+
+
+```
+
+## Data Wrangling
+```{r}
+
+
+```
+
+
+## Data Visualization
+```{r}
+
+```
+
+
