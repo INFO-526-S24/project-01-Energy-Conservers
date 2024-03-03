@@ -33,15 +33,16 @@ Add new sections as necessary [DELETE BEFORE TURNING IN]
 ```{r}
 elec <- readr::read_csv('data/house.csv')
 describe(elec)
-#ggplot(elec) |> #create a plot to show change house elections from entire dataset
+elec16to20 <- elec |>
+  filter(between(year,2016,2020))  #filter years to between 2016 and 2020
 
+#ggplot(elec) |> #create a plot to show change house elections from entire dataset
 
 ```
 
 ## Data Wrangling
 ```{r}
-elec16to20 <- elec |>
-  filter(between(year,2016,2020))  #filter years to between 2016 and 2020
+
  
 for (date in c(2016, #aggregate state mode of party to determine which party has the 
                2018, #majority
@@ -81,6 +82,10 @@ for(date in c(2016,2018,2020)) { #for each state determine which party got the m
 
 
 plot_usmap(data = genMaj2016, values = "partyVotes", labels = TRUE)
+
+
+
+
 ```
 
 
