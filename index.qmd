@@ -14,12 +14,18 @@ Add project abstract here.
 ```{r}
 if(!require(pacman))
   install.packages("pacman") #utilize pacman to load each package, while ensuring nothing is redownloaded unnecesarily
+options(timeout = 1200) #sf takes forever to download so we have to increase the timeout time
 
 pacman::p_load(tidyverse, #Add new packages as necessary
                here,
                devtools,
                dlookr,
-               dplyr)
+               dplyr,
+               usmap,
+               sf,
+               ggrepel)
+
+
 ```
 Add new sections as necessary [DELETE BEFORE TURNING IN]
 
@@ -54,11 +60,14 @@ for(date in c(2016,2018,2020)) { #for each state determine which party got the m
     filter(year == date) |>
     group_by(state) |>
     summarize(winnerByTotalVotes = party[which.max(candidatevotes)], 
-              partyVotes = sum(candidatevotes))
+              partyVotes = sum(candidatevotes)) |>
+    mutate(fips = fips(state)) #necessary for plotting on US map
   assign(paste0('genMaj',
                 date), 
          result)
 }
+
+
 
 
 
@@ -67,7 +76,8 @@ for(date in c(2016,2018,2020)) { #for each state determine which party got the m
 
 ## Data Visualization
 ```{r}
-
+#general plot just to get used to the function. We can add layers like a ggplot object
+plot_usmap(data = genMaj2016, values = "partyVotes", labels = TRUE)
 ```
 
 
