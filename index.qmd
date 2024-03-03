@@ -77,6 +77,9 @@ for(date in c(2016,2018,2020)) { #for each state determine which party got the m
 ## Data Visualization
 ```{r}
 #general plot just to get used to the function. We can add layers like a ggplot object
+#For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
+
+
 plot_usmap(data = genMaj2016, values = "partyVotes", labels = TRUE)
 ```
 
