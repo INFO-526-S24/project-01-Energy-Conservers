@@ -84,16 +84,28 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 
 ## Data Visualization
-```{r}
+```{r  fig.width = 14, fig.height = 14 }
 #general plot just to get used to the function. We can add layers like a ggplot object
 #For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
 
-plot_usmap(data = data2016, values = "winnerByHouseMajority", labels = TRUE) + 
-  scale_fill_manual(values = c("REPUBLICAN" = "red", "DEMOCRAT" = "blue"), guide = 'none') + 
-   geom_sf_text(data = data2016, aes(label = partyVotes, geometry = geom))
 
-# +
-#   geom_text(data = data2016, aes(x = x, y = y, label = number(winnerByTotalVotes)), color = "white")
+plot_usmap(data = data2016, 
+           values = "winnerByHouseMajority", 
+           labels = FALSE) + 
+  scale_fill_manual(values = c("REPUBLICAN" = "red", 
+                               "DEMOCRAT" = "blue"), 
+                    guide = 'none') +
+  geom_text_repel(data = data2016,
+                   aes(label = partyVotes,
+                       geometry = geom,
+                       color = ifelse(winnerByTotalVotes == "REPUBLICAN",
+                                      "red",
+                                      "blue")),
+                   stat = 'sf_coordinates',
+                   show.legend = FALSE,
+                   size = 5,
+                   force = 0.01)
+
 
 
 ```
