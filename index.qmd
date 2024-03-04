@@ -23,7 +23,9 @@ pacman::p_load(tidyverse, #Add new packages as necessary
                dplyr,
                usmap,
                sf,
-               ggrepel)
+               ggrepel,
+               scales,
+               usmapdata)
 
 
 ```
@@ -37,6 +39,7 @@ elec16to20 <- elec |>
   filter(between(year,2016,2020))  #filter years to between 2016 and 2020
 
 #ggplot(elec) |> #create a plot to show change house elections from entire dataset
+
 
 ```
 
@@ -62,15 +65,18 @@ for(date in c(2016,2018,2020)) { #for each state determine which party got the m
     group_by(state) |>
     summarize(winnerByTotalVotes = party[which.max(candidatevotes)], 
               partyVotes = sum(candidatevotes)) |>
-    mutate(fips = fips(state)) #necessary for plotting on US map
+    mutate(fips = fips(state)) #necessary for plotting on US map only on this plot because we will merge
   assign(paste0('genMaj',
                 date), 
          result)
 }
 
-data2016 <- merge(genMaj2016,partyMaj2016)
-data2018 <- merge(genMaj2018, partyMaj2018)
-data2020 <- merge(genMaj2020, partyMaj2020)
+data2016 <- merge(genMaj2016,partyMaj2016) |>
+  merge(centroid_labels(regions = c('states')), by = "fips") #adds in data for centroid of each state
+data2018 <- merge(genMaj2018, partyMaj2018) |> 
+  merge(centroid_labels(regions = c('states')), by = "fips")
+data2020 <- merge(genMaj2020, partyMaj2020) |>
+  merge(centroid_labels(regions = c('states')), by = "fips")
 
 
 
@@ -82,9 +88,13 @@ data2020 <- merge(genMaj2020, partyMaj2020)
 #general plot just to get used to the function. We can add layers like a ggplot object
 #For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
 
+plot_usmap(data = data2016, values = "winnerByHouseMajority", labels = TRUE) + 
+  scale_fill_manual(values = c("REPUBLICAN" = "red", "DEMOCRAT" = "blue"), guide = 'none') 
 
-plot_usmap(data = data2016, values = "winnerByHouseMajority", labels = TRUE)
-
+# +   geom_text(data = data2016, aes(
+#     x = x, y = y,
+#     label = scales::number(winnerByTotalVotes)
+#   ), color = "white")
 
 
 ```
