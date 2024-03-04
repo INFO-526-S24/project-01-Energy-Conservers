@@ -290,7 +290,7 @@ lgl (5): runoff, special, writein, unofficial, fusion_ticket
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>data2016 <span class="ot">&lt;-</span> <span class="fu">merge</span>(genMaj2016,partyMaj2016) <span class="sc">|&gt;</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(<span class="fu">centroid_labels</span>(<span class="at">regions =</span> <span class="fu">c</span>(<span class="st">'states'</span>)), <span class="at">by =</span> <span class="st">"fips"</span>) <span class="co">#adds in data for centroid of each state</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(<span class="fu">centroid_labels</span>(<span class="at">regions =</span> <span class="fu">c</span>(<span class="st">'states'</span>)), <span class="at">by =</span> <span class="st">"fips"</span>) <span class="co">#adds in data for centroid of each state for labeling</span></span>
 <span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>data2018 <span class="ot">&lt;-</span> <span class="fu">merge</span>(genMaj2018, partyMaj2018) <span class="sc">|&gt;</span> </span>
 <span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">merge</span>(<span class="fu">centroid_labels</span>(<span class="at">regions =</span> <span class="fu">c</span>(<span class="st">'states'</span>)), <span class="at">by =</span> <span class="st">"fips"</span>)</span>
 <span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>data2020 <span class="ot">&lt;-</span> <span class="fu">merge</span>(genMaj2020, partyMaj2020) <span class="sc">|&gt;</span></span>
@@ -304,7 +304,8 @@ lgl (5): runoff, special, writein, unofficial, fusion_ticket
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_usmap</span>(<span class="at">data =</span> data2016, <span class="at">values =</span> <span class="st">"winnerByHouseMajority"</span>, <span class="at">labels =</span> <span class="cn">TRUE</span>) <span class="sc">+</span> </span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"REPUBLICAN"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"DEMOCRAT"</span> <span class="ot">=</span> <span class="st">"blue"</span>), <span class="at">guide =</span> <span class="st">'none'</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"REPUBLICAN"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"DEMOCRAT"</span> <span class="ot">=</span> <span class="st">"blue"</span>), <span class="at">guide =</span> <span class="st">'none'</span>) <span class="sc">+</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_sf_text</span>(<span class="at">data =</span> data2016, <span class="fu">aes</span>(<span class="at">label =</span> partyVotes, <span class="at">geometry =</span> geom))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -312,10 +313,8 @@ lgl (5): runoff, special, writein, unofficial, fusion_ticket
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># +   geom_text(data = data2016, aes(</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#     x = x, y = y,</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#     label = scales::number(winnerByTotalVotes)</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   ), color = "white")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># +</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   geom_text(data = data2016, aes(x = x, y = y, label = number(winnerByTotalVotes)), color = "white")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
