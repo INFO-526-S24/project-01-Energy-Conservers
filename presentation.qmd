@@ -1,11 +1,12 @@
 ---
-title: "The Power of Voters"
+title: "Taking a look into voting trends and effects"
 subtitle: "INFO 526 - Spring 2024 - Project 1"
-author: "Energy-Conservers"
+author: "The Power of Voters: Christian Ortmann, Sachin Patil, Abhishek Kumar, Tejas Bhawari, Monica Kommareddy, Nick Ferrante"
 title-slide-attributes:
-  data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
+  
+  data-background-image: images/USHouse1.jpeg
   data-background-size: stretch
-  data-background-opacity: "0.7"
+  data-background-opacity: "0.5"
   data-slide-number: none
 format:
   revealjs:
@@ -14,15 +15,37 @@ format:
 editor: visual
 execute:
   echo: false
+  warning: false
+  message: false
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r}
 #| label: load-packages
 #| include: false
 
+
 # Load packages here
-pacman::p_load(tidymodels,
-               tidyverse)
+if (!require("pacman")) 
+  install.packages("pacman")
+
+options(timeout = 1200)
+
+pacman::p_load(tidyverse, #Add new packages as necessary
+               here,
+               devtools,
+               dlookr,
+               dplyr,
+               usmap,
+               sf,
+               ggrepel,
+               scales,
+               usmapdata, 
+               grid,
+               ggpubr
+               )
+
 
 ```
 
@@ -31,14 +54,15 @@ pacman::p_load(tidymodels,
 #| include: false
 
 # Plot theme
-ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 14))
 
 # For better figure resolution
 knitr::opts_chunk$set(
   fig.retina = 3, 
   dpi = 300, 
   fig.width = 6, 
-  fig.asp = 0.618 
+  fig.asp = 0.618, 
+  fig.align = "center"
   )
 ```
 
@@ -46,120 +70,200 @@ knitr::opts_chunk$set(
 #| label: load-data
 #| include: false
 # Load data here
-data(mtcars)
-mtcars$speed <- mtcars$hp / mtcars$wt
-
-data("penguins")
+elec <- readr::read_csv('data/house_population_merged.csv')
+describe(elec)
+elec16to20 <- elec |>
+  filter(between(year,2016,2020))
 ```
 
-# Using Quarto for presentations
+# US House Election Dataset
 
-## Quarto
+## Understanding the Dataset
+-   Data sourced from MIT Election Data and Science Lab
+-   Contains observations from elections in the House of Representatives over a span of 47 years starting at 1976 all the way up to 2022 and encompasses a total of 32,452 recorded events. Each event is represented with 20 attributes.
 
--   The presentation is created using the Quarto CLI
+-   For our analysis some of the most important variables will be:
 
--   `##` sets the start of a new slide
+    ::: columns
+    ::: {.column width="40%"}
+    **`year`**
+    :::
 
-## Layouts
+    ::: {.column width="60%"}
+    **`party`**
+    :::
 
-You can use plain text
+    ::: {.column width="40%"}
+    **`state_po`**
+    :::
 
-::: columns
-::: {.column width="40%"}
--   or bullet points[^1]
-:::
+    ::: {.column width="60%"}
+    **`totalvotes`**
+    :::
+    :::
 
-::: {.column width="60%"}
-or in two columns
-:::
-:::
 
-[^1]: And add footnotes
+## Question 1
+How did US voting trends change throughout the 2016-2020 presidential term?
 
--   like
+### Analysis
+To answer this question we will look at which party won in each state for the years 2016, 2018, and 2020 to identify patterns and significant changes throughout the 2016-2020 presidency.
 
--   this
 
-## Code
-
-```{r, echo=FALSE}
-model <- lm(mpg ~ speed, data = mtcars) 
-
-model |> tidy()
-
-model |> glance()
-
-```
-
-## Plots
-
+# Plots
+## 2016 Results
 ```{r}
-penguins |>
-  mutate(species = ifelse(species == "Adelie", "Adelie", "Other")) |>
-  ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
-  geom_point()
+#| label: Data Wrangling
+
+
+for (date in c(2016, #aggregate state mode of party to determine which party has the 
+               2018, #majority
+               2020)) {
+  result <- elec16to20 |>
+    filter(year == date) |>
+    group_by(state) |>
+    summarize(winnerByHouseMajority = names(which.max(table(party))))
+  assign(paste0('partyMaj', 
+                date), 
+         result)
+}
+  
+for(date in c(2016,2018,2020)) { #for each state determine which party got the most votes
+  result <- elec16to20 |>
+    filter(year == date) |>
+    group_by(state) |>
+    summarize(winnerByTotalVotes = party[which.max(candidatevotes)], 
+              partyVotes = sum(candidatevotes)) |>
+    mutate(fips = fips(state)) #necessary for plotting on US map only on this plot because we will merge
+  assign(paste0('genMaj',
+                date), 
+         result)
+}
+
+data2016 <- merge(genMaj2016,partyMaj2016) |>
+  merge(centroid_labels(regions = c('states')), by = "fips") #adds in data for centroid of each state for labeling
+data2018 <- merge(genMaj2018, partyMaj2018) |> 
+  merge(centroid_labels(regions = c('states')), by = "fips")
+data2020 <- merge(genMaj2020, partyMaj2020) |>
+  merge(centroid_labels(regions = c('states')), by = "fips")
 ```
 
-## Plot and text
 
-::: columns
-::: {.column width="50%"}
--   Some text
+```{r  fig.width = 14, fig.height = 34 }
+#| label: Data Visualization
+#general plot just to get used to the function. We can add layers like a ggplot object
+#For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
 
--   goes here
-:::
 
-::: {.column width="50%"}
-```{r, warning=FALSE, fig.width=5.5}
-penguins |>
-  ggplot(aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot(linewidth = 0.75,
-               outlier.size = 2.5) +
-  theme_minimal(base_size = 15) +
-  theme(legend.key.size = unit(0.8, "cm"))
-```
-:::
-:::
+ us2016 <- plot_usmap(data = data2016, 
+           values = "winnerByHouseMajority", 
+           labels = FALSE) + 
+  scale_fill_manual(name = 'Winner by House Majority', 
+                    values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
+  geom_label_repel(data = data2016,
+                   aes(label = abbr,
+                       geometry = geom,
+                       color = winnerByTotalVotes),
+                   stat = 'sf_coordinates',
+                   size = 5,
+                   force = 0.01, 
+                   min.segment.length = 0) +
+  scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
+  labs(
+    title = 'House Majority vs Popular Vote Majority',
+    subtitle = "By State in 2016",
+    caption = "Teal & Harmon | Tidy Tuesday 2023"
+  ) + 
+  theme(
+    plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+    plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+    plot.caption = element_text(size = 20, hjust = 0.5),
+    legend.text = element_text(size = 12, hjust = 0),
+    legend.title = element_text(size = 16, hjust= 0),
+    legend.position = c(0.6,0.03)
+  )
 
-# A new section...
-
-## Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-```{r}
-penguins |> 
-  head() |>
-  kableExtra::kable() |>
-  kableExtra::kable_styling()
-```
-
-## Images
-
-![Image credit: Danielle Navarro, Percolate.](images/watercolour_sys02_img34_teacup-ocean.png){fig-align="center" width="500"}
-
-## Math Expressions {.smaller}
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\alpha+\\beta\$ renders $\alpha + \beta$. You can use the display style with double dollar signs:
-
-```         
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
+us2016
 ```
 
-$$
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-$$
+## 2018 Results
+```{r fig.width = 14, fig.height = 34 }
+us2018 <- plot_usmap(data = data2018,
+           values = "winnerByHouseMajority",
+           labels = FALSE) +
+  scale_fill_manual(name = 'Winner by House Majority',
+                    values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+
+  geom_label_repel(data = data2016,
+                   aes(label = abbr,
+                       geometry = geom,
+                       color = winnerByTotalVotes),
+                   stat = 'sf_coordinates',
+                   size = 5,
+                   force = 0.01,
+                   min.segment.length = 0) +
+  scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
+  labs(
+    title = 'House Majority vs Popular Vote Majority',
+    subtitle = "By State in 2018",
+    caption = "Teal & Harmon | Tidy Tuesday 2023"
+  ) +
+  theme(
+    plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+    plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+    plot.caption = element_text(size = 20, hjust = 0.5),
+    legend.text = element_text(size = 12, hjust = 0),
+    legend.title = element_text(size = 16, hjust= 0),
+    legend.position = c(0.6,0.03)
+  )
 
-Limitations:
+us2018
+```
 
-1.  The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
 
-2.  There should not be spaces after the opening `$` or before the closing `$`.
+## 2020 Results
+```{r fig.width = 14, fig.height = 34 }
+us2020 <- plot_usmap(data = data2020,
+           values = "winnerByHouseMajority",
+           labels = FALSE) +
+  scale_fill_manual(name = 'Winner by House Majority',
+                    values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+
+  geom_label_repel(data = data2016,
+                   aes(label = abbr,
+                       geometry = geom,
+                       color = winnerByTotalVotes),
+                   stat = 'sf_coordinates',
+                   size = 5,
+                   force = 0.01,
+                   min.segment.length = 0,
+                   force_pull = 0.5) +
+  scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
+  labs(
+    title = 'House Majority vs Popular Vote Majority',
+    subtitle = "By State in 2020",
+    caption = "Teal & Harmon | Tidy Tuesday 2023"
+  ) +
+  theme(
+    plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+    plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+    plot.caption = element_text(size = 20, hjust = 0.5),
+    legend.text = element_text(size = 12, hjust = 0),
+    legend.title = element_text(size = 16, hjust= 0),
+    legend.position = c(0.6,0.03)
+  )
 
-# Wrap up
+us2020
+```
 
-## Feeling adventurous?
 
--   You are welcomed to use the default styling of the slides. In fact, that\'s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
+```{r fig.width = 17, fig.height = 34 }
+# ggarrange(us2016, us2018, us2020, ncol = 2, nrow = 2)
 
--   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+```
+
+
+## Question 2
+How is the type of voting influenced by population and how does that influence who loses?
+
+### Analysis
+
+
