@@ -25,7 +25,10 @@ pacman::p_load(tidyverse, #Add new packages as necessary
                sf,
                ggrepel,
                scales,
-               usmapdata)
+               usmapdata, 
+               grid,
+               ggpubr
+               )
 
 
 ```
@@ -84,29 +87,97 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 
 ## Data Visualization
-```{r  fig.width = 14, fig.height = 14 }
+```{r  fig.width = 14, fig.height = 25 }
 #general plot just to get used to the function. We can add layers like a ggplot object
 #For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
 
 
-plot_usmap(data = data2016, 
+ us2016 <- plot_usmap(data = data2016, 
            values = "winnerByHouseMajority", 
            labels = FALSE) + 
-  scale_fill_manual(values = c("REPUBLICAN" = "red", 
-                               "DEMOCRAT" = "blue"), 
-                    guide = 'none') +
-  geom_text_repel(data = data2016,
-                   aes(label = partyVotes,
+  scale_fill_manual(name = 'Winner by House Majority', 
+                    values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
+  geom_label_repel(data = data2016,
+                   aes(label = abbr,
                        geometry = geom,
-                       color = ifelse(winnerByTotalVotes == "REPUBLICAN",
-                                      "red",
-                                      "blue")),
+                       color = winnerByTotalVotes),
                    stat = 'sf_coordinates',
-                   show.legend = FALSE,
                    size = 5,
-                   force = 0.01)
+                   force = 0.01, 
+                   min.segment.length = 0) +
+  scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
+  labs(
+    title = 'House Majority vs Popular Vote Majority',
+    subtitle = "By State in 2016",
+    #caption = "Teal & Harmon | Tidy Tuesday 2023"
+  ) + 
+  theme(
+    plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+    plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+    #plot.caption = element_text(size = 20, hjust = 0.5),
+    legend.text = element_text(size = 12, hjust = 0),
+    legend.title = element_text(size = 16, hjust= 0),
+    legend.position = c(0.6,0.03)
+  )
 
 
+us2018 <- plot_usmap(data = data2018, 
+           values = "winnerByHouseMajority", 
+           labels = FALSE) + 
+  scale_fill_manual(name = 'Winner by House Majority', 
+                    values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
+  geom_label_repel(data = data2016,
+                   aes(label = abbr,
+                       geometry = geom,
+                       color = winnerByTotalVotes),
+                   stat = 'sf_coordinates',
+                   size = 5,
+                   force = 0.01, 
+                   min.segment.length = 0) +
+  scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
+  labs(
+    title = 'House Majority vs Popular Vote Majority',
+    subtitle = "By State in 2018",
+    #caption = "Teal & Harmon | Tidy Tuesday 2023"
+  ) + 
+  theme(
+    plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+    plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+    #plot.caption = element_text(size = 20, hjust = 0.5),
+    legend.text = element_text(size = 12, hjust = 0),
+    legend.title = element_text(size = 16, hjust= 0),
+    legend.position = c(0.6,0.03)
+  )
+
+us2020 <- plot_usmap(data = data2020, 
+           values = "winnerByHouseMajority", 
+           labels = FALSE) + 
+  scale_fill_manual(name = 'Winner by House Majority', 
+                    values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
+  geom_label_repel(data = data2016,
+                   aes(label = abbr,
+                       geometry = geom,
+                       color = winnerByTotalVotes),
+                   stat = 'sf_coordinates',
+                   size = 5,
+                   force = 0.01, 
+                   min.segment.length = 0) +
+  scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
+  labs(
+    title = 'House Majority vs Popular Vote Majority',
+    subtitle = "By State in 2020",
+    caption = "Teal & Harmon | Tidy Tuesday 2023"
+  ) + 
+  theme(
+    plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+    plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+    plot.caption = element_text(size = 20, hjust = 0.5),
+    legend.text = element_text(size = 12, hjust = 0),
+    legend.title = element_text(size = 16, hjust= 0),
+    legend.position = c(0.6,0.03)
+  )
+
+ggarrange(us2016, us2018, us2020, ncol = 1)
 
 ```
 
