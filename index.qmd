@@ -1,7 +1,7 @@
 ---
-title: "Project title"
+title: "Analyzing Trends in House of Representatives from 2016-2020"
 subtitle: "INFO 526 - Project 1"
-author: "Team name"
+author: "The Power of The Voters"
 format: html
 editor: visual
 ---
