@@ -161,7 +161,8 @@ us2020 <- plot_usmap(data = data2020,
                    stat = 'sf_coordinates',
                    size = 5,
                    force = 0.01, 
-                   min.segment.length = 0) +
+                   min.segment.length = 0,
+                   force_pull = 0.5) +
   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
   labs(
     title = 'House Majority vs Popular Vote Majority',
