@@ -3,13 +3,13 @@ title: "Taking a look into voting trends and effects"
 subtitle: "INFO 526 - Spring 2024 - Project 1"
 author: "The Power of Voters: Christian Ortmann, Sachin Patil, Abhishek Kumar, Tejas Bhawari, Monica Kommareddy, Nick Ferrante"
 title-slide-attributes:
-  
   data-background-image: images/USHouse1.jpeg
   data-background-size: stretch
   data-background-opacity: "0.5"
   data-slide-number: none
 format:
   revealjs:
+    transition: convex
     theme:  ['data/customtheming.scss']
   
 editor: visual
@@ -80,8 +80,12 @@ elec16to20 <- elec |>
 
 ## Understanding the Dataset
 -   Data sourced from MIT Election Data and Science Lab
--   Contains observations from elections in the House of Representatives over a span of 47 years starting at 1976 all the way up to 2022 and encompasses a total of 32,452 recorded events. Each event is represented with 20 attributes.
 
+::: {.fragment .fade-in}
+-   Contains observations from elections in the House of Representatives over a span of 47 years starting at 1976 all the way up to 2022 and encompasses a total of 32,452 recorded events. Each event is represented with 20 attributes.
+:::
+
+::: {.fragment .fade-in}
 -   For our analysis some of the most important variables will be:
 
     ::: columns
@@ -101,17 +105,25 @@ elec16to20 <- elec |>
     **`totalvotes`**
     :::
     :::
+:::
 
+## Question 1 {auto-animate=true}
 
-## Question 1
-How did US voting trends change throughout the 2016-2020 presidential term?
+::: {style="margin-top: 0px;"}
+Election Results
+:::
+How did US voting trends change election results throughout the 2016-2020 presidential term?
 
+::: {.fragment .fade-in}
 ### Analysis
-To answer this question we will look at which party won in each state for the years 2016, 2018, and 2020 to identify patterns and significant changes throughout the 2016-2020 presidency.
+To answer this question we will look at which party won in each state for the years 2016, 2018, and 2020 to identify patterns and significant changes that occurred in the election results.
+:::
 
+## {auto-animate=true}
 
-# Plots
-## 2016 Results
+::: {style="margin-top: -80px; font-size: 1.5em; font-weight: bold;"}
+Election Results
+:::
 ```{r}
 #| label: Data Wrangling
 
@@ -148,7 +160,8 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
   merge(centroid_labels(regions = c('states')), by = "fips")
 ```
 
-
+::: panel-tabset
+## 2016
 ```{r  fig.width = 14, fig.height = 34 }
 #| label: Data Visualization
 #general plot just to get used to the function. We can add layers like a ggplot object
@@ -186,7 +199,7 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 us2016
 ```
 
-## 2018 Results
+## 2018
 ```{r fig.width = 14, fig.height = 34 }
 us2018 <- plot_usmap(data = data2018,
            values = "winnerByHouseMajority",
@@ -220,7 +233,7 @@ us2018
 ```
 
 
-## 2020 Results
+## 2020
 ```{r fig.width = 14, fig.height = 34 }
 us2020 <- plot_usmap(data = data2020,
            values = "winnerByHouseMajority",
@@ -255,6 +268,154 @@ us2020
 ```
 
 
+:::
+
+
+```{r}
+# This code chunk and the following 3 are for having the 3 plots on separate slides as opposed in the tab format
+
+# #| label: Data Wrangling
+# 
+# 
+# for (date in c(2016, #aggregate state mode of party to determine which party has the 
+#                2018, #majority
+#                2020)) {
+#   result <- elec16to20 |>
+#     filter(year == date) |>
+#     group_by(state) |>
+#     summarize(winnerByHouseMajority = names(which.max(table(party))))
+#   assign(paste0('partyMaj', 
+#                 date), 
+#          result)
+# }
+#   
+# for(date in c(2016,2018,2020)) { #for each state determine which party got the most votes
+#   result <- elec16to20 |>
+#     filter(year == date) |>
+#     group_by(state) |>
+#     summarize(winnerByTotalVotes = party[which.max(candidatevotes)], 
+#               partyVotes = sum(candidatevotes)) |>
+#     mutate(fips = fips(state)) #necessary for plotting on US map only on this plot because we will merge
+#   assign(paste0('genMaj',
+#                 date), 
+#          result)
+# }
+# 
+# data2016 <- merge(genMaj2016,partyMaj2016) |>
+#   merge(centroid_labels(regions = c('states')), by = "fips") #adds in data for centroid of each state for labeling
+# data2018 <- merge(genMaj2018, partyMaj2018) |> 
+#   merge(centroid_labels(regions = c('states')), by = "fips")
+# data2020 <- merge(genMaj2020, partyMaj2020) |>
+#   merge(centroid_labels(regions = c('states')), by = "fips")
+```
+
+
+```{r  fig.width = 14, fig.height = 34 }
+# #| label: Data Visualization
+# #general plot just to get used to the function. We can add layers like a ggplot object
+# #For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
+# 
+# 
+#  us2016 <- plot_usmap(data = data2016, 
+#            values = "winnerByHouseMajority", 
+#            labels = FALSE) + 
+#   scale_fill_manual(name = 'Winner by House Majority', 
+#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
+#   geom_label_repel(data = data2016,
+#                    aes(label = abbr,
+#                        geometry = geom,
+#                        color = winnerByTotalVotes),
+#                    stat = 'sf_coordinates',
+#                    size = 5,
+#                    force = 0.01, 
+#                    min.segment.length = 0) +
+#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
+#   labs(
+#     title = 'House Majority vs Popular Vote Majority',
+#     subtitle = "By State in 2016",
+#     caption = "Teal & Harmon | Tidy Tuesday 2023"
+#   ) + 
+#   theme(
+#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+#     plot.caption = element_text(size = 20, hjust = 0.5),
+#     legend.text = element_text(size = 12, hjust = 0),
+#     legend.title = element_text(size = 16, hjust= 0),
+#     legend.position = c(0.6,0.03)
+#   )
+# 
+# us2016
+```
+
+
+```{r fig.width = 14, fig.height = 34 }
+# us2018 <- plot_usmap(data = data2018,
+#            values = "winnerByHouseMajority",
+#            labels = FALSE) +
+#   scale_fill_manual(name = 'Winner by House Majority',
+#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+
+#   geom_label_repel(data = data2016,
+#                    aes(label = abbr,
+#                        geometry = geom,
+#                        color = winnerByTotalVotes),
+#                    stat = 'sf_coordinates',
+#                    size = 5,
+#                    force = 0.01,
+#                    min.segment.length = 0) +
+#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
+#   labs(
+#     title = 'House Majority vs Popular Vote Majority',
+#     subtitle = "By State in 2018",
+#     caption = "Teal & Harmon | Tidy Tuesday 2023"
+#   ) +
+#   theme(
+#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+#     plot.caption = element_text(size = 20, hjust = 0.5),
+#     legend.text = element_text(size = 12, hjust = 0),
+#     legend.title = element_text(size = 16, hjust= 0),
+#     legend.position = c(0.6,0.03)
+#   )
+# 
+# us2018
+```
+
+
+
+```{r fig.width = 14, fig.height = 34 }
+# us2020 <- plot_usmap(data = data2020,
+#            values = "winnerByHouseMajority",
+#            labels = FALSE) +
+#   scale_fill_manual(name = 'Winner by House Majority',
+#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+
+#   geom_label_repel(data = data2016,
+#                    aes(label = abbr,
+#                        geometry = geom,
+#                        color = winnerByTotalVotes),
+#                    stat = 'sf_coordinates',
+#                    size = 5,
+#                    force = 0.01,
+#                    min.segment.length = 0,
+#                    force_pull = 0.5) +
+#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
+#   labs(
+#     title = 'House Majority vs Popular Vote Majority',
+#     subtitle = "By State in 2020",
+#     caption = "Teal & Harmon | Tidy Tuesday 2023"
+#   ) +
+#   theme(
+#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
+#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
+#     plot.caption = element_text(size = 20, hjust = 0.5),
+#     legend.text = element_text(size = 12, hjust = 0),
+#     legend.title = element_text(size = 16, hjust= 0),
+#     legend.position = c(0.6,0.03)
+#   )
+# 
+# us2020
+```
+
+
 ```{r fig.width = 17, fig.height = 34 }
 # ggarrange(us2016, us2018, us2020, ncol = 2, nrow = 2)
 
@@ -264,6 +425,7 @@ us2020
 ## Question 2
 How is the type of voting influenced by population and how does that influence who loses?
 
+::: {.fragment .fade-in}
 ### Analysis
-
+:::
 
