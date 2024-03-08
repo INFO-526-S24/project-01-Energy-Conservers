@@ -6,9 +6,11 @@ format: html
 editor: visual
 ---
 
-## Abstract
+# Abstract
 
 Add project abstract here.
+
+# Question 1: How did congressional voting trends change from 2016-2020
 
 ## Setup
 ```{r}
@@ -182,4 +184,9 @@ ggarrange(us2016, us2018, us2020, ncol = 1)
 
 ```
 
+## Insight Gained 
 
+The visualization of the House of Representatives broken down by district majority and popular vote majority provides multiple insights. 
+1) The sentiment of the general population is often overlooked by the electoral (district) system.
+2) During a single presidency, the sentiment of the people will change significantly
+3) Well known trends can be seen such as midterm elections supporting the opposite party of the incumbent president.
