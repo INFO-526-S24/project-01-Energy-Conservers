@@ -8,11 +8,18 @@ editor: visual
 
 # Abstract
 
-Add project abstract here.
+This study explores US House election results from 1976 to 2022, focusing on the 2016-2020 presidential term. Using data from the MIT Election Data and Science Lab (MEDSL), we analyze voting trends and the influence of population on election outcomes.
+
+For the 2016-2020 term, we filter data to determine the winning party for each state, creating a map to visualize the political landscape. We then merge population data to analyze how voting types vary with population size in congressional districts, identifying relationships between population and election outcomes.
+
+Our analysis includes statistical approaches such as logistic regression, chi-square tests, and time-series analysis to predict election outcomes and understand voting trends over time.
+
+Limitations include the availability of only basic demographic information due to data constraints. This study provides insights into US voting patterns and the impact of population on election results, contributing to the understanding of electoral dynamics.
 
 # Question 1: How did congressional voting trends change from 2016-2020
 
 ## Setup
+
 ```{r}
 if(!require(pacman))
   install.packages("pacman") #utilize pacman to load each package, while ensuring nothing is redownloaded unnecesarily
@@ -34,9 +41,11 @@ pacman::p_load(tidyverse, #Add new packages as necessary
 
 
 ```
-Add new sections as necessary [DELETE BEFORE TURNING IN]
+
+Add new sections as necessary \[DELETE BEFORE TURNING IN\]
 
 ## EDA
+
 ```{r}
 elec <- readr::read_csv('data/house.csv')
 describe(elec)
@@ -49,6 +58,7 @@ elec16to20 <- elec |>
 ```
 
 ## Data Wrangling
+
 ```{r}
 
  
@@ -87,8 +97,8 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 ```
 
-
 ## Data Visualization
+
 ```{r  fig.width = 14, fig.height = 34 }
 #general plot just to get used to the function. We can add layers like a ggplot object
 #For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
@@ -183,6 +193,7 @@ us2020 <- plot_usmap(data = data2020,
 ggarrange(us2016, us2018, us2020, ncol = 1)
 
 ```
+<<<<<<< HEAD
 
 ## Insight Gained 
 
@@ -190,3 +201,5 @@ The visualization of the House of Representatives broken down by district majori
 1) The sentiment of the general population is often overlooked by the electoral (district) system.
 2) During a single presidency, the sentiment of the people will change significantly
 3) Well known trends can be seen such as midterm elections supporting the opposite party of the incumbent president.
+=======
+>>>>>>> ebe41a1256b11a45ce16b58bba74af08876e2e56
