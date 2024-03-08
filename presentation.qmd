@@ -431,6 +431,11 @@ us2020
 ```
 
 
+## Insight
+-   The sentiment of the general population is often overlooked by the electoral system
+-   The sentiment of people during a single presidency will change significantly
+-   Evident trends can be seen such as supporting the opposite party of the current president in midterm elections
+
 ## Question 2
 How is the type of voting influenced by population and how does that influence who loses?
 
