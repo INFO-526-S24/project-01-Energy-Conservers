@@ -67,9 +67,6 @@ elec16to20 <- elec |>
 
 #ggplot(elec) |> #create a plot to show change house elections from entire dataset
 
-
-
-
 elec12to22 <- elec |>
   filter(between(year,2012,2022))
 
@@ -80,7 +77,7 @@ ariz <- elec12to22 |>
 ```
 
 
-```
+
 
 # \# Question 1: How did congressional voting trends change from 2016-2020
 
@@ -357,12 +354,20 @@ The visualization of the House of Representatives broken down by district majori
 ```{r}
 #| label: Question 2 Data Wrangling
 
-for(date in c(2012, 2014, 2016, 2018, 2020,2022)){
+elec2 <- readr::read_csv('data/house_population_merged.csv')
+
+elec12to22 <- elec2 |>
+  filter(between(year,2012,2022))
+
+ariz <- elec12to22 |>
+  filter(state == "ARIZONA",
+         !is.na(party))
+
+for(date in c(2012, 2016, 2022)){
   result2 <- ariz |>
     filter(year == date) |>
     group_by(district) |>
-    summarise(winParty = party[which.max(candidatevotes)],
-              partyVotes = sum(candidatevotes))
+    summarise(winParty = party[which.max(candidatevotes)])
   assign(paste0('distWin', date), result2)
 }
 
@@ -375,17 +380,25 @@ To analyze the congressional district mappings of the state of Arizona we will l
 ```{r}
 #| label: 2012 District Map
 
-cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
-cd_az12$party <- c("DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+# Get dataframe to map AZ state from USAboundaries
+cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
+  st_sf() |>
+  rename(district = "cd116fp")
 
-cd_az12 |>
+# Change district variable type to numeric and rename it 'district'
+cd_az12$district <- as.numeric(cd_az12$district)
+
+# Join USAboundaries data with our dataset to determine party winners of each district
+azMap12 <- full_join(cd_az12, distWin2012, by = 'district')
+
+# Plot district map
+azMap12 |>
   ggplot() + 
-  geom_sf(aes(fill = party)) +
+  geom_sf(aes(fill = winParty)) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2012") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
 
@@ -396,19 +409,28 @@ cd_az12 |>
 ```{r}
 #| label: 2016 District Map
 
-cd_az16 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
-cd_az16$party <- c("REPUBLICAN", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+# Get dataframe to map AZ state from USAboundaries
+cd_az16 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
+  st_sf() |>
+  rename(district = "cd116fp")
 
-cd_az16 |>
+# Change district variable type to numeric and rename it 'district'
+cd_az16$district <- as.numeric(cd_az16$district)
+
+# Join USAboundaries data with our dataset to determine party winners of each district
+azMap16 <- full_join(cd_az16, distWin2016, by = 'district')
+
+# Plot district map
+azMap16 |>
   ggplot() + 
-  geom_sf(aes(fill = party)) +
+  geom_sf(aes(fill = winParty)) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2016") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
+
 
 ```
 
@@ -417,19 +439,29 @@ cd_az16 |>
 ```{r}
 #| label: 2022 District Map
 
-cd_az22 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
-cd_az22$party <- c("REPUBLICAN", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+# Get dataframe to map AZ state from USAboundaries
+cd_az22 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
+  st_sf() |>
+  rename(district = "cd116fp")
 
-cd_az22 |>
+# Change district variable type to numeric and rename it 'district'
+cd_az22$district <- as.numeric(cd_az22$district)
+
+# Join USAboundaries data with our dataset to determine party winners of each district
+azMap22 <- full_join(cd_az22, distWin2022, by = 'district')
+
+# Plot district map
+azMap22 |>
   ggplot() + 
-  geom_sf(aes(fill = party)) +
+  geom_sf(aes(fill = winParty)) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2022") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
+
+
 
 
 ```
