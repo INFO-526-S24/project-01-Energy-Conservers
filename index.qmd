@@ -25,10 +25,8 @@ The analysis focused on time-series analysis as the variables were view over tim
 
 
 
-# Introduction
 
 
-## Setup
 
 ```{r}
 if(!require(pacman))
@@ -53,7 +51,9 @@ remotes::install_github("ropensci/USAboundariesData")
 
 ```
 
-Add new sections as necessary \[DELETE BEFORE TURNING IN\]
+# Introduction
+
+## Introducing the Dataset
 
 ## EDA
 
@@ -77,17 +77,15 @@ ariz <- elec12to22 |>
 
 ```
 
+# Question 1: How did congressional voting trends change from 2016-2020
 
-```
+## Introduction
 
-# \# Question 1: How did congressional voting trends change from 2016-2020
+## Approach
 
-
-
-## Data Wrangling
 
 ```{r}
-
+# Data Wrangling
  
 for (date in c(2016, #aggregate state mode of party to determine which party has the 
                2018, #majority
@@ -126,7 +124,7 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 We analyze the election data from 2016, 2018 and 2020 to determine the party that has the majority in each state based on the house of representatives. We calculate the party with majority of seats in the house for each state in each election year. It shows that party that received the most total votes in each state for each year. Which tells us the most total votes in each state for each year. The analysis provides insights into the party distribution and voting trends across states in the specified election years.
 
-## Data Visualization
+## Analysis
 
 ```{r  fig.width = 14, fig.height = 34 }
 #general plot just to get used to the function. We can add layers like a ggplot object
@@ -344,7 +342,7 @@ us2020
 
 We generate a map of united states for the year 2020, Where each state is colored based on the wining party in the House of Representatives .We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has lost 13 states which is the most states by comparing 2016, 2018 and 2020 election results. Also, Republican party has gained most states according to the data of previous years.
 
-## Insight Gained
+## Discussion
 
 The visualization of the House of Representatives broken down by district majority and popular vote majority provides multiple insights. 1) The sentiment of the general population is often overlooked by the electoral (district) system. 2) During a single presidency, the sentiment of the people will change significantly 3) Well known trends can be seen such as midterm elections supporting the opposite party of the incumbent president.
 
