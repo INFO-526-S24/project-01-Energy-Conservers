@@ -8,7 +8,7 @@ editor: visual
 
 # Abstract
 
-This study explores US House election results from 1976 to 2022, focusing on the 2016-2020 presidential term. Using data from the MIT Election Data and Science Lab (MEDSL), we analyze voting trends and the influence of population on election outcomes.
+This study explores US House election results from 1976 to 2022, focusing on the 2016-2020 cycles. Using data from the MIT Election Data and Science Lab (MEDSL), we analyze voting trends and the influence of population on election outcomes.
 
 For the 2016-2020 term, we filter data to determine the winning party for each state, creating a map to visualize the political landscape. We then merge population data to analyze how voting types vary with population size in congressional districts, identifying relationships between population and election outcomes.
 
