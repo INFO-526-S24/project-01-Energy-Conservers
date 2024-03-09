@@ -374,7 +374,7 @@ cd_az16 <- USAboundaries::us_congressional(resolution = "high", states = c("Ariz
 cd_az16$party <- c("REPUBLICAN", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
 
 cd_az16 |>
-  ggplot() + 
+  ggplot() +
   geom_sf(aes(fill = party)) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2016") +
@@ -383,39 +383,6 @@ cd_az16 |>
         panel.grid = element_blank(),
         panel.background = element_blank())
 
-
-# 2018 District Map
-# cd_az18 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
-# cd_az18$party <- c("DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
-# 
-# 
-# cd_az18 |>
-#   ggplot() + 
-#   geom_sf(aes(fill = party)) +
-#   scale_fill_manual(name = "Party", values = c("blue", "red")) +
-#   labs(title = "Arizona Congressional Districts 2018") +
-#   theme(legend.position = "bottom",
-#         axis.text = element_blank(),
-#         axis.ticks = element_blank(),
-#         panel.grid = element_blank(),
-#         panel.background = element_blank())
-
-
-# 2020 District Map
-# cd_az20 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
-# cd_az20$party <- c("DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
-# 
-# 
-# cd_az20 |>
-#   ggplot() + 
-#   geom_sf(aes(fill = party)) +
-#   scale_fill_manual(name = "Party", values = c("blue", "red")) +
-#   labs(title = "Arizona Congressional Districts 2020") +
-#   theme(legend.position = "bottom",
-#         axis.text = element_blank(),
-#         axis.ticks = element_blank(),
-#         panel.grid = element_blank(),
-#         panel.background = element_blank())
 ```
 
 ## 2022
@@ -426,8 +393,9 @@ cd_az16 |>
 cd_az22 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
 cd_az22$party <- c("REPUBLICAN", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
 
+
 cd_az22 |>
-  ggplot() + 
+  ggplot() +
   geom_sf(aes(fill = party)) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2022") +
@@ -438,26 +406,11 @@ cd_az22 |>
 
 
 
-# cd_az |>
-#   ggplot() + 
-#   geom_sf(data = distWin2016, aes(geometry = , fill = winParty)) +
-#   scale_fill_manual(name = "Party", 
-#                     values = c("blue", "red")) +
-#   labs(title = "Arizona Congressional Districts 2016") +
-#   theme(legend.position = "bottom",
-#         axis.text = element_blank(),
-#         axis.ticks = element_blank(),
-#         panel.background = element_blank())
-
-
-
-
-
-
 
 
 ```
 :::
+
 
 ## Insight
 -   It is not common for the party representation of a district to change in one or two elections
