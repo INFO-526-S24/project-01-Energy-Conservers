@@ -12,7 +12,6 @@ This study explores US House election results from 1976 to 2022, focusing on the
 
 For the 2016-2020 term, we filter data to determine the winning party for each state, creating a map to visualize the political landscape. We then merge population data to analyze how voting types vary with population size in congressional districts, identifying relationships between population and election outcomes.
 
-
 Our analysis includes statistical approaches such as logistic regression, chi-square tests, and time-series analysis to predict election outcomes and understand voting trends over time.
 
 Limitations include the availability of only basic demographic information due to data constraints. This study provides insights into US voting patterns and the impact of population on election results, contributing to the understanding of electoral dynamics.
@@ -197,9 +196,7 @@ we analyze the election data fro 2016, 2018 and 2020 to determine the party that
 
 ```
 
-
 ## 2016
-
 
 ```{r  fig.width = 14, fig.height = 34}
 
@@ -323,3 +320,51 @@ We generate a map of united states for the year 2020, Where each state is colore
 ## Insight Gained
 
 The visualization of the House of Representatives broken down by district majority and popular vote majority provides multiple insights. 1) The sentiment of the general population is often overlooked by the electoral (district) system. 2) During a single presidency, the sentiment of the people will change significantly 3) Well known trends can be seen such as midterm elections supporting the opposite party of the incumbent president.
+
+# \# Question 2 : What percentage of House members get re-elected throughout the years and what types of voting play significant roles in these elections?
+
+## EDA
+
+```{r}
+library(readxl)
+house_with_New_features <- read_xlsx('data/house_with_New_features.xlsx')
+```
+
+## Data Wrangling
+
+```{r}
+
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Filter data for Arizona state, relevant columns, and years 2016-2022
+voting_data_arizona <- house_with_New_features %>%
+  filter(state == "ARIZONA", year >= 2016 & year <= 2022) %>%
+  select(year, Type_of_Voting, RESULT)
+
+# Count the number of candidates for each combination of Year, Type_of_Voting, and RESULT
+voting_result_counts_arizona <- voting_data_arizona %>%
+  group_by(year, Type_of_Voting, RESULT) %>%
+  summarise(Count = n())
+
+# Calculate the percentage of candidates for each combination
+voting_result_counts_arizona <- voting_result_counts_arizona %>%
+  group_by(year, Type_of_Voting) %>%
+  mutate(Percentage = (Count / sum(Count)) * 100) %>%
+  ungroup() %>%
+  arrange(year, desc(Count))
+
+# Custom color palette
+custom_colors <- c("#009688", "#FF9800")
+
+
+
+```
+
+## Data Visualization
+
+```{r}
+
+
+```
