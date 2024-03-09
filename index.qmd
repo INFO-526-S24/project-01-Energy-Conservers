@@ -50,6 +50,8 @@ pacman::p_load(tidyverse, #Add new packages as necessary
                grid,
                ggpubr
                )
+remotes::install_github("ropensci/USAboundaries")
+remotes::install_github("ropensci/USAboundariesData")
 
 ```
 
