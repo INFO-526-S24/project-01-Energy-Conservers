@@ -383,6 +383,7 @@ cd_az12 |>
   labs(title = "Arizona Congressional Districts 2012") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
+        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
 
@@ -403,6 +404,7 @@ cd_az16 |>
   labs(title = "Arizona Congressional Districts 2016") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
+        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
 
@@ -423,6 +425,7 @@ cd_az22 |>
   labs(title = "Arizona Congressional Districts 2022") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
+        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
 
