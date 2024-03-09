@@ -12,7 +12,6 @@ This study explores US House election results from 1976 to 2022, focusing on the
 
 For the 2016-2020 term, we filter data to determine the winning party for each state, creating a map to visualize the political landscape. We then merge population data to analyze how voting types vary with population size in congressional districts, identifying relationships between population and election outcomes.
 
-
 Our analysis includes statistical approaches such as logistic regression, chi-square tests, and time-series analysis to predict election outcomes and understand voting trends over time.
 
 Limitations include the availability of only basic demographic information due to data constraints. This study provides insights into US voting patterns and the impact of population on election results, contributing to the understanding of electoral dynamics.
@@ -98,7 +97,7 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 ```
 
-we analyze the election data fro 2016, 2018 and 2020 to determine the party that has the majority in each state based on the house of representatives.We calculate the party with majority of seats in the house for each state in each election year. It shows that party that received the most total votes in each state for each year. Which tells us the most total votes in each state for each year. The analysis provides insights into the party distribution and voting trends across states in the specified election years.
+We analyze the election data from 2016, 2018 and 2020 to determine the party that has the majority in each state based on the house of representatives. We calculate the party with majority of seats in the house for each state in each election year. It shows that party that received the most total votes in each state for each year. Which tells us the most total votes in each state for each year. The analysis provides insights into the party distribution and voting trends across states in the specified election years.
 
 ## Data Visualization
 
@@ -197,14 +196,10 @@ we analyze the election data fro 2016, 2018 and 2020 to determine the party that
 
 ```
 
-
 ## 2016
-<<<<<<< HEAD
-```{r  fig.width = 14, fig.height = 14 }
-=======
 
-```{r  fig.width = 14, fig.height = 34 }
->>>>>>> 6c1ab10bc785195446368bfeea675f4e4669c48e
+```{r  fig.width = 14, fig.height = 34}
+
 #| label: Data Visualization
 
 #general plot just to get used to the function. We can add layers like a ggplot object
@@ -245,12 +240,11 @@ us2016
 We generate a map of united states for the year 2016, Where each state is colored based on the majority party in the House of Representatives .We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 40 states and the rest are won by Republican Party in the year 2016.
 
 ## 2018
-<<<<<<< HEAD
-```{r fig.width = 14, fig.height = 14 }
+
 =======
 
 ```{r fig.width = 14, fig.height = 34 }
->>>>>>> 6c1ab10bc785195446368bfeea675f4e4669c48e
+
 us2018 <- plot_usmap(data = data2018,
            values = "winnerByHouseMajority",
            labels = FALSE) +
@@ -285,12 +279,10 @@ us2018
 We generate a map of united states for the year 2018, Where each state is colored based on the wining party in the House of Representatives .We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 42 states and Republican Party has won only in 1 state that is NC in 2018.
 
 ## 2020
-<<<<<<< HEAD
-```{r fig.width = 14, fig.height = 14 }
-=======
 
-```{r fig.width = 14, fig.height = 34 }
->>>>>>> 6c1ab10bc785195446368bfeea675f4e4669c48e
+```{r fig.width = 14, fig.height = 14 }
+
+
 us2020 <- plot_usmap(data = data2020,
            values = "winnerByHouseMajority",
            labels = FALSE) +
@@ -328,3 +320,176 @@ We generate a map of united states for the year 2020, Where each state is colore
 ## Insight Gained
 
 The visualization of the House of Representatives broken down by district majority and popular vote majority provides multiple insights. 1) The sentiment of the general population is often overlooked by the electoral (district) system. 2) During a single presidency, the sentiment of the people will change significantly 3) Well known trends can be seen such as midterm elections supporting the opposite party of the incumbent president.
+
+# \# Question 2 : How often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?
+
+## EDA for district mappings
+
+```{r}
+#| label: Question 2 EDA
+
+elec12to22 <- elec |>
+  filter(between(year,2012,2022))
+
+ariz <- elec12to22 |>
+  filter(state == "ARIZONA",
+         !is.na(party))
+
+```
+
+
+## Data wrangling for district maps
+
+```{r}
+#| label: Question 2 Data Wrangling
+
+for(date in c(2012, 2014, 2016, 2018, 2020,2022)){
+  result2 <- ariz |>
+    filter(year == date) |>
+    group_by(district) |>
+    summarise(winParty = party[which.max(candidatevotes)],
+              partyVotes = sum(candidatevotes))
+  assign(paste0('distWin', date), result2)
+}
+
+```
+
+To analyze the congressional district mappings of the state of Arizona we will look at data from 2012, 2016, and 2022 to compare how the parties that represent districts change over a course of a couple years and also over the course of a decade to exhibit the difference in change over time. We will also consider specific types of voting methods to examine which methods played significant roles in these elections for the state of Arizona.
+
+## 2012
+```{r}
+#| label: 2012 District Map
+
+cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+cd_az12$party <- c("DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+
+cd_az12 |>
+  ggplot() + 
+  geom_sf(aes(fill = party)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2012") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+
+```
+
+
+## 2016
+```{r}
+#| label: 2016 District Map
+
+cd_az16 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+cd_az16$party <- c("REPUBLICAN", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+
+cd_az16 |>
+  ggplot() + 
+  geom_sf(aes(fill = party)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2016") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+
+```
+
+## 2022
+```{r}
+#| label: 2022 District Map
+
+cd_az22 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+cd_az22$party <- c("REPUBLICAN", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+
+cd_az22 |>
+  ggplot() + 
+  geom_sf(aes(fill = party)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2022") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+
+
+```
+
+## Insight Gained
+From the Arizona congressional district maps we can see that there are not many changes that occur in the span of only 2-4 years, however there are significant changes that occur when comparing the district maps that are a decade apart. From the rest of the dataset we are able to see that this is often the case, it is not common for many districts to change the parties that represent them in a span of only one or two elections, however this doesn't necessarily mean that change is a rarity as we can see the significant change in district representation over the course of a decade.
+
+## EDA for voting methods
+
+```{r}
+#| label: Load new features into dataset
+
+library(readxl)
+house_with_New_features <- read_xlsx('data/house_with_New_features.xlsx')
+```
+
+## Data wrangling for voting methods
+
+```{r}
+#| label: Data Wrangling Q.2
+
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Filter data for Arizona state, relevant columns, and years 2016-2022
+voting_data_arizona <- house_with_New_features %>%
+  filter(state == "ARIZONA", year >= 2016 & year <= 2022) %>%
+  select(year, Type_of_Voting, RESULT)
+
+# Count the number of candidates for each combination of Year, Type_of_Voting, and RESULT
+voting_result_counts_arizona <- voting_data_arizona %>%
+  group_by(year, Type_of_Voting, RESULT) %>%
+  summarise(Count = n())
+
+# Calculate the percentage of candidates for each combination
+voting_result_counts_arizona <- voting_result_counts_arizona %>%
+  group_by(year, Type_of_Voting) %>%
+  mutate(Percentage = (Count / sum(Count)) * 100) %>%
+  ungroup() %>%
+  arrange(year, desc(Count))
+
+# Custom color palette
+custom_colors <- c("#009688", "#FF9800")
+
+
+
+```
+
+## Data Visualization
+
+```{r}
+#| label: Data Visualization Q.2
+
+library(ggplot2)
+# Visualization - Enhanced Horizontally Stacked Bar Plot for Arizona with Percentage Labels
+ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, levels = unique(Type_of_Voting)), Count), y = Count, fill = RESULT)) +
+  geom_bar(stat = "identity", color = "white") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5),
+            color = "black", size = 4, fontface = "bold") +  # Add percentage labels
+  facet_wrap(~ year, scales = "free") +
+  labs(title = "Impact of Types of Voting on Election Outcomes in Arizona (2016-2022)",
+       y = "Number of Candidates",
+       x = "Type of Voting",
+       fill = "Result") +
+  scale_fill_manual(values = custom_colors) +  # Set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),  # Rotate labels by 90 degrees
+        plot.title = element_text(hjust = 0.5, size = 12, face = "bold"),
+        legend.title = element_text(size = 12),
+        legend.text = element_text(size = 10),
+        legend.position = "bottom",
+        panel.grid.major.y = element_blank(),  # Remove horizontal grid lines
+        panel.grid.minor.y = element_blank(),  # Remove horizontal grid lines
+        panel.background = element_rect(fill = "white"),  # Set panel background color
+        plot.background = element_rect(fill = "#F5F5F5"),  # Set plot background color
+        strip.background = element_rect(fill = "#E0E0E0", color = "white"),  # Set facet strip background color
+        strip.text = element_text(face = "bold")) +
+  coord_flip()  # Flip the coordinates to create a horizontally stacked bar chart
+
+```

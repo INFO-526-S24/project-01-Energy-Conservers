@@ -8,11 +8,11 @@ title-slide-attributes:
   data-background-opacity: "0.5"
   data-slide-number: none
 format:
+  
   revealjs:
     transition: convex
     theme:  ['data/customtheming.scss']
     auto-animate-duration: 1.5
-  
 editor: visual
 execute:
   echo: false
@@ -83,6 +83,7 @@ elec16to20 <- elec |>
 # US House Election Dataset
 
 ## Understanding the Dataset
+
 -   Data sourced from MIT Election Data and Science Lab
 
 ::: {.fragment .fade-in}
@@ -96,15 +97,12 @@ elec16to20 <- elec |>
     ::: {.column width="33%"}
     **`year`**
     :::
-
     ::: {.column width="33%"}
     **`party`**
     :::
-
     ::: {.column width="34%"}
     **`state_po`**
     :::
-
     ::: {.column width="33%"}
     **`population`**
     :::
@@ -119,23 +117,26 @@ elec16to20 <- elec |>
     :::
 :::
 
-## Question 1 {auto-animate=true}
+## Question 1 {auto-animate="true"}
 
 ::: {style="margin-top: 0px;"}
 Election Results
 :::
+
 How did US voting trends change election results throughout the 2016-2020 presidential term?
 
 ::: {.fragment .fade-in}
 ### Analysis
+
 To answer this question we will look at which party won in each state for the years 2016, 2018, and 2020 to identify patterns and significant changes that occurred in the election results.
 :::
 
-## {auto-animate=true}
+##  {auto-animate="true"}
 
 ::: {style="margin-top: -80px; font-size: 1.5em; font-weight: bold;"}
 Election Results
 :::
+
 ```{r}
 #| label: Data Wrangling
 
@@ -174,6 +175,7 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 ::: panel-tabset
 ## 2016
+
 ```{r  fig.width = 14, fig.height = 34 }
 #| label: Data Visualization
 #general plot just to get used to the function. We can add layers like a ggplot object
@@ -212,6 +214,7 @@ us2016
 ```
 
 ## 2018
+
 ```{r fig.width = 14, fig.height = 34 }
 us2018 <- plot_usmap(data = data2018,
            values = "winnerByHouseMajority",
@@ -244,8 +247,8 @@ us2018 <- plot_usmap(data = data2018,
 us2018
 ```
 
-
 ## 2020
+
 ```{r fig.width = 14, fig.height = 34 }
 us2020 <- plot_usmap(data = data2020,
            values = "winnerByHouseMajority",
@@ -278,23 +281,32 @@ us2020 <- plot_usmap(data = data2020,
 
 us2020
 ```
-
-
 :::
 
 ## Insight
+
 -   The sentiment of the general population is often overlooked by the electoral system
 -   The sentiment of people during a single presidency will change significantly
 -   Evident trends can be seen such as supporting the opposite party of the current president in midterm elections
 
-## Question 2
-What percentage of House members get re-elected throughout the years and what types of voting play significant roles in these elections?
+## Question 2 {auto-animate=true}
+
+::: {style="margine-top: 0px;"}
+Arizona Congressional Districts
+:::
+
+How often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?
 
 ::: {.fragment .fade-in}
 ### Analysis
+To answer this question we will look at Arizona congressional district mappings in the years 2012, 2016, and 2022 to examine the changes that occur in district representation. We will also consider various voting methods and determine which played the largest roles in these elections.
 :::
 
-## Arizona Distruct Results
+## {auto-animate=true}
+
+::: {style="margin-top: -80px; font-size: 1.5em; font-weight: bold;"}
+Arizona Congressional Districts
+:::
 
 ```{r}
 #| label: Arizona Congressional District Maps
@@ -318,6 +330,7 @@ for(date in c(2012, 2014, 2016, 2018, 2020,2022)){
 
 ::: panel-tabset
 ## 2012
+
 ```{r}
 
 # 2012 District Map
@@ -352,8 +365,8 @@ cd_az12 |>
 #         panel.background = element_blank())
 ```
 
-
 ## 2016
+
 ```{r}
 
 # 2016 District Map
@@ -405,8 +418,8 @@ cd_az16 |>
 #         panel.background = element_blank())
 ```
 
-
 ## 2022
+
 ```{r}
 
 # 2022 District Map
@@ -444,7 +457,10 @@ cd_az22 |>
 
 
 ```
-
 :::
+
+## Insight
+-   It is not common for the party representation of a district to change in one or two elections
+-   Doesn't mean that change doesn't occur
 
 ## Conclusion
