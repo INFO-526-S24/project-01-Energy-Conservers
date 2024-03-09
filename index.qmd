@@ -2,8 +2,17 @@
 title: "Analyzing Trends in House of Representatives from 2016-2020"
 subtitle: "INFO 526 - Project 1"
 author: "The Power of The Voters"
-format: html
+format: 
+  html:
+    embed-resources: true
+toc: true
+execute:
+  warning: false
+  message: false
+  results: hide 
 editor: visual
+
+
 ---
 
 # Abstract
@@ -16,7 +25,10 @@ Our analysis includes statistical approaches such as logistic regression, chi-sq
 
 Limitations include the availability of only basic demographic information due to data constraints. This study provides insights into US voting patterns and the impact of population on election results, contributing to the understanding of electoral dynamics.
 
-# \# Question 1: How did congressional voting trends change from 2016-2020
+
+
+# Introduction
+
 
 ## Setup
 
@@ -41,7 +53,6 @@ pacman::p_load(tidyverse, #Add new packages as necessary
 remotes::install_github("ropensci/USAboundaries")
 remotes::install_github("ropensci/USAboundariesData")
 
-
 ```
 
 Add new sections as necessary \[DELETE BEFORE TURNING IN\]
@@ -57,7 +68,23 @@ elec16to20 <- elec |>
 #ggplot(elec) |> #create a plot to show change house elections from entire dataset
 
 
+
+
+elec12to22 <- elec |>
+  filter(between(year,2012,2022))
+
+ariz <- elec12to22 |>
+  filter(state == "ARIZONA",
+         !is.na(party))
+
 ```
+
+
+```
+
+# \# Question 1: How did congressional voting trends change from 2016-2020
+
+
 
 ## Data Wrangling
 
@@ -245,7 +272,7 @@ We generate a map of united states for the year 2016, Where each state is colore
 
 =======
 
-```{r fig.width = 14, fig.height = 34 }
+```{r fig.width = 14, fig.height = 14 }
 
 us2018 <- plot_usmap(data = data2018,
            values = "winnerByHouseMajority",
@@ -260,7 +287,7 @@ us2018 <- plot_usmap(data = data2018,
                    size = 5,
                    force = 0.01,
                    min.segment.length = 0) +
-  scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
+  scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) + guides(color = guide_legend(title = "Winner by Total Votes")) +
   labs(
     title = 'House Majority vs Popular Vote Majority',
     subtitle = "By State in 2018",
@@ -325,21 +352,6 @@ The visualization of the House of Representatives broken down by district majori
 
 # \# Question 2 : How often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?
 
-## EDA for district mappings
-
-```{r}
-#| label: Question 2 EDA
-
-elec12to22 <- elec |>
-  filter(between(year,2012,2022))
-
-ariz <- elec12to22 |>
-  filter(state == "ARIZONA",
-         !is.na(party))
-
-```
-
-
 ## Data wrangling for district maps
 
 ```{r}
@@ -359,6 +371,7 @@ for(date in c(2012, 2014, 2016, 2018, 2020,2022)){
 To analyze the congressional district mappings of the state of Arizona we will look at data from 2012, 2016, and 2022 to compare how the parties that represent districts change over a course of a couple years and also over the course of a decade to exhibit the difference in change over time. We will also consider specific types of voting methods to examine which methods played significant roles in these elections for the state of Arizona.
 
 ## 2012
+
 ```{r}
 #| label: 2012 District Map
 
@@ -378,8 +391,8 @@ cd_az12 |>
 
 ```
 
-
 ## 2016
+
 ```{r}
 #| label: 2016 District Map
 
@@ -400,6 +413,7 @@ cd_az16 |>
 ```
 
 ## 2022
+
 ```{r}
 #| label: 2022 District Map
 
@@ -421,6 +435,7 @@ cd_az22 |>
 ```
 
 ## Insight Gained
+
 From the Arizona congressional district maps we can see that there are not many changes that occur in the span of only 2-4 years, however there are significant changes that occur when comparing the district maps that are a decade apart. From the rest of the dataset we are able to see that this is often the case, it is not common for many districts to change the parties that represent them in a span of only one or two elections, however this doesn't necessarily mean that change is a rarity as we can see the significant change in district representation over the course of a decade.
 
 ## EDA for voting methods
