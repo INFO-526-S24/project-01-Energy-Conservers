@@ -17,13 +17,11 @@ editor: visual
 
 # Abstract
 
-This study explores US House election results from 1976 to 2022, focusing on the 2016-2020 cycles. Using data from the MIT Election Data and Science Lab (MEDSL), we analyze voting trends and the influence of population on election outcomes.
+This study explores US House election results from 1976 to 2022, focusing on US House of Representative trends from 2016-2022, and state-wide trends in Arizona from 2012-2022. From 2016-2020, the data was wrangled into three subsets, one for each cycle. To simplify the analysis, all parties that are outside of Republican and Democrat were grouped into a new generalized party called "Other". These subsets were then displayed on a US map, where the fill of the state indicates which party has the house majority, while the label of the state indicates which party had the popular vote majority. This revealed insights into how the electoral system can lead to politicians that may not represent the sentiment of the population of the state. Zooming in on the state of Arizona, voting trends were analyzed over a longer time frame of 10 years, from 2012 to 2022. The mode of voting as well as the change in party in each district was visualized to create insights into how mode of voting will influence the winning candidate, and how that influences the winning party in each district.
 
-For the 2016-2020 term, we filter data to determine the winning party for each state, creating a map to visualize the political landscape. We then merge population data to analyze how voting types vary with population size in congressional districts, identifying relationships between population and election outcomes.
+Insights into voting trends are very important metrics for politicians and the general population as it can be directly be related to other aspects of life such as the economy and global politics. These insights can then help politicians target states where voter sentiment can make or break a politicians campaign.
 
-Our analysis includes statistical approaches such as logistic regression, chi-square tests, and time-series analysis to predict election outcomes and understand voting trends over time.
-
-Limitations include the availability of only basic demographic information due to data constraints. This study provides insights into US voting patterns and the impact of population on election results, contributing to the understanding of electoral dynamics.
+The analysis focused on time-series analysis as the variables were view over time and the changes noted as valuable insights.  The limitations for this project include the assumption that the conglomeration of minor parties will create a larger third party that will vote different from Democrat and Republican, though this is not the case in real life, where some minor parties will align closer to the larger parties and some will votes on their own ideas. Ulitmately, This study provides insights into US voting patterns and the impact of election results on future voting trends.
 
 
 
