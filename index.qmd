@@ -200,7 +200,7 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 ::: panel-tabset
 ## 2016
-```{r  fig.width = 14, fig.height = 34 }
+```{r  fig.width = 14, fig.height = 14 }
 #| label: Data Visualization
 
 #general plot just to get used to the function. We can add layers like a ggplot object
@@ -240,7 +240,7 @@ us2016
 <<<<<<< HEAD
 
 ## 2018
-```{r fig.width = 14, fig.height = 34 }
+```{r fig.width = 14, fig.height = 14 }
 us2018 <- plot_usmap(data = data2018,
            values = "winnerByHouseMajority",
            labels = FALSE) +
@@ -274,7 +274,7 @@ us2018
 
 
 ## 2020
-```{r fig.width = 14, fig.height = 34 }
+```{r fig.width = 14, fig.height = 14 }
 us2020 <- plot_usmap(data = data2020,
            values = "winnerByHouseMajority",
            labels = FALSE) +
