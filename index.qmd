@@ -36,7 +36,8 @@ pacman::p_load(tidyverse, #Add new packages as necessary
                scales,
                usmapdata, 
                grid,
-               ggpubr
+               ggpubr,
+               USAboundaries
                )
 
 
@@ -432,9 +433,6 @@ house_with_New_features <- read_xlsx('data/house_with_New_features.xlsx')
 ```{r}
 #| label: Data Wrangling Q.2
 
-# Load necessary libraries
-library(dplyr)
-library(ggplot2)
 
 # Filter data for Arizona state, relevant columns, and years 2016-2022
 voting_data_arizona <- house_with_New_features %>%
