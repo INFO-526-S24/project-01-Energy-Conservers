@@ -288,7 +288,7 @@ us2020
 -   Evident trends can be seen such as supporting the opposite party of the current president in midterm elections
 
 ## Question 2
-How is the type of voting influenced by population and how does that influence who loses?
+What percentage of House members get re-elected throughout the years and what types of voting play significant roles in these elections?
 
 ::: {.fragment .fade-in}
 ### Analysis
