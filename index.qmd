@@ -8,7 +8,7 @@ editor: visual
 
 # Abstract
 
-This study explores US House election results from 1976 to 2022, focusing on the 2016-2020 presidential term. Using data from the MIT Election Data and Science Lab (MEDSL), we analyze voting trends and the influence of population on election outcomes.
+This study explores US House election results from 1976 to 2022, focusing on the 2016-2020 cycles. Using data from the MIT Election Data and Science Lab (MEDSL), we analyze voting trends and the influence of population on election outcomes.
 
 For the 2016-2020 term, we filter data to determine the winning party for each state, creating a map to visualize the political landscape. We then merge population data to analyze how voting types vary with population size in congressional districts, identifying relationships between population and election outcomes.
 
@@ -36,7 +36,8 @@ pacman::p_load(tidyverse, #Add new packages as necessary
                scales,
                usmapdata, 
                grid,
-               ggpubr
+               ggpubr,
+               USAboundaries
                )
 
 
@@ -432,9 +433,6 @@ house_with_New_features <- read_xlsx('data/house_with_New_features.xlsx')
 ```{r}
 #| label: Data Wrangling Q.2
 
-# Load necessary libraries
-library(dplyr)
-library(ggplot2)
 
 # Filter data for Arizona state, relevant columns, and years 2016-2022
 voting_data_arizona <- house_with_New_features %>%
