@@ -3,9 +3,9 @@ title: "Taking a look into voting trends and effects"
 subtitle: "INFO 526 - Spring 2024 - Project 1"
 author: "The Power of Voters: Christian Ortmann, Sachin Patil, Abhishek Kumar, Tejas Bhawari, Monica Kommareddy, Nick Ferrante"
 title-slide-attributes:
-  data-background-image: images/Picture1.png
+  data-background-image: images/USHouse1.jpeg
   data-background-size: stretch
-  data-background-opacity: "0.9"
+  data-background-opacity: "0.5"
   data-slide-number: none
 format:
   
