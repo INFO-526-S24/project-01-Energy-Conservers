@@ -46,6 +46,8 @@ pacman::p_load(tidyverse, #Add new packages as necessary
                grid,
                ggpubr
                )
+remotes::install_github("ropensci/USAboundaries")
+remotes::install_github("ropensci/USAboundariesData")
 
 
 ```
@@ -75,6 +77,7 @@ elec <- readr::read_csv('data/house_population_merged.csv')
 describe(elec)
 elec16to20 <- elec |>
   filter(between(year,2016,2020))
+
 ```
 
 # US House Election Dataset
@@ -279,158 +282,6 @@ us2020
 
 :::
 
-
-```{r}
-# This code chunk and the following 3 are for having the 3 plots on separate slides as opposed in the tab format
-
-# #| label: Data Wrangling
-# 
-# 
-# for (date in c(2016, #aggregate state mode of party to determine which party has the 
-#                2018, #majority
-#                2020)) {
-#   result <- elec16to20 |>
-#     filter(year == date) |>
-#     group_by(state) |>
-#     summarize(winnerByHouseMajority = names(which.max(table(party))))
-#   assign(paste0('partyMaj', 
-#                 date), 
-#          result)
-# }
-#   
-# for(date in c(2016,2018,2020)) { #for each state determine which party got the most votes
-#   result <- elec16to20 |>
-#     filter(year == date) |>
-#     group_by(state) |>
-#     summarize(winnerByTotalVotes = party[which.max(candidatevotes)], 
-#               partyVotes = sum(candidatevotes)) |>
-#     mutate(fips = fips(state)) #necessary for plotting on US map only on this plot because we will merge
-#   assign(paste0('genMaj',
-#                 date), 
-#          result)
-# }
-# 
-# data2016 <- merge(genMaj2016,partyMaj2016) |>
-#   merge(centroid_labels(regions = c('states')), by = "fips") #adds in data for centroid of each state for labeling
-# data2018 <- merge(genMaj2018, partyMaj2018) |> 
-#   merge(centroid_labels(regions = c('states')), by = "fips")
-# data2020 <- merge(genMaj2020, partyMaj2020) |>
-#   merge(centroid_labels(regions = c('states')), by = "fips")
-```
-
-
-```{r  fig.width = 14, fig.height = 34 }
-# #| label: Data Visualization
-# #general plot just to get used to the function. We can add layers like a ggplot object
-# #For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
-# 
-# 
-#  us2016 <- plot_usmap(data = data2016, 
-#            values = "winnerByHouseMajority", 
-#            labels = FALSE) + 
-#   scale_fill_manual(name = 'Winner by House Majority', 
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01, 
-#                    min.segment.length = 0) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2016",
-#     caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) + 
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# us2016
-```
-
-
-```{r fig.width = 14, fig.height = 34 }
-# us2018 <- plot_usmap(data = data2018,
-#            values = "winnerByHouseMajority",
-#            labels = FALSE) +
-#   scale_fill_manual(name = 'Winner by House Majority',
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01,
-#                    min.segment.length = 0) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2018",
-#     caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) +
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# us2018
-```
-
-
-
-```{r fig.width = 14, fig.height = 34 }
-# us2020 <- plot_usmap(data = data2020,
-#            values = "winnerByHouseMajority",
-#            labels = FALSE) +
-#   scale_fill_manual(name = 'Winner by House Majority',
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01,
-#                    min.segment.length = 0,
-#                    force_pull = 0.5) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2020",
-#     caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) +
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# us2020
-```
-
-
-```{r fig.width = 17, fig.height = 34 }
-# ggarrange(us2016, us2018, us2020, ncol = 2, nrow = 2)
-
-```
-
-
 ## Insight
 -   The sentiment of the general population is often overlooked by the electoral system
 -   The sentiment of people during a single presidency will change significantly
@@ -441,6 +292,159 @@ How is the type of voting influenced by population and how does that influence w
 
 ::: {.fragment .fade-in}
 ### Analysis
+:::
+
+## Arizona Distruct Results
+
+```{r}
+#| label: Arizona Congressional District Maps
+
+elec12to22 <- elec |>
+  filter(between(year,2012,2022))
+
+ariz <- elec12to22 |>
+  filter(state == "ARIZONA",
+         !is.na(party))
+
+for(date in c(2012, 2014, 2016, 2018, 2020,2022)){
+  result2 <- ariz |>
+    filter(year == date) |>
+    group_by(district) |>
+    summarise(winParty = party[which.max(candidatevotes)],
+              partyVotes = sum(candidatevotes))
+  assign(paste0('distWin', date), result2)
+}
+```
+
+::: panel-tabset
+## 2012
+```{r}
+
+# 2012 District Map
+cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+cd_az12$party <- c("DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+
+cd_az12 |>
+  ggplot() + 
+  geom_sf(aes(fill = party)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2012") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+
+
+# 2014 District Map
+# cd_az14 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+# cd_az14$party <- c("REPUBLICAN", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+# 
+# 
+# cd_az14 |>
+#   ggplot() + 
+#   geom_sf(aes(fill = party)) +
+#   scale_fill_manual(name = "Party", values = c("blue", "red")) +
+#   labs(title = "Arizona Congressional Districts 2014") +
+#   theme(legend.position = "bottom",
+#         axis.text = element_blank(),
+#         axis.ticks = element_blank(),
+#         panel.grid = element_blank(),
+#         panel.background = element_blank())
+```
+
+
+## 2016
+```{r}
+
+# 2016 District Map
+cd_az16 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+cd_az16$party <- c("REPUBLICAN", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+
+cd_az16 |>
+  ggplot() + 
+  geom_sf(aes(fill = party)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2016") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+
+
+# 2018 District Map
+# cd_az18 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+# cd_az18$party <- c("DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+# 
+# 
+# cd_az18 |>
+#   ggplot() + 
+#   geom_sf(aes(fill = party)) +
+#   scale_fill_manual(name = "Party", values = c("blue", "red")) +
+#   labs(title = "Arizona Congressional Districts 2018") +
+#   theme(legend.position = "bottom",
+#         axis.text = element_blank(),
+#         axis.ticks = element_blank(),
+#         panel.grid = element_blank(),
+#         panel.background = element_blank())
+
+
+# 2020 District Map
+# cd_az20 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+# cd_az20$party <- c("DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+# 
+# 
+# cd_az20 |>
+#   ggplot() + 
+#   geom_sf(aes(fill = party)) +
+#   scale_fill_manual(name = "Party", values = c("blue", "red")) +
+#   labs(title = "Arizona Congressional Districts 2020") +
+#   theme(legend.position = "bottom",
+#         axis.text = element_blank(),
+#         axis.ticks = element_blank(),
+#         panel.grid = element_blank(),
+#         panel.background = element_blank())
+```
+
+
+## 2022
+```{r}
+
+# 2022 District Map
+cd_az22 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona"))
+cd_az22$party <- c("REPUBLICAN", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT", "REPUBLICAN", "REPUBLICAN", "DEMOCRAT")
+
+cd_az22 |>
+  ggplot() + 
+  geom_sf(aes(fill = party)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2022") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+
+
+
+# cd_az |>
+#   ggplot() + 
+#   geom_sf(data = distWin2016, aes(geometry = , fill = winParty)) +
+#   scale_fill_manual(name = "Party", 
+#                     values = c("blue", "red")) +
+#   labs(title = "Arizona Congressional Districts 2016") +
+#   theme(legend.position = "bottom",
+#         axis.text = element_blank(),
+#         axis.ticks = element_blank(),
+#         panel.background = element_blank())
+
+
+
+
+
+
+
+
+```
+
 :::
 
 ## Conclusion
