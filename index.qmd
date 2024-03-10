@@ -374,7 +374,7 @@ for(date in c(2012, 2016, 2022)){
 
 ```
 
-To analyze the congressional district mappings of the state of Arizona we will look at data from 2012, 2016, and 2022 to compare how the parties that represent districts change over a course of a couple years and also over the course of a decade to exhibit the difference in change over time. We will also consider specific types of voting methods to examine which methods played significant roles in these elections for the state of Arizona.
+The analysis will look at election results from 2012, 2016, and 2022 to see how Arizona's congressional district alignments have changed over time. The goal is to identify patterns of political representation inside the state's districts, detecting movements in party control over both short-term and decade-long periods. Furthermore, the analysis will look into the influence of various voting procedures, specifically their impact on election outcomes in Arizona.
 
 ## Analysis
 
@@ -407,6 +407,8 @@ azMap12 |>
         panel.background = element_blank())
 
 ```
+
+The resultant visualisation is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This visualisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party.
 
 ### 2016
 
