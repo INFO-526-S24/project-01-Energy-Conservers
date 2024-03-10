@@ -51,7 +51,7 @@ remotes::install_github("ropensci/USAboundariesData")
 
 ## Introducing the Dataset
 
-The dataset, [US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
+The dataset, [US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) is sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
 
 This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate's name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.
 
@@ -132,6 +132,10 @@ usmap::plot_usmap(data = total_votes_2022, values = "total_votes", color = "skyb
 ```
 
 # Question 1: How did congressional voting trends change from 2016-2020
+
+## Introduction
+
+The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020
 
 ## Approach
 
@@ -277,7 +281,7 @@ We analyze the election data from 2016, 2018 and 2020 to determine the party tha
 
 ### 2016
 
-```{r  fig.width = 14, fig.height = 34}
+```{r  fig.width = 16, fig.asp = 0.618}
 
 #| label: Data Visualization
 
@@ -316,13 +320,13 @@ We analyze the election data from 2016, 2018 and 2020 to determine the party tha
 us2016
 ```
 
-We generate a map of united states for the year 2016, Where each state is colored based on the majority party in the House of Representatives .We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 40 states and the rest are won by Republican Party in the year 2016.
+The years analyzed for Q1 are 2016, 2018, and 2020. 2016 and 2020, represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
 
 ### 2018
 
 =======
 
-```{r fig.width = 14, fig.height = 14 }
+```{r fig.width = 16, fig.asp = 0.618 }
 
 us2018 <- plot_usmap(data = data2018,
            values = "winnerByHouseMajority",
@@ -359,7 +363,7 @@ We generate a map of united states for the year 2018, Where each state is colore
 
 ### 2020
 
-```{r fig.width = 14, fig.height = 14 }
+```{r fig.width = 14, fig.asp = 0.618}
 
 
 us2020 <- plot_usmap(data = data2020,
@@ -654,7 +658,7 @@ Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis o
 
 ## Data Visualization
 
-```{r}
+```{r fig.width = 16, fig.asp = 0.618}
 #| label: Data Visualization Q.2
 
 # Visualization - Enhanced Horizontally Stacked Bar Plot for Arizona with Percentage Labels
