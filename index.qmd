@@ -134,23 +134,12 @@ usmap::plot_usmap(data = total_votes_2022, values = "total_votes", color = "skyb
 
 ## Introduction
 
-<<<<<<< HEAD
 The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020. The interest in this question stems from the recent volatility in the US political climate and to understand how voter sentiment changed in the last presidential cycle. Data from the House of Representatives is used rather than general election data because it gives insight into voter sentiment every two years and is more of a direct reflection of voters' beliefs since there are more candidates that can be elected.
-=======
-The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020
->>>>>>> 0bc1ada5a992329123c3b3bf477ea0ca0d7407d4
 
 ## Approach
-Election data from 2016, 2018, and 2020 were extracted from the data set. To quantify party majority metrics in a more simplified manner, all parties that are outside of Republican and Democrat were grouped into a new generalized party called "Other". For each year of interest, a map of the USA is plotted with all 50 states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority". The three maps will then be set in a tabbed format, which will allow years to be toggled between. Maps are useful to analyze this question because they show state-wise data in an accessible way. The colors are then mapped to each party's traditional color, which makes for an easy way to correlate the colors to a party. h
+Election data from 2016, 2018, and 2020 were extracted from the data set. To quantify party majority metrics in a more simplified manner, all parties that are outside of Republican and Democrat were grouped into a new generalized party called "Other". For each year of interest, a map of the USA is plotted with all 50 states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority". The three maps will then be set in a tabbed format, which will allow years to be toggled between. Maps are useful to analyze this question because they show state-wise data in an accessible way. The colors are then mapped to each party's traditional color, which makes for an easy way to correlate the colors to a party. 
 
-The t
-
-
-2016, 2018, and 2020. 2016 and 2020 represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
-
-
-
-election data from 2016, 2018 and 2020 was analyzed to determine the party that has the majority in each state based on the house of representatives. We calculate the party with majority of seats in the house for each state in each election year. It shows that party that received the most total votes in each state for each year. Which tells us the most total votes in each state for each year. The analysis provides insights into the party distribution and voting trends across states in the specified election years.
+## Analysis
 
 ```{r}
 # Data Wrangling
@@ -190,103 +179,6 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
   merge(centroid_labels(regions = c('states')), by = "fips")
 
 
-
-```
-
-## Analysis
-
-```{r  fig.width = 14, fig.height = 34 }
-#general plot just to get used to the function. We can add layers like a ggplot object
-#For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
-
-
-#  us2016 <- plot_usmap(data = data2016, 
-#            values = "winnerByHouseMajority", 
-#            labels = FALSE) + 
-#   scale_fill_manual(name = 'Winner by House Majority', 
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01, 
-#                    min.segment.length = 0) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2016",
-#     #caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) + 
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     #plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# 
-# us2018 <- plot_usmap(data = data2018, 
-#            values = "winnerByHouseMajority", 
-#            labels = FALSE) + 
-#   scale_fill_manual(name = 'Winner by House Majority', 
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01, 
-#                    min.segment.length = 0) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2018",
-#     #caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) + 
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     #plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# us2020 <- plot_usmap(data = data2020, 
-#            values = "winnerByHouseMajority", 
-#            labels = FALSE) + 
-#   scale_fill_manual(name = 'Winner by House Majority', 
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01, 
-#                    min.segment.length = 0,
-#                    force_pull = 0.5) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2020",
-#     caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) + 
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# ggarrange(us2016, us2018, us2020, ncol = 1)
 
 ```
 
@@ -332,15 +224,7 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 us2016
 ```
 
-<<<<<<< HEAD
-The years analyzed for Q1 are 2016, 2018, and 2020. 2016 and 2020 represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
-
-### 2018
-
-=======
-=======
 ## 2018
->>>>>>> 0bc1ada5a992329123c3b3bf477ea0ca0d7407d4
 
 ```{r fig.width = 16, fig.asp = 0.618 }
 
@@ -412,12 +296,6 @@ us2020 <- plot_usmap(data = data2020,
 us2020
 ```
 :::
-
-The years analyzed for Q1 are 2016, 2018, and 2020. 2016 and 2020, represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
-
-We generate a map of united states for the year 2018, Where each state is colored based on the winning party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 42 states and Republican Party has won only in 1 state that is NC in 2018.
-
-We generate a map of united states for the year 2020, Where each state is colored based on the wining party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has lost 13 states which is the most states by comparing 2016, 2018 and 2020 election results. Also, Republican party has gained most states according to the data of previous years.
 
 ## Discussion
 
