@@ -352,14 +352,14 @@ azMap12 <- full_join(cd_az12, distWin2012, by = 'district')
 
 # Create and extract mid points of districts on map for labeling
 
-centroids <- st_centroid(azMap12)
-centCol <- centroids$geometry
- 
-cent2 <- azMap12
-
-azCoords <- as.data.frame(st_coordinates(centroids))
-azCoords$district <- c(2,3,1,9,8,4,6,5,7)
-azMap12 <- full_join(azMap12, azCoords, by = "district")
+# centroids <- st_centroid(azMap12)
+# centCol <- centroids$geometry
+#  
+# cent2 <- azMap12
+# 
+# azCoords <- as.data.frame(st_coordinates(centroids))
+# azCoords$district <- c(2,3,1,9,8,4,6,5,7)
+# azMap12 <- full_join(azMap12, azCoords, by = "district")
 
 
 

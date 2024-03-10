@@ -553,7 +553,7 @@ A new column titled RESULT is added to the datset, labelling items as "Win" if t
 
 Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis on the various methods of voting and how it effects the outcomes of candidates. By focusing on particular details—year, voting type, and election results—it determines both the frequency and percentage of each vote result. This data allows to visualize the Arizona district electoral evolution over that decade.
 
-# \### 2012
+## Arizona Congressional District Maps
 
 ::: panel-tabset
 ## 2012
@@ -561,6 +561,7 @@ Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis o
 ```{r}
 #| label: 2012 District Map
 
+# 2012 District Map
 # Get dataframe to map AZ state from USAboundaries
 cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
   st_sf() |>
@@ -569,21 +570,29 @@ cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Ariz
 # Change district variable type to numeric and rename it 'district'
 cd_az12$district <- as.numeric(cd_az12$district)
 
+
 # Join USAboundaries data with our dataset to determine party winners of each district
 azMap12 <- full_join(cd_az12, distWin2012, by = 'district')
 
-# Plot district map
+# Create and extract mid points of districts on map for labeling
 azMap12 |>
   ggplot() +
   geom_sf(aes(fill = winParty)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2012") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
+        axis.title = element_blank(),
         panel.grid = element_blank(),
         panel.background = element_blank())
-
 ```
 
 
@@ -603,23 +612,31 @@ cd_az16$district <- as.numeric(cd_az16$district)
 # Join USAboundaries data with our dataset to determine party winners of each district
 azMap16 <- full_join(cd_az16, distWin2016, by = 'district')
 
+# Determine if the district party representation changed from previous plot
 azMap16$change <- c("yes", "no", "no", "no", "no", "no", "no", "no", "no")
 
-# Plot district map
+
 azMap16 |>
-  ggplot() + 
-  geom_sf(aes(fill = winParty, alpha = change)) +
-  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  ggplot() +
+  geom_sf(aes(fill = winParty,
+              alpha = change)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
   scale_alpha_discrete(range = c(0.5, 1)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2016") +
   guides(alpha = FALSE) +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
+        axis.title = element_blank(),
         panel.grid = element_blank(),
         panel.background = element_blank())
-
-
 ```
 
 
@@ -639,23 +656,31 @@ cd_az22$district <- as.numeric(cd_az22$district)
 # Join USAboundaries data with our dataset to determine party winners of each district
 azMap22 <- full_join(cd_az22, distWin2022, by = 'district')
 
+# Determine if the district party representation changed from previous plot
 azMap22$change <- c("no", "no", "yes", "yes", "no", "yes", "no", "no", "no")
 
-# Plot district map
+
 azMap22 |>
-  ggplot() + 
-  geom_sf(aes(fill = winParty, alpha = change)) +
-  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  ggplot() +
+  geom_sf(aes(fill = winParty,
+              alpha = change)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
   scale_alpha_discrete(range = c(0.5, 1)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2022") +
   guides(alpha = FALSE) +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
+        axis.title = element_blank(),
         panel.grid = element_blank(),
         panel.background = element_blank())
-
-
 
 
 ```
