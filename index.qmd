@@ -112,7 +112,6 @@ ggplot(total_votes_by_year, aes(x = year, y = totalvotes)) +
 
 ```
 
-
 ```{r}
 # Filter data for the year 2022
 total_votes_2022 <- house_with_New_features %>%
@@ -544,22 +543,54 @@ azMap22 |>
 
 The resultant visualisation is a color-coded map of Arizona's congressional districts in 2022, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of 1st and 9th districts has changed from Democratic party to Republican party.4th congressional district has changed from Republican party to Democratic party.
 
+```{r fig.width = 16, fig.asp = 0.618}
+#| label: Data Visualization Q.2
+
+# Visualization - Enhanced Horizontally Stacked Bar Plot for Arizona with Percentage Labels
+
+ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, levels = unique(Type_of_Voting)), Count), y = Count, fill = RESULT)) +
+  geom_bar(stat = "identity", color = "white") +
+  geom_text(aes(label = paste0(round(Percentage, 1), "%")), 
+            position = position_stack(vjust = 0.5),
+            color = "black", size = 5, fontface = "bold") +  # Add percentage labels
+  facet_wrap(~ year, scales = "free") +
+  labs(title = "Impact of Types of Voting on House Representation in Arizona (2012-2022)",
+       y = "Number of Candidates",
+       x = "Type of Voting") +
+  scale_fill_manual(values = custom_colors) +  # Set custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,size = 14),  # Rotate labels by 90 degrees
+        axis.text.y = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 16),
+        legend.position = "bottom",
+        panel.grid.major.y = element_blank(),  # Remove horizontal grid lines
+        panel.grid.minor.y = element_blank(),  # Remove horizontal grid lines
+        panel.grid.major.x = element_blank(),  # Remove horizontal grid lines
+        panel.grid.minor.x = element_blank(),  # Remove horizontal grid lines
+        panel.background = element_rect(fill = "white"),  # Set panel background color
+        plot.background = element_rect(fill = "#F5F5F5"),  # Set plot background color
+        strip.background = element_rect(fill = "#E0E0E0", color = "white"),  # Set facet strip background color
+        strip.text = element_text(face = "bold",size = 16),  # Set strip text size
+        axis.title.y = element_text(size = 18),  # Set y-axis label size
+        axis.title.x = element_text(size = 18)) +  # Set x-axis label size
+  coord_flip()  # Flip the coordinates to create a horizontally stacked bar chart
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
 ## Discussion
 
 An interesting trend emerges from examining Arizona's congressional district maps: the political setting rarely changes over brief periods, such as between two elections that happened just a few years apart(2012 and 2016). This consistency points strong party loyalty at these times. But a decade of observation tells a different story: there are notable changes in party representation in different districts. This discovery highlights a slow but significant shift in voter attitude and party affiliations. Even though it is rare for districts to switch parties in the course of one or two election cycles, a ten-year period shows a dynamic and ever-changing political landscape. This long-term perspective on the ups and downs of political change allows for a better understanding of the complexity and gradual alterations in voter preferences and party power.
 
 # ANY CODE BELOW THIS SECTION ADD TO THE ABOVE SECTIONS
-
-## EDA for voting methods
-
-```{r}
-#| label: Load new features into dataset
-
-library(readxl)
-house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col_types = FALSE)
-
-house_with_New_features
-```
 
 ## Feature Extaraction and Data wrangling for voting methods
 
@@ -572,6 +603,10 @@ house_with_New_features
     #| message: false
     #| warning: false
 
+    library(readxl)
+    house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col_types = FALSE)
+
+    house_with_New_features
 
     # Function to determine the category based on conditions
     get_category <- function(row) {
@@ -656,44 +691,6 @@ custom_colors <- c("#009688", "#FF9800")
 
 Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis on the various methods of voting and how it effects the outcomes of candidates. By focusing on particular details—year, voting type, and election results—it determines both the frequency and percentage of each vote result. This data allows to visualize the Arizona district electoral evolution over that decade.
 
-## Data Visualization
-
-```{r fig.width = 16, fig.asp = 0.618}
-#| label: Data Visualization Q.2
-
-# Visualization - Enhanced Horizontally Stacked Bar Plot for Arizona with Percentage Labels
-
-ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, levels = unique(Type_of_Voting)), Count), y = Count, fill = RESULT)) +
-  geom_bar(stat = "identity", color = "white") +
-  geom_text(aes(label = paste0(round(Percentage, 1), "%")), 
-            position = position_stack(vjust = 0.5),
-            color = "black", size = 5, fontface = "bold") +  # Add percentage labels
-  facet_wrap(~ year, scales = "free") +
-  labs(title = "Impact of Types of Voting on House Representation in Arizona (2012-2022)",
-       y = "Number of Candidates",
-       x = "Type of Voting") +
-  scale_fill_manual(values = custom_colors) +  # Set custom colors
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,size = 14),  # Rotate labels by 90 degrees
-        axis.text.y = element_text(size = 14),
-        plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
-        legend.title = element_text(size = 16),
-        legend.text = element_text(size = 16),
-        legend.position = "bottom",
-        panel.grid.major.y = element_blank(),  # Remove horizontal grid lines
-        panel.grid.minor.y = element_blank(),  # Remove horizontal grid lines
-        panel.grid.major.x = element_blank(),  # Remove horizontal grid lines
-        panel.grid.minor.x = element_blank(),  # Remove horizontal grid lines
-        panel.background = element_rect(fill = "white"),  # Set panel background color
-        plot.background = element_rect(fill = "#F5F5F5"),  # Set plot background color
-        strip.background = element_rect(fill = "#E0E0E0", color = "white"),  # Set facet strip background color
-        strip.text = element_text(face = "bold",size = 16),  # Set strip text size
-        axis.title.y = element_text(size = 18),  # Set y-axis label size
-        axis.title.x = element_text(size = 18)) +  # Set x-axis label size
-  coord_flip()  # Flip the coordinates to create a horizontally stacked bar chart
-
-```
-
 ## Discussion
 
-The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade reveals varying success rates for conventional voting methods, marked by a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This gap implies that traditional voting procedures, despite their continuous dominance, are not effective entirely, while also emphasising the ongoing difficulty that write-in candidates have in gaining political success in Arizona. These visual representations showcase shifts in electoral outcomes across different voting methodologies over time, providing valuable insights into the evolving political dynamics and voter preferences within the state.
+The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade reveals varying success rates for conventional voting methods, marked by a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This gap implies that traditional voting procedures, despite their continuous dominance, are not effective entirely, while also emphasizing the ongoing difficulty that write-in candidates have in gaining political success in Arizona. These visual representations showcase shifts in electoral outcomes across different voting methodologies over time, providing valuable insights into the evolving political dynamics and voter preferences within the state.
