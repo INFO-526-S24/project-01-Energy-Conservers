@@ -278,7 +278,8 @@ We analyze the election data from 2016, 2018 and 2020 to determine the party tha
 
 ```
 
-### 2016
+::: panel-tabset
+## 2016
 
 ```{r  fig.width = 16, fig.asp = 0.618}
 
@@ -319,11 +320,7 @@ We analyze the election data from 2016, 2018 and 2020 to determine the party tha
 us2016
 ```
 
-The years analyzed for Q1 are 2016, 2018, and 2020. 2016 and 2020, represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
-
-### 2018
-
-=======
+## 2018
 
 ```{r fig.width = 16, fig.asp = 0.618 }
 
@@ -358,11 +355,9 @@ us2018 <- plot_usmap(data = data2018,
 us2018
 ```
 
-We generate a map of united states for the year 2018, Where each state is colored based on the winning party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 42 states and Republican Party has won only in 1 state that is NC in 2018.
+## 2020
 
-### 2020
-
-```{r fig.width = 14, fig.asp = 0.618}
+```{r fig.width = 16, fig.asp = 0.618}
 
 
 us2020 <- plot_usmap(data = data2020,
@@ -396,6 +391,11 @@ us2020 <- plot_usmap(data = data2020,
 
 us2020
 ```
+:::
+
+The years analyzed for Q1 are 2016, 2018, and 2020. 2016 and 2020, represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
+
+We generate a map of united states for the year 2018, Where each state is colored based on the winning party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 42 states and Republican Party has won only in 1 state that is NC in 2018.
 
 We generate a map of united states for the year 2020, Where each state is colored based on the wining party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has lost 13 states which is the most states by comparing 2016, 2018 and 2020 election results. Also, Republican party has gained most states according to the data of previous years.
 
@@ -533,7 +533,10 @@ A new column titled RESULT is added to the datset, labelling items as "Win" if t
 
 Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis on the various methods of voting and how it effects the outcomes of candidates. By focusing on particular details—year, voting type, and election results—it determines both the frequency and percentage of each vote result. This data allows to visualize the Arizona district electoral evolution over that decade.
 
-### 2012
+# \### 2012
+
+::: panel-tabset
+## 2012
 
 ```{r}
 #| label: 2012 District Map
@@ -565,7 +568,7 @@ azMap12 |>
 
 The resultant visualisation is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This visualisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party.
 
-### 2016
+## 2016
 
 ```{r}
 #| label: 2016 District Map
@@ -602,7 +605,7 @@ azMap16 |>
 
 The resultant visualisation is a color-coded map of Arizona's congressional districts in 2016, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of 6th congressional district during the 2016 election cycle has changed from Democratic party to Republican party.
 
-### 2022
+## 2022
 
 ```{r}
 #| label: 2022 District Map
@@ -638,6 +641,7 @@ azMap22 |>
 
 
 ```
+:::
 
 The resultant visualisation is a color-coded map of Arizona's congressional districts in 2022, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of 1st and 9th districts has changed from Democratic party to Republican party.4th congressional district has changed from Republican party to Democratic party.
 
@@ -680,6 +684,6 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
 
 An interesting trend emerges from examining Arizona's congressional district maps: the political setting rarely changes over brief periods, such as between two elections that happened just a few years apart(2012 and 2016). This consistency points strong party loyalty at these times. But a decade of observation tells a different story: there are notable changes in party representation in different districts. This discovery highlights a slow but significant shift in voter attitude and party affiliations. Even though it is rare for districts to switch parties in the course of one or two election cycles, a ten-year period shows a dynamic and ever-changing political landscape. This long-term perspective on the ups and downs of political change allows for a better understanding of the complexity and gradual alterations in voter preferences and party power.
 
-## Discussion Q.2 Part 2 
+## Discussion Q.2 Part 2
 
 The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade reveals varying success rates for conventional voting methods, marked by a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This gap implies that traditional voting procedures, despite their continuous dominance, are not effective entirely, while also emphasizing the ongoing difficulty that write-in candidates have in gaining political success in Arizona. These visual representations showcase shifts in electoral outcomes across different voting methodologies over time, providing valuable insights into the evolving political dynamics and voter preferences within the state.
