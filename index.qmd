@@ -51,7 +51,7 @@ remotes::install_github("ropensci/USAboundariesData")
 
 ## Introducing the Dataset
 
-The dataset, [US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
+The dataset, [US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) is sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
 
 This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate's name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.
 
@@ -132,7 +132,28 @@ usmap::plot_usmap(data = total_votes_2022, values = "total_votes", color = "skyb
 
 # Question 1: How did congressional voting trends change from 2016-2020
 
+## Introduction
+
+<<<<<<< HEAD
+The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020. The interest in this question stems from the recent volatility in the US political climate and to understand how voter sentiment changed in the last presidential cycle. Data from the House of Representatives is used rather than general election data because it gives insight into voter sentiment every two years and is more of a direct reflection of voters' beliefs since there are more candidates that can be elected.
+
 ## Approach
+Election data from 2016, 2018, and 2020 were extracted from the data set. To quantify party majority metrics in a more simplified manner, all parties that are outside of Republican and Democrat were grouped into a new generalized party called "Other". For each year of interest, a map of the USA is plotted with all 50 states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority". The three maps will then be set in a tabbed format, which will allow years to be toggled between. Maps are useful to analyze this question because they show state-wise data in an accessible way. The colors are then mapped to each party's traditional color, which makes for an easy way to correlate the colors to a party. 
+
+## Analysis
+=======
+\<\<\<\<\<\<\< HEAD The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020. The interest in this question stems from the recent volatility in the US political climate and to understand how voter sentiment changed in the last presidential cycle. Data from the House of Representatives is used rather than general election data because it gives insight into voter sentiment every two years and is more of a direct reflection of voters' beliefs since there are more candidates that can be elected. ======= The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020 \>\>\>\>\>\>\> 0bc1ada5a992329123c3b3bf477ea0ca0d7407d4
+
+## Approach
+
+Election data from 2016, 2018, and 2020 were extracted from the data set. To quantify party majority metrics in a more simplified manner, all parties that are outside of Republican and Democrat were grouped into a new generalized party called "Other". For each year of interest, a map of the USA is plotted with all 50 states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority". The three maps will then be set in a tabbed format, which will allow years to be toggled between. Maps are useful to analyze this question because they show state-wise data in an accessible way. The colors are then mapped to each party's traditional color, which makes for an easy way to correlate the colors to a party. h
+
+The t
+
+2016, 2018, and 2020. 2016 and 2020 represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
+
+election data from 2016, 2018 and 2020 was analyzed to determine the party that has the majority in each state based on the house of representatives. We calculate the party with majority of seats in the house for each state in each election year. It shows that party that received the most total votes in each state for each year. Which tells us the most total votes in each state for each year. The analysis provides insights into the party distribution and voting trends across states in the specified election years.
+>>>>>>> aa945af60f6300a2931dd2639a3ebf88cdc31ec2
 
 ```{r}
 # Data Wrangling
@@ -175,108 +196,10 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 ```
 
-We analyze the election data from 2016, 2018 and 2020 to determine the party that has the majority in each state based on the house of representatives. We calculate the party with majority of seats in the house for each state in each election year. It shows that party that received the most total votes in each state for each year. Which tells us the most total votes in each state for each year. The analysis provides insights into the party distribution and voting trends across states in the specified election years.
+::: panel-tabset
+## 2016
 
-## Analysis
-
-```{r  fig.width = 14, fig.height = 34 }
-#general plot just to get used to the function. We can add layers like a ggplot object
-#For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
-
-
-#  us2016 <- plot_usmap(data = data2016, 
-#            values = "winnerByHouseMajority", 
-#            labels = FALSE) + 
-#   scale_fill_manual(name = 'Winner by House Majority', 
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01, 
-#                    min.segment.length = 0) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2016",
-#     #caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) + 
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     #plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# 
-# us2018 <- plot_usmap(data = data2018, 
-#            values = "winnerByHouseMajority", 
-#            labels = FALSE) + 
-#   scale_fill_manual(name = 'Winner by House Majority', 
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01, 
-#                    min.segment.length = 0) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2018",
-#     #caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) + 
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     #plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# us2020 <- plot_usmap(data = data2020, 
-#            values = "winnerByHouseMajority", 
-#            labels = FALSE) + 
-#   scale_fill_manual(name = 'Winner by House Majority', 
-#                     values = c("REPUBLICAN" = 'red' , "DEMOCRAT" = 'blue'))+ 
-#   geom_label_repel(data = data2016,
-#                    aes(label = abbr,
-#                        geometry = geom,
-#                        color = winnerByTotalVotes),
-#                    stat = 'sf_coordinates',
-#                    size = 5,
-#                    force = 0.01, 
-#                    min.segment.length = 0,
-#                    force_pull = 0.5) +
-#   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
-#   labs(
-#     title = 'House Majority vs Popular Vote Majority',
-#     subtitle = "By State in 2020",
-#     caption = "Teal & Harmon | Tidy Tuesday 2023"
-#   ) + 
-#   theme(
-#     plot.title = element_text(size = 25, hjust = 0.5, vjust = -10),
-#     plot.subtitle = element_text(size = 24, hjust = 0.5, vjust = -10),
-#     plot.caption = element_text(size = 20, hjust = 0.5),
-#     legend.text = element_text(size = 12, hjust = 0),
-#     legend.title = element_text(size = 16, hjust= 0),
-#     legend.position = c(0.6,0.03)
-#   )
-# 
-# ggarrange(us2016, us2018, us2020, ncol = 1)
-
-```
-
-### 2016
-
-```{r  fig.width = 14, fig.height = 34}
+```{r  fig.width = 16, fig.asp = 0.618}
 
 #| label: Data Visualization
 
@@ -315,13 +238,10 @@ We analyze the election data from 2016, 2018 and 2020 to determine the party tha
 us2016
 ```
 
-We generate a map of united states for the year 2016, Where each state is colored based on the majority party in the House of Representatives .We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 40 states and the rest are won by Republican Party in the year 2016.
 
-### 2018
+## 2018
 
-=======
-
-```{r fig.width = 14, fig.height = 14 }
+```{r fig.width = 16, fig.asp = 0.618 }
 
 us2018 <- plot_usmap(data = data2018,
            values = "winnerByHouseMajority",
@@ -354,11 +274,9 @@ us2018 <- plot_usmap(data = data2018,
 us2018
 ```
 
-We generate a map of united states for the year 2018, Where each state is colored based on the winning party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 42 states and Republican Party has won only in 1 state that is NC in 2018.
+## 2020
 
-### 2020
-
-```{r fig.width = 14, fig.height = 14 }
+```{r fig.width = 16, fig.asp = 0.618}
 
 
 us2020 <- plot_usmap(data = data2020,
@@ -392,8 +310,7 @@ us2020 <- plot_usmap(data = data2020,
 
 us2020
 ```
-
-We generate a map of united states for the year 2020, Where each state is colored based on the wining party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has lost 13 states which is the most states by comparing 2016, 2018 and 2020 election results. Also, Republican party has gained most states according to the data of previous years.
+:::
 
 ## Discussion
 
@@ -433,6 +350,7 @@ for(date in c(2012, 2016, 2022)){
 
 ## Analysis
 
+<<<<<<< HEAD
 The analysis will look at election results from 2012, 2016, and 2022 to see how Arizona's congressional district alignments have changed over time. The goal is to identify patterns of political representation inside the state's districts, detecting movements in party control over both short-term and decade-long periods. Furthermore, the analysis will look into the influence of various voting procedures, specifically their impact on election outcomes in Arizona.
 
 ### 2012
@@ -561,44 +479,50 @@ house_with_New_features
 ```
 
 ## Feature Extaraction and Data wrangling for voting methods
+=======
+## Feature Extraction and Data wrangling for voting methods
+>>>>>>> f990174785fb11d6cf2a913ff1e7c1e0a4121f7e
 
 1.  **Feature Extraction :** Created 2 new Features - Result( Win and Loss ) and Type_of_Voting , these were done by converting all categorical values in numerical and Created Function
 
     Extracting 1st Feature : Type_of_Voting
 
-    ```{r}
-    #| label: Feature Extaction 1
-    #| message: false
-    #| warning: false
+```{r}
+#| label: Feature Extaction 1
+#| message: false
+#| warning: false
 
+library(readxl)
+house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col_types = FALSE)
 
-    # Function to determine the category based on conditions
-    get_category <- function(row) {
-      if (row["fusion_ticket"] == 1) {
-        return("fusion_ticket")
-      } else if (row["runoff"] == 1) {
-        return("runoff")
-      } else if (row["special"] == 1) {
-        return("special")
-      } else if (row["writein"] == 1) {
-        return("writein")
-      } else if (row["unofficial"] == 1) {
-        return("unofficial")
-      } else {
-        return("Normal")
-      }
-    }
+house_with_New_features
 
-    # Apply the function to each row
-    house_with_New_features$Type_of_Voting <- apply(house_with_New_features , 1, get_category)
+# Function to determine the category based on conditions
+get_category <- function(row) {
+  if (row["fusion_ticket"] == 1) {
+    return("fusion_ticket")
+  } else if (row["runoff"] == 1) {
+    return("runoff")
+  } else if (row["special"] == 1) {
+    return("special")
+  } else if (row["writein"] == 1) {
+    return("writein")
+  } else if (row["unofficial"] == 1) {
+    return("unofficial")
+  } else {
+    return("Normal")
+  }
+}
 
-    # Print the result
-    print(house_with_New_features)
+# Apply the function to each row
+house_with_New_features$Type_of_Voting <- apply(house_with_New_features , 1, get_category)
 
+# Print the result
+print(house_with_New_features)
 
-    ```
+```
 
-    A "Type_of_Voting" column has been added to the dataset which categorizes entries as normal elections, fusion tickets, runoffs, special elections, write-ins, and unofficial results. This feature aids the analysis by emphasizing the multitude and distinctiveness of the election processes reflected in the data.
+A "Type_of_Voting" column has been added to the dataset which categorizes entries as normal elections, fusion tickets, runoffs, special elections, write-ins, and unofficial results. This feature aids the analysis by emphasizing the multitude and distinctiveness of the election processes reflected in the data.
 
 Extracting 2nd Feature : Result( Win/Loss)
 
@@ -623,41 +547,176 @@ A new column titled RESULT is added to the datset, labelling items as "Win" if t
 
 2.  **Data Wrangling :**
 
-```{r}
-#| label: Data Wrangling Q.2
+    ```{r}
+    #| label: Data Wrangling Q.2
 
-# Load necessary libraries
-library(readxl)
-library(dplyr)
-library(ggplot2)
+    # Load necessary libraries
+    library(readxl)
+    library(dplyr)
+    library(ggplot2)
 
-# Filter data for Arizona state, relevant columns, and years 2012-2022
-voting_data_arizona <- house_with_New_features %>%
-  filter(state == "ARIZONA", year >= 2012 & year <= 2022) %>%
-  select(year, Type_of_Voting, RESULT)
+    # Filter data for Arizona state, relevant columns, and years 2012-2022
+    voting_data_arizona <- house_with_New_features %>%
+      filter(state == "ARIZONA", year >= 2012 & year <= 2022) %>%
+      select(year, Type_of_Voting, RESULT)
 
-# Count the number of candidates for each combination of Year, Type_of_Voting, and RESULT
-voting_result_counts_arizona <- voting_data_arizona %>%
-  group_by(year, Type_of_Voting, RESULT) %>%
-  summarise(Count = n())
+    # Count the number of candidates for each combination of Year, Type_of_Voting, and RESULT
+    voting_result_counts_arizona <- voting_data_arizona %>%
+      group_by(year, Type_of_Voting, RESULT) %>%
+      summarise(Count = n())
 
-# Calculate the percentage of candidates for each combination
-voting_result_counts_arizona <- voting_result_counts_arizona %>%
-  group_by(year, Type_of_Voting) %>%
-  mutate(Percentage = (Count / sum(Count)) * 100) %>%
-  ungroup() %>%
-  arrange(year, desc(Count))
+    # Calculate the percentage of candidates for each combination
+    voting_result_counts_arizona <- voting_result_counts_arizona %>%
+      group_by(year, Type_of_Voting) %>%
+      mutate(Percentage = (Count / sum(Count)) * 100) %>%
+      ungroup() %>%
+      arrange(year, desc(Count))
 
-# Custom color palette
-custom_colors <- c("#009688", "#FF9800")
+    # Custom color palette
+    custom_colors <- c("#009688", "#FF9800")
 
-```
+    ```
 
 Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis on the various methods of voting and how it effects the outcomes of candidates. By focusing on particular details—year, voting type, and election results—it determines both the frequency and percentage of each vote result. This data allows to visualize the Arizona district electoral evolution over that decade.
 
-## Data Visualization
+## Arizona Congressional District Maps
+
+::: panel-tabset
+## 2012
 
 ```{r}
+#| label: 2012 District Map
+
+# 2012 District Map
+# Get dataframe to map AZ state from USAboundaries
+cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
+  st_sf() |>
+  rename(district = "cd116fp")
+
+# Change district variable type to numeric and rename it 'district'
+cd_az12$district <- as.numeric(cd_az12$district)
+
+
+# Join USAboundaries data with our dataset to determine party winners of each district
+azMap12 <- full_join(cd_az12, distWin2012, by = 'district')
+
+# Create and extract mid points of districts on map for labeling
+azMap12 |>
+  ggplot() +
+  geom_sf(aes(fill = winParty)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2012") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+```
+
+## 2016
+
+```{r}
+#| label: 2016 District Map
+
+# Get dataframe to map AZ state from USAboundaries
+cd_az16 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
+  st_sf() |>
+  rename(district = "cd116fp")
+
+# Change district variable type to numeric and rename it 'district'
+cd_az16$district <- as.numeric(cd_az16$district)
+
+# Join USAboundaries data with our dataset to determine party winners of each district
+azMap16 <- full_join(cd_az16, distWin2016, by = 'district')
+
+# Determine if the district party representation changed from previous plot
+azMap16$change <- c("yes", "no", "no", "no", "no", "no", "no", "no", "no")
+
+
+azMap16 |>
+  ggplot() +
+  geom_sf(aes(fill = winParty,
+              alpha = change)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
+  scale_alpha_discrete(range = c(0.5, 1)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2016") +
+  guides(alpha = FALSE) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+```
+
+## 2022
+
+```{r}
+#| label: 2022 District Map
+
+# Get dataframe to map AZ state from USAboundaries
+cd_az22 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
+  st_sf() |>
+  rename(district = "cd116fp")
+
+# Change district variable type to numeric and rename it 'district'
+cd_az22$district <- as.numeric(cd_az22$district)
+
+# Join USAboundaries data with our dataset to determine party winners of each district
+azMap22 <- full_join(cd_az22, distWin2022, by = 'district')
+
+# Determine if the district party representation changed from previous plot
+azMap22$change <- c("no", "no", "yes", "yes", "no", "yes", "no", "no", "no")
+
+
+azMap22 |>
+  ggplot() +
+  geom_sf(aes(fill = winParty,
+              alpha = change)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
+  scale_alpha_discrete(range = c(0.5, 1)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  labs(title = "Arizona Congressional Districts 2022") +
+  guides(alpha = FALSE) +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.title = element_blank(),
+        panel.grid = element_blank(),
+        panel.background = element_blank())
+
+
+```
+:::
+
+The resultant visualization is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a color that represents the winning party: blue for Democrats and red for Republicans. The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This localisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party.
+
+The resultant visualization is a color-coded map of Arizona's congressional districts in 2016, based on the political party that won each seat. Each district is assigned a color that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualization is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-color saturation. This visualization reveals that the political leaning of 6th congressional district during the 2016 election cycle has changed from Democratic party to Republican party.
+
+The resultant visualization is a color-coded map of Arizona's congressional districts in 2022, based on the political party that won each seat. Each district is assigned a color that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualization is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-color saturation. This visualization reveals that the political leaning of 1st and 9th districts has changed from Democratic party to Republican party.4th congressional district has changed from Republican party to Democratic party.
+
+```{r fig.width = 16, fig.asp = 0.618}
 #| label: Data Visualization Q.2
 
 # Visualization - Enhanced Horizontally Stacked Bar Plot for Arizona with Percentage Labels
@@ -690,9 +749,12 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
         axis.title.y = element_text(size = 18),  # Set y-axis label size
         axis.title.x = element_text(size = 18)) +  # Set x-axis label size
   coord_flip()  # Flip the coordinates to create a horizontally stacked bar chart
-
 ```
 
 ## Discussion
 
-The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade reveals varying success rates for conventional voting methods, marked by a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This gap implies that traditional voting procedures, despite their continuous dominance, are not effective entirely, while also emphasising the ongoing difficulty that write-in candidates have in gaining political success in Arizona. These visual representations showcase shifts in electoral outcomes across different voting methodologies over time, providing valuable insights into the evolving political dynamics and voter preferences within the state.
+An interesting trend emerges from examining Arizona's congressional district maps: the political setting rarely changes over brief periods, such as between two elections that happened just a few years apart(2012 and 2016). This consistency points strong party loyalty at these times. But a decade of observation tells a different story: there are notable changes in party representation in different districts. This discovery highlights a slow but significant shift in voter attitude and party affiliations. Even though it is rare for districts to switch parties in the course of one or two election cycles, a ten-year period shows a dynamic and ever-changing political landscape. This long-term perspective on the ups and downs of political change allows for a better understanding of the complexity and gradual alterations in voter preferences and party power.
+
+## Discussion Q.2 Part 2 \[Merge Both\]
+
+The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade reveals varying success rates for conventional voting methods, marked by a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This gap implies that traditional voting procedures, despite their continuous dominance, are not effective entirely, while also emphasizing the ongoing difficulty that write-in candidates have in gaining political success in Arizona. These visual representations showcase shifts in electoral outcomes across different voting methodologies over time, providing valuable insights into the evolving political dynamics and voter preferences within the state.
