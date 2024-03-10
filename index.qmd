@@ -134,21 +134,15 @@ usmap::plot_usmap(data = total_votes_2022, values = "total_votes", color = "skyb
 
 ## Introduction
 
-<<<<<<< HEAD
-The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020. The interest in this question stems from the recent volatility in the US political climate and to understand how voter sentiment changed in the last presidential cycle. Data from the House of Representatives is used rather than general election data because it gives insight into voter sentiment every two years and is more of a direct reflection of voters' beliefs since there are more candidates that can be elected.
-=======
-The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020
->>>>>>> 0bc1ada5a992329123c3b3bf477ea0ca0d7407d4
+\<\<\<\<\<\<\< HEAD The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020. The interest in this question stems from the recent volatility in the US political climate and to understand how voter sentiment changed in the last presidential cycle. Data from the House of Representatives is used rather than general election data because it gives insight into voter sentiment every two years and is more of a direct reflection of voters' beliefs since there are more candidates that can be elected. ======= The goal of Q1 is to understand how voting trends in the House of Representatives change over the course of a presidency. To answer this question, district majority (the number of districts a party won), and party vote majority (the number of votes a party received overall), will be visualized. The data will be narrowed down to the district, party, candidate votes and state for the years 2016, 2018, and 2020 \>\>\>\>\>\>\> 0bc1ada5a992329123c3b3bf477ea0ca0d7407d4
 
 ## Approach
+
 Election data from 2016, 2018, and 2020 were extracted from the data set. To quantify party majority metrics in a more simplified manner, all parties that are outside of Republican and Democrat were grouped into a new generalized party called "Other". For each year of interest, a map of the USA is plotted with all 50 states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority". The three maps will then be set in a tabbed format, which will allow years to be toggled between. Maps are useful to analyze this question because they show state-wise data in an accessible way. The colors are then mapped to each party's traditional color, which makes for an easy way to correlate the colors to a party. h
 
 The t
 
-
 2016, 2018, and 2020. 2016 and 2020 represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
-
-
 
 election data from 2016, 2018 and 2020 was analyzed to determine the party that has the majority in each state based on the house of representatives. We calculate the party with majority of seats in the house for each state in each election year. It shows that party that received the most total votes in each state for each year. Which tells us the most total votes in each state for each year. The analysis provides insights into the party distribution and voting trends across states in the specified election years.
 
@@ -332,15 +326,15 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 us2016
 ```
 
-<<<<<<< HEAD
-The years analyzed for Q1 are 2016, 2018, and 2020. 2016 and 2020 represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
+\<\<\<\<\<\<\< HEAD The years analyzed for Q1 are 2016, 2018, and 2020. 2016 and 2020 represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
 
 ### 2018
 
-=======
-=======
+# =======
+
 ## 2018
->>>>>>> 0bc1ada5a992329123c3b3bf477ea0ca0d7407d4
+
+> > > > > > > 0bc1ada5a992329123c3b3bf477ea0ca0d7407d4
 
 ```{r fig.width = 16, fig.asp = 0.618 }
 
@@ -595,7 +589,6 @@ azMap12 |>
         panel.background = element_blank())
 ```
 
-
 ## 2016
 
 ```{r}
@@ -638,7 +631,6 @@ azMap16 |>
         panel.grid = element_blank(),
         panel.background = element_blank())
 ```
-
 
 ## 2022
 
@@ -686,11 +678,11 @@ azMap22 |>
 ```
 :::
 
-The resultant visualisation is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This visualisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party.
+The resultant visualization is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a color that represents the winning party: blue for Democrats and red for Republicans. The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This localisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party.
 
-The resultant visualisation is a color-coded map of Arizona's congressional districts in 2016, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of 6th congressional district during the 2016 election cycle has changed from Democratic party to Republican party.
+The resultant visualization is a color-coded map of Arizona's congressional districts in 2016, based on the political party that won each seat. Each district is assigned a color that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualization is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-color saturation. This visualization reveals that the political leaning of 6th congressional district during the 2016 election cycle has changed from Democratic party to Republican party.
 
-The resultant visualisation is a color-coded map of Arizona's congressional districts in 2022, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of 1st and 9th districts has changed from Democratic party to Republican party.4th congressional district has changed from Republican party to Democratic party.
+The resultant visualization is a color-coded map of Arizona's congressional districts in 2022, based on the political party that won each seat. Each district is assigned a color that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualization is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-color saturation. This visualization reveals that the political leaning of 1st and 9th districts has changed from Democratic party to Republican party.4th congressional district has changed from Republican party to Democratic party.
 
 ```{r fig.width = 16, fig.asp = 0.618}
 #| label: Data Visualization Q.2
@@ -731,6 +723,6 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
 
 An interesting trend emerges from examining Arizona's congressional district maps: the political setting rarely changes over brief periods, such as between two elections that happened just a few years apart(2012 and 2016). This consistency points strong party loyalty at these times. But a decade of observation tells a different story: there are notable changes in party representation in different districts. This discovery highlights a slow but significant shift in voter attitude and party affiliations. Even though it is rare for districts to switch parties in the course of one or two election cycles, a ten-year period shows a dynamic and ever-changing political landscape. This long-term perspective on the ups and downs of political change allows for a better understanding of the complexity and gradual alterations in voter preferences and party power.
 
-## Discussion Q.2 Part 2
+## Discussion Q.2 Part 2 \[Merge Both\]
 
 The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade reveals varying success rates for conventional voting methods, marked by a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This gap implies that traditional voting procedures, despite their continuous dominance, are not effective entirely, while also emphasizing the ongoing difficulty that write-in candidates have in gaining political success in Arizona. These visual representations showcase shifts in electoral outcomes across different voting methodologies over time, providing valuable insights into the evolving political dynamics and voter preferences within the state.
