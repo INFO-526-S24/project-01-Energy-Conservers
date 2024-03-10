@@ -353,11 +353,15 @@ for(date in c(2012, 2016, 2022)){
 <<<<<<< HEAD
 The analysis will look at election results from 2012, 2016, and 2022 to see how Arizona's congressional district alignments have changed over time. The goal is to identify patterns of political representation inside the state's districts, detecting movements in party control over both short-term and decade-long periods. Furthermore, the analysis will look into the influence of various voting procedures, specifically their impact on election outcomes in Arizona.
 
-### 2012
+## Arizona Congressional District Maps
+
+::: panel-tabset
+## 2012
 
 ```{r}
 #| label: 2012 District Map
 
+# 2012 District Map
 # Get dataframe to map AZ state from USAboundaries
 cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
   st_sf() |>
@@ -366,26 +370,32 @@ cd_az12 <- USAboundaries::us_congressional(resolution = "high", states = c("Ariz
 # Change district variable type to numeric and rename it 'district'
 cd_az12$district <- as.numeric(cd_az12$district)
 
+
 # Join USAboundaries data with our dataset to determine party winners of each district
 azMap12 <- full_join(cd_az12, distWin2012, by = 'district')
 
-# Plot district map
+# Create and extract mid points of districts on map for labeling
 azMap12 |>
   ggplot() +
   geom_sf(aes(fill = winParty)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2012") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
+        axis.title = element_blank(),
         panel.grid = element_blank(),
         panel.background = element_blank())
-
 ```
 
-The resultant visualisation is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This visualisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party.
-
-### 2016
+## 2016
 
 ```{r}
 #| label: 2016 District Map
@@ -401,28 +411,34 @@ cd_az16$district <- as.numeric(cd_az16$district)
 # Join USAboundaries data with our dataset to determine party winners of each district
 azMap16 <- full_join(cd_az16, distWin2016, by = 'district')
 
+# Determine if the district party representation changed from previous plot
 azMap16$change <- c("yes", "no", "no", "no", "no", "no", "no", "no", "no")
 
-# Plot district map
+
 azMap16 |>
-  ggplot() + 
-  geom_sf(aes(fill = winParty, alpha = change)) +
-  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  ggplot() +
+  geom_sf(aes(fill = winParty,
+              alpha = change)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
   scale_alpha_discrete(range = c(0.5, 1)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2016") +
   guides(alpha = FALSE) +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
+        axis.title = element_blank(),
         panel.grid = element_blank(),
         panel.background = element_blank())
-
-
 ```
 
-The resultant visualisation is a color-coded map of Arizona's congressional districts in 2016, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of 6th congressional district during the 2016 election cycle has changed from Democratic party to Republican party.
-
-### 2022
+## 2022
 
 ```{r}
 #| label: 2022 District Map
@@ -438,26 +454,44 @@ cd_az22$district <- as.numeric(cd_az22$district)
 # Join USAboundaries data with our dataset to determine party winners of each district
 azMap22 <- full_join(cd_az22, distWin2022, by = 'district')
 
+# Determine if the district party representation changed from previous plot
 azMap22$change <- c("no", "no", "yes", "yes", "no", "yes", "no", "no", "no")
 
-# Plot district map
+
 azMap22 |>
-  ggplot() + 
-  geom_sf(aes(fill = winParty, alpha = change)) +
-  scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  ggplot() +
+  geom_sf(aes(fill = winParty,
+              alpha = change)) +
+  geom_label_repel(box.padding = 0.5,
+                  max.overlaps = Inf,
+                  size = 4,
+                  aes(label = district,
+                      geometry = geometry),
+                  stat = 'sf_coordinates',
+                  force = 0.01,
+                  min.segment.length = 0) +
   scale_alpha_discrete(range = c(0.5, 1)) +
+  scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2022") +
   guides(alpha = FALSE) +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
-        plot.title = element_text(hjust = 0.75),
+        axis.title = element_blank(),
         panel.grid = element_blank(),
         panel.background = element_blank())
 
 
-
-
 ```
+:::
+
+
+The resultant visualisation is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This visualisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party.
+
+The resultant visualisation is a color-coded map of Arizona's congressional districts in 2016, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of 6th congressional district during the 2016 election cycle has changed from Democratic party to Republican party.
+
+### 2022
+
+
 
 The resultant visualisation is a color-coded map of Arizona's congressional districts in 2022, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of 1st and 9th districts has changed from Democratic party to Republican party.4th congressional district has changed from Republican party to Democratic party.
 
@@ -585,7 +619,7 @@ Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis o
 ## 2012
 
 ```{r}
-#| label: 2012 District Map
+#| label: 2012 District Map 2
 
 # 2012 District Map
 # Get dataframe to map AZ state from USAboundaries
@@ -624,7 +658,7 @@ azMap12 |>
 ## 2016
 
 ```{r}
-#| label: 2016 District Map
+#| label: 2016 District Map 2
 
 # Get dataframe to map AZ state from USAboundaries
 cd_az16 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
@@ -667,7 +701,7 @@ azMap16 |>
 ## 2022
 
 ```{r}
-#| label: 2022 District Map
+#| label: 2022 District Map 2
 
 # Get dataframe to map AZ state from USAboundaries
 cd_az22 <- USAboundaries::us_congressional(resolution = "high", states = c("Arizona")) |> 
