@@ -166,5 +166,68 @@
     "title": "Analyzing Trends in House of Representatives from 2016-2020",
     "section": "Insight Gained",
     "text": "Insight Gained\nThe visualization of the House of Representatives broken down by district majority and popular vote majority provides multiple insights. 1) The sentiment of the general population is often overlooked by the electoral (district) system. 2) During a single presidency, the sentiment of the people will change significantly 3) Well known trends can be seen such as midterm elections supporting the opposite party of the incumbent president. ======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; ebe41a1256b11a45ce16b58bba74af08876e2e56 ======= &gt;&gt;&gt;&gt;&gt;&gt;&gt; ebe41a1256b11a45ce16b58bba74af08876e2e56"
+  },
+  {
+    "objectID": "presentation.html#understanding-the-dataset",
+    "href": "presentation.html#understanding-the-dataset",
+    "title": "Taking a look into voting trends and effects",
+    "section": "Understanding the Dataset",
+    "text": "Understanding the Dataset\n\nData sourced from MIT Election Data and Science Lab\n\n\n\nContains observations from elections in the House of Representatives over a span of 47 years starting in 1976 all the way up to 2022 and encompasses a total of 32,452 recorded events. Each event is represented with 20 attributes.\n\n\n\n\nFor our analysis some of the most important variables will be:\n\n\nyear\n\nparty\n\nstate_po\n\npopulation\n\ntotalvotes\n\ndistrict"
+  },
+  {
+    "objectID": "presentation.html#question-1",
+    "href": "presentation.html#question-1",
+    "title": "Taking a look into voting trends and effects",
+    "section": "Question 1",
+    "text": "Question 1\n\nElection Results\n\nHow did US voting trends change election results throughout the 2016-2020 presidential term?\n\n\nAnalysis\nTo answer this question we will look at which party won in each state for the years 2016, 2018, and 2020 to identify patterns and significant changes that occurred in the election results."
+  },
+  {
+    "objectID": "presentation.html#section",
+    "href": "presentation.html#section",
+    "title": "Taking a look into voting trends and effects",
+    "section": "",
+    "text": "Election Results\n\n\n201620182020"
+  },
+  {
+    "objectID": "presentation.html#insight",
+    "href": "presentation.html#insight",
+    "title": "Taking a look into voting trends and effects",
+    "section": "Insight",
+    "text": "Insight\n\nThe sentiment of the general population is often overlooked by the electoral system\nThe sentiment of people during a single presidency will change significantly\nEvident trends can be seen such as supporting the opposite party of the current president in midterm elections"
+  },
+  {
+    "objectID": "presentation.html#question-2",
+    "href": "presentation.html#question-2",
+    "title": "Taking a look into voting trends and effects",
+    "section": "Question 2",
+    "text": "Question 2\n\nArizona Congressional Districts\n\nHow often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?\n\n\nAnalysis\nTo answer this question we will look at Arizona congressional district mappings in the years 2012, 2016, and 2022 to examine the changes that occur in district representation. We will also consider various voting methods and determine which played the largest roles in these elections."
+  },
+  {
+    "objectID": "presentation.html#section-4",
+    "href": "presentation.html#section-4",
+    "title": "Taking a look into voting trends and effects",
+    "section": "",
+    "text": "Arizona Congressional Districts\n\n\n201220162022"
+  },
+  {
+    "objectID": "presentation.html#section-8",
+    "href": "presentation.html#section-8",
+    "title": "Taking a look into voting trends and effects",
+    "section": "",
+    "text": "Arizona Congressional Districts\n\n\n20122022"
+  },
+  {
+    "objectID": "presentation.html#insight-1",
+    "href": "presentation.html#insight-1",
+    "title": "Taking a look into voting trends and effects",
+    "section": "Insight",
+    "text": "Insight\n\nIt is not common for the party representation of a district to change in one or two elections\nDoesn’t mean that change doesn’t occur"
+  },
+  {
+    "objectID": "presentation.html#conclusion",
+    "href": "presentation.html#conclusion",
+    "title": "Taking a look into voting trends and effects",
+    "section": "Conclusion",
+    "text": "Conclusion"
   }
 ]
