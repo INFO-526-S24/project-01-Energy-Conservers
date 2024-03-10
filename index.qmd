@@ -485,6 +485,44 @@ house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col
 
 ## Data wrangling for voting methods
 
+1.  **Feature Extraction :** Created 2 new Features - Result( Win and Loss ) and Type_of_Voting , these was done by converting all categorical values in numerical and Created Function
+
+    Extracting 1st Feature : Type_of_Voting
+
+    ```{r}
+    #| label: Feature Extaction 1
+
+
+    # Function to determine the category based on conditions
+    get_category <- function(row) {
+      if (row["fusion_ticket"] == 1) {
+        return("fusion_ticket")
+      } else if (row["runoff"] == 1) {
+        return("runoff")
+      } else if (row["special"] == 1) {
+        return("special")
+      } else if (row["writein"] == 1) {
+        return("writein")
+      } else if (row["unofficial"] == 1) {
+        return("unofficial")
+      } else {
+        return("Normal")
+      }
+    }
+
+    # Apply the function to each row
+    house_with_New_features$Type_of_Voting1 <- apply(house_with_New_features , 1, get_category)
+
+    # Print the result
+    print(house_with_New_features)
+
+
+    ```
+
+Extracting 2nd Feature : Result( Win/Loss)
+
+1.  **Data Wrangling :**
+
 ```{r}
 #| label: Data Wrangling Q.2
 
