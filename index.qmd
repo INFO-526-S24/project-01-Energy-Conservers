@@ -582,6 +582,7 @@ Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis o
 
 ## Data Visualization
 
+
 ```{r}
 #| label: Data Visualization Q.2
 
@@ -617,3 +618,9 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
   coord_flip()  # Flip the coordinates to create a horizontally stacked bar chart
 
 ```
+
+## Discussion
+The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade reveals varying success rates for conventional voting methods, marked by a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This gap implies that traditional voting procedures, despite their continuous dominance, are not effective entirely, while also emphasising the ongoing difficulty that write-in candidates have in gaining political success in Arizona. These visual representations showcase shifts in electoral outcomes across different voting methodologies over time, providing valuable insights into the evolving political dynamics and voter preferences within the state.
+
+
+
