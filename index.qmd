@@ -12,8 +12,6 @@ execute:
   results: hide 
   echo: false
 editor: visual
-
-
 ---
 
 # Abstract
@@ -22,12 +20,7 @@ This study explores US House election results from 1976 to 2022, focusing on US 
 
 Insights into voting trends are very important metrics for politicians and the general population as it can be directly be related to other aspects of life such as the economy and global politics. These insights can then help politicians target states where voter sentiment can make or break a politicians campaign.
 
-The analysis focused on time-series analysis as the variables were view over time and the changes noted as valuable insights.  The limitations for this project include the assumption that the conglomeration of minor parties will create a larger third party that will vote different from Democrat and Republican, though this is not the case in real life, where some minor parties will align closer to the larger parties and some will votes on their own ideas. Ulitmately, This study provides insights into US voting patterns and the impact of election results on future voting trends.
-
-
-
-
-
+The analysis focused on time-series analysis as the variables were view over time and the changes noted as valuable insights. The limitations for this project include the assumption that the conglomeration of minor parties will create a larger third party that will vote different from Democrat and Republican, though this is not the case in real life, where some minor parties will align closer to the larger parties and some will votes on their own ideas. Ulitmately, This study provides insights into US voting patterns and the impact of election results on future voting trends.
 
 ```{r}
 
@@ -73,14 +66,7 @@ elec16to20 <- elec |>
 
 # Question 1: How did congressional voting trends change from 2016-2020
 
-<<<<<<< HEAD
-
-=======
-## Introduction
->>>>>>> f500a6844f5d3253d57d2cd00bf25ac66f698196
-
 ## Approach
-
 
 ```{r}
 # Data Wrangling
@@ -346,8 +332,6 @@ The visualization of the House of Representatives broken down by district majori
 
 # Question 2 : How often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?
 
-## Introduction
-
 ## Approach
 
 ```{r}
@@ -488,10 +472,7 @@ azMap22 |>
 
 From the Arizona congressional district maps we can see that there are not many changes that occur in the span of only 2-4 years, however there are significant changes that occur when comparing the district maps that are a decade apart. From the rest of the dataset we are able to see that this is often the case, it is not common for many districts to change the parties that represent them in a span of only one or two elections, however this doesn't necessarily mean that change is a rarity as we can see the significant change in district representation over the course of a decade.
 
-
 # ANY CODE BELOW THIS SECTION ADD TO THE ABOVE SECTIONS
-
-
 
 ## EDA for voting methods
 
@@ -499,7 +480,7 @@ From the Arizona congressional district maps we can see that there are not many 
 #| label: Load new features into dataset
 
 library(readxl)
-house_with_New_features <- read_xlsx('data/house_with_New_features.xlsx')
+house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col_types = FALSE)
 ```
 
 ## Data wrangling for voting methods
@@ -507,10 +488,14 @@ house_with_New_features <- read_xlsx('data/house_with_New_features.xlsx')
 ```{r}
 #| label: Data Wrangling Q.2
 
+# Load necessary libraries
+library(readxl)
+library(dplyr)
+library(ggplot2)
 
-# Filter data for Arizona state, relevant columns, and years 2016-2022
+# Filter data for Arizona state, relevant columns, and years 2012-2022
 voting_data_arizona <- house_with_New_features %>%
-  filter(state == "ARIZONA", year >= 2016 & year <= 2022) %>%
+  filter(state == "ARIZONA", year >= 2012 & year <= 2022) %>%
   select(year, Type_of_Voting, RESULT)
 
 # Count the number of candidates for each combination of Year, Type_of_Voting, and RESULT
@@ -528,8 +513,6 @@ voting_result_counts_arizona <- voting_result_counts_arizona %>%
 # Custom color palette
 custom_colors <- c("#009688", "#FF9800")
 
-
-
 ```
 
 ## Data Visualization
@@ -537,31 +520,35 @@ custom_colors <- c("#009688", "#FF9800")
 ```{r}
 #| label: Data Visualization Q.2
 
-library(ggplot2)
 # Visualization - Enhanced Horizontally Stacked Bar Plot for Arizona with Percentage Labels
+
 ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, levels = unique(Type_of_Voting)), Count), y = Count, fill = RESULT)) +
   geom_bar(stat = "identity", color = "white") +
   geom_text(aes(label = paste0(round(Percentage, 1), "%")), 
             position = position_stack(vjust = 0.5),
-            color = "black", size = 4, fontface = "bold") +  # Add percentage labels
+            color = "black", size = 5, fontface = "bold") +  # Add percentage labels
   facet_wrap(~ year, scales = "free") +
-  labs(title = "Impact of Types of Voting on Election Outcomes in Arizona (2016-2022)",
+  labs(title = "Impact of Types of Voting on House Representation in Arizona (2012-2022)",
        y = "Number of Candidates",
-       x = "Type of Voting",
-       fill = "Result") +
+       x = "Type of Voting") +
   scale_fill_manual(values = custom_colors) +  # Set custom colors
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5),  # Rotate labels by 90 degrees
-        plot.title = element_text(hjust = 0.5, size = 12, face = "bold"),
-        legend.title = element_text(size = 12),
-        legend.text = element_text(size = 10),
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,size = 14),  # Rotate labels by 90 degrees
+        axis.text.y = element_text(size = 14),
+        plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
+        legend.title = element_text(size = 16),
+        legend.text = element_text(size = 16),
         legend.position = "bottom",
         panel.grid.major.y = element_blank(),  # Remove horizontal grid lines
         panel.grid.minor.y = element_blank(),  # Remove horizontal grid lines
+        panel.grid.major.x = element_blank(),  # Remove horizontal grid lines
+        panel.grid.minor.x = element_blank(),  # Remove horizontal grid lines
         panel.background = element_rect(fill = "white"),  # Set panel background color
         plot.background = element_rect(fill = "#F5F5F5"),  # Set plot background color
         strip.background = element_rect(fill = "#E0E0E0", color = "white"),  # Set facet strip background color
-        strip.text = element_text(face = "bold")) +
+        strip.text = element_text(face = "bold",size = 16),  # Set strip text size
+        axis.title.y = element_text(size = 18),  # Set y-axis label size
+        axis.title.x = element_text(size = 18)) +  # Set x-axis label size
   coord_flip()  # Flip the coordinates to create a horizontally stacked bar chart
 
 ```
