@@ -75,6 +75,7 @@ for (col in names(house_with_New_features)) {
 
 
 ```
+
 ```{r}
 # Check for missing values
 missing_values <- colSums(is.na(house_with_New_features))
@@ -90,6 +91,7 @@ if (length(cols_with_null) > 0) {
   cat("No columns have null values.\n")
 }
 ```
+
 ```{r}
 # Aggregate total votes by year
 total_votes_by_year <- aggregate(totalvotes ~ year, data = house_with_New_features, sum)
@@ -102,18 +104,32 @@ ggplot(total_votes_by_year, aes(x = year, y = totalvotes)) +
        x = "Year",
        y = "Total Votes") +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  scale_y_continuous(labels = comma_format())
+  scale_y_continuous(labels = comma_format())+
+  theme(plot.title = element_text(size = 20),
+        legend.text = element_text(size = 14))
 
 
 
 ```
 
 
+```{r}
+# Filter data for the year 2022
+total_votes_2022 <- house_with_New_features %>%
+  filter(year == 2022) %>%
+  group_by(state) %>%
+  summarise(total_votes = sum(totalvotes, na.rm = TRUE))
+
+# Plot the total votes by state on a US map for the year 2022 with state abbreviations as labels
+usmap::plot_usmap(data = total_votes_2022, values = "total_votes", color = "skyblue", labels = TRUE) +
+  scale_fill_continuous(labels = scales::comma_format()) +
+  labs(title = "Total Votes by State in 2022",
+       fill = "Total Votes") +
+  theme(plot.title = element_text(size = 20),
+        legend.text = element_text(size = 11))
 
 
-
-
-
+```
 
 # Question 1: How did congressional voting trends change from 2016-2020
 
