@@ -51,15 +51,81 @@ remotes::install_github("ropensci/USAboundariesData")
 
 ## Introducing the Dataset
 
+The dataset, [US House Election Results](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-11-07) sourced from MIT Election Data and Science Lab (MEDSL), offers a comprehensive overview of US House elections.
+
+This dataset contains observations for elections held over 47 years from 1976 to 2022, encompassing a total of 32,452 recorded events. Each event is represented as a row with 20 attributes as columns. These columns provide details including the year, state, district, political party, candidate's name, votes received, and various indicators such as whether it was a runoff election or if it was a write-in candidate.
+
 ## EDA
 
 ```{r}
-elec <- readr::read_csv('data/house.csv')
-describe(elec)
-elec16to20 <- elec |>
-  filter(between(year,2016,2020))  #filter years to between 2016 and 2020
+    #| label: EDA
+    #| message: false
+    #| warning: false
+house_with_New_features <- read_csv('data/house_with_New_features.csv')
 
-#ggplot(elec) |> #create a plot to show change house elections from entire dataset
+house_with_New_features
+
+# Summary statistics for each column
+for (col in names(house_with_New_features)) {
+  cat("Summary Statistics for", col, ":\n")
+  print(summary(house_with_New_features[[col]]))
+  cat("\n")
+}
+
+
+
+```
+
+```{r}
+# Check for missing values
+missing_values <- colSums(is.na(house_with_New_features))
+
+# Filter columns with null values
+cols_with_null <- names(missing_values)[missing_values > 0]
+
+# Display columns with null values
+if (length(cols_with_null) > 0) {
+  cat("Columns with Null Values:\n")
+  print(cols_with_null)
+} else {
+  cat("No columns have null values.\n")
+}
+```
+
+```{r}
+# Aggregate total votes by year
+total_votes_by_year <- aggregate(totalvotes ~ year, data = house_with_New_features, sum)
+library(scales)
+
+# Plot the total votes by year (bar plot)
+ggplot(total_votes_by_year, aes(x = year, y = totalvotes)) +
+  geom_bar(stat = "identity", fill = "skyblue", color = "black") +
+  labs(title = "Total Votes by Year",
+       x = "Year",
+       y = "Total Votes") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_y_continuous(labels = comma_format())+
+  theme(plot.title = element_text(size = 20),
+        legend.text = element_text(size = 14))
+
+
+
+```
+
+```{r}
+# Filter data for the year 2022
+total_votes_2022 <- house_with_New_features %>%
+  filter(year == 2022) %>%
+  group_by(state) %>%
+  summarise(total_votes = sum(totalvotes, na.rm = TRUE))
+
+# Plot the total votes by state on a US map for the year 2022 with state abbreviations as labels
+usmap::plot_usmap(data = total_votes_2022, values = "total_votes", color = "skyblue", labels = TRUE) +
+  scale_fill_continuous(labels = scales::comma_format()) +
+  labs(title = "Total Votes by State in 2022",
+       fill = "Total Votes") +
+  theme(plot.title = element_text(size = 20),
+        legend.text = element_text(size = 11))
 
 
 ```
@@ -70,7 +136,10 @@ elec16to20 <- elec |>
 
 ```{r}
 # Data Wrangling
- 
+elec <- readr::read_csv('data/house.csv')
+
+elec16to20 <- elec |>
+  filter(between(year,2016,2020))  #filter years to between 2016 and 2020 
 for (date in c(2016, #aggregate state mode of party to determine which party has the 
                2018, #majority
                2020)) {
@@ -332,6 +401,10 @@ The visualization of the House of Representatives broken down by district majori
 
 # Question 2 : How often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?
 
+## Introduction.
+
+This question seeks to achieve two objectives: firstly, to identify recurring patterns in Arizona's House representation, and secondly, to examine the impact of different voting methods on election outcomes. We have utilized comprehensive data on House elections in Arizona spanning from 2012 to 2022 to answer this question. This dataset contains details regarding the voting methods employed, election results, party affiliations, districts, and the total votes garnered by each candidate. Through scrutinizing fluctuations in House representation, we aim to gain deeper insights into Arizona's political landscape. Simultaneously, analyzing voting techniques allows us to assess the fairness of elections and devise strategies to increase voter participation.
+
 ## Approach
 
 ```{r}
@@ -358,9 +431,9 @@ for(date in c(2012, 2016, 2022)){
 
 ```
 
-The analysis will look at election results from 2012, 2016, and 2022 to see how Arizona's congressional district alignments have changed over time. The goal is to identify patterns of political representation inside the state's districts, detecting movements in party control over both short-term and decade-long periods. Furthermore, the analysis will look into the influence of various voting procedures, specifically their impact on election outcomes in Arizona.
-
 ## Analysis
+
+The analysis will look at election results from 2012, 2016, and 2022 to see how Arizona's congressional district alignments have changed over time. The goal is to identify patterns of political representation inside the state's districts, detecting movements in party control over both short-term and decade-long periods. Furthermore, the analysis will look into the influence of various voting procedures, specifically their impact on election outcomes in Arizona.
 
 ### 2012
 
@@ -487,7 +560,7 @@ house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col
 house_with_New_features
 ```
 
-## Feature Extaraction and Data wrangling  for voting methods
+## Feature Extaraction and Data wrangling for voting methods
 
 1.  **Feature Extraction :** Created 2 new Features - Result( Win and Loss ) and Type_of_Voting , these were done by converting all categorical values in numerical and Created Function
 
@@ -524,7 +597,8 @@ house_with_New_features
 
 
     ```
-A "Type_of_Voting" column has been added to the dataset which categorizes entries as normal elections, fusion tickets, runoffs, special elections, write-ins, and unofficial results. This feature aids the analysis by emphasizing the multitude and distinctiveness of the election processes reflected in the data.
+
+    A "Type_of_Voting" column has been added to the dataset which categorizes entries as normal elections, fusion tickets, runoffs, special elections, write-ins, and unofficial results. This feature aids the analysis by emphasizing the multitude and distinctiveness of the election processes reflected in the data.
 
 Extracting 2nd Feature : Result( Win/Loss)
 
@@ -578,10 +652,10 @@ voting_result_counts_arizona <- voting_result_counts_arizona %>%
 custom_colors <- c("#009688", "#FF9800")
 
 ```
+
 Analyzing and filtering Arizona's vote data from 2012 to 2022, brings emphasis on the various methods of voting and how it effects the outcomes of candidates. By focusing on particular details—year, voting type, and election results—it determines both the frequency and percentage of each vote result. This data allows to visualize the Arizona district electoral evolution over that decade.
 
 ## Data Visualization
-
 
 ```{r}
 #| label: Data Visualization Q.2
@@ -620,7 +694,5 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
 ```
 
 ## Discussion
+
 The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade reveals varying success rates for conventional voting methods, marked by a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This gap implies that traditional voting procedures, despite their continuous dominance, are not effective entirely, while also emphasising the ongoing difficulty that write-in candidates have in gaining political success in Arizona. These visual representations showcase shifts in electoral outcomes across different voting methodologies over time, providing valuable insights into the evolving political dynamics and voter preferences within the state.
-
-
-
