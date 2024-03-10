@@ -445,7 +445,7 @@ azMap16 |>
 
 ```
 
-The resultant visualisation is a color-coded map of Arizona's congressional districts in 2016, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of Cochise district during that 2016 election cycle has changed from Democratic party to Republican party.
+The resultant visualisation is a color-coded map of Arizona's congressional districts in 2016, based on the political party that won each seat. Each district is assigned a colour that represents the winning party: blue for Democrats and red for Republicans. One key feature of this visualisation is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-colour saturation. This visualisation reveals that the political leaning of Cochise district during the 2016 election cycle has changed from Democratic party to Republican party.
 
 ### 2022
 
