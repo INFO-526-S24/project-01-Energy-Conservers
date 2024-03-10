@@ -238,19 +238,8 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 us2016
 ```
 
-<<<<<<< HEAD
-## 2018
-=======
-\<\<\<\<\<\<\< HEAD The years analyzed for Q1 are 2016, 2018, and 2020. 2016 and 2020 represent presidential election years, which occur every four years. A map of the USA is plotted with all states, where the color of the fill and the color of the label of each state represent different voting metrics. The fill of each state is based on which party has the most districts, which is called "House Majority". The color of the label of each state is based on which party has the most votes overall, called "Popular Vote Majority".
-
-### 2018
-
-# =======
 
 ## 2018
-
-> > > > > > > 0bc1ada5a992329123c3b3bf477ea0ca0d7407d4
->>>>>>> aa945af60f6300a2931dd2639a3ebf88cdc31ec2
 
 ```{r fig.width = 16, fig.asp = 0.618 }
 
