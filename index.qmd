@@ -521,6 +521,20 @@ house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col
 
 Extracting 2nd Feature : Result( Win/Loss)
 
+```{r}
+#| label: Feature Extaction 2 
+
+str(house_with_New_features)
+# Create a new column 'WinLoss' based on conditions
+house_with_New_features <- house_with_New_features %>%
+  mutate(Result = ifelse(candidatevotes == max(candidatevotes[year == year & 
+  state == state & district == district]) &
+  sum(year == year & state == state & district == district ) > 1,"Win", "Loss"))
+
+# Print the result
+print(house_with_New_features)
+```
+
 1.  **Data Wrangling :**
 
 ```{r}
