@@ -68,12 +68,6 @@ elec16to20 <- elec |>
 
 #ggplot(elec) |> #create a plot to show change house elections from entire dataset
 
-elec12to22 <- elec |>
-  filter(between(year,2012,2022))
-
-ariz <- elec12to22 |>
-  filter(state == "ARIZONA",
-         !is.na(party))
 
 ```
 
@@ -305,7 +299,7 @@ us2018 <- plot_usmap(data = data2018,
 us2018
 ```
 
-We generate a map of united states for the year 2018, Where each state is colored based on the wining party in the House of Representatives .We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 42 states and Republican Party has won only in 1 state that is NC in 2018.
+We generate a map of united states for the year 2018, Where each state is colored based on the winning party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has won 42 states and Republican Party has won only in 1 state that is NC in 2018.
 
 ### 2020
 
@@ -344,7 +338,7 @@ us2020 <- plot_usmap(data = data2020,
 us2020
 ```
 
-We generate a map of united states for the year 2020, Where each state is colored based on the wining party in the House of Representatives .We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has lost 13 states which is the most states by comparing 2016, 2018 and 2020 election results. Also, Republican party has gained most states according to the data of previous years.
+We generate a map of united states for the year 2020, Where each state is colored based on the wining party in the House of Representatives. We also included labels for each state indicating the party that received the most votes. The map uses different colors to represent the Republican Party and Democrat Party. We can see out of 50 states in US Democrat Party has lost 13 states which is the most states by comparing 2016, 2018 and 2020 election results. Also, Republican party has gained most states according to the data of previous years.
 
 ## Discussion
 
@@ -402,12 +396,13 @@ azMap12 <- full_join(cd_az12, distWin2012, by = 'district')
 
 # Plot district map
 azMap12 |>
-  ggplot() + 
+  ggplot() +
   geom_sf(aes(fill = winParty)) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
   labs(title = "Arizona Congressional Districts 2012") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
+        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
 
@@ -429,14 +424,19 @@ cd_az16$district <- as.numeric(cd_az16$district)
 # Join USAboundaries data with our dataset to determine party winners of each district
 azMap16 <- full_join(cd_az16, distWin2016, by = 'district')
 
+azMap16$change <- c("yes", "no", "no", "no", "no", "no", "no", "no", "no")
+
 # Plot district map
 azMap16 |>
   ggplot() + 
-  geom_sf(aes(fill = winParty)) +
+  geom_sf(aes(fill = winParty, alpha = change)) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  scale_alpha_discrete(range = c(0.5, 1)) +
   labs(title = "Arizona Congressional Districts 2016") +
+  guides(alpha = FALSE) +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
+        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
 
@@ -459,14 +459,19 @@ cd_az22$district <- as.numeric(cd_az22$district)
 # Join USAboundaries data with our dataset to determine party winners of each district
 azMap22 <- full_join(cd_az22, distWin2022, by = 'district')
 
+azMap22$change <- c("no", "no", "yes", "yes", "no", "yes", "no", "no", "no")
+
 # Plot district map
 azMap22 |>
   ggplot() + 
-  geom_sf(aes(fill = winParty)) +
+  geom_sf(aes(fill = winParty, alpha = change)) +
   scale_fill_manual(name = "Party", values = c("blue", "red")) +
+  scale_alpha_discrete(range = c(0.5, 1)) +
   labs(title = "Arizona Congressional Districts 2022") +
+  guides(alpha = FALSE) +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank(),
+        plot.title = element_text(hjust = 0.75),
         panel.grid = element_blank(),
         panel.background = element_blank())
 
