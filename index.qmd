@@ -481,9 +481,11 @@ From the Arizona congressional district maps we can see that there are not many 
 
 library(readxl)
 house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col_types = FALSE)
+
+house_with_New_features
 ```
 
-## Data wrangling for voting methods
+## Feature Extaraction and Data wrangling  for voting methods
 
 1.  **Feature Extraction :** Created 2 new Features - Result( Win and Loss ) and Type_of_Voting , these was done by converting all categorical values in numerical and Created Function
 
@@ -491,6 +493,8 @@ house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col
 
     ```{r}
     #| label: Feature Extaction 1
+    #| message: false
+    #| warning: false
 
 
     # Function to determine the category based on conditions
@@ -511,7 +515,7 @@ house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col
     }
 
     # Apply the function to each row
-    house_with_New_features$Type_of_Voting1 <- apply(house_with_New_features , 1, get_category)
+    house_with_New_features$Type_of_Voting <- apply(house_with_New_features , 1, get_category)
 
     # Print the result
     print(house_with_New_features)
@@ -523,19 +527,22 @@ Extracting 2nd Feature : Result( Win/Loss)
 
 ```{r}
 #| label: Feature Extaction 2 
+#| message: false
+#| warning: false
 
 str(house_with_New_features)
+
 # Create a new column 'WinLoss' based on conditions
-house_with_New_features <- house_with_New_features %>%
-  mutate(Result = ifelse(candidatevotes == max(candidatevotes[year == year & 
-  state == state & district == district]) &
-  sum(year == year & state == state & district == district ) > 1,"Win", "Loss"))
+house_with_New_features$RESULT <- ifelse(house_with_New_features$mode == "TOTAL" &
+                       house_with_New_features$candidatevotes == ave(house_with_New_features$candidatevotes, house_with_New_features$year, house_with_New_features$state, house_with_New_features$district, FUN = max) &
+                       ave(house_with_New_features$mode, house_with_New_features$year, house_with_New_features$state, house_with_New_features$district, FUN = function(x) sum(x == "TOTAL")) > 1,
+                     "Win", "Loss")
 
 # Print the result
 print(house_with_New_features)
 ```
 
-1.  **Data Wrangling :**
+2.  **Data Wrangling :**
 
 ```{r}
 #| label: Data Wrangling Q.2
