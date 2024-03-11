@@ -353,6 +353,7 @@ for(date in c(2012, 2016, 2022)){
 ## Arizona Congressional District Maps
 
 ::: panel-tabset
+
 ## 2012
 
 ```{r}
@@ -479,15 +480,13 @@ azMap22 |>
 
 
 ```
+
 :::
-
-## Insight
-The resultant visualization is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a color that represents the winning party blue for Democrats and red for Republicans.The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This localisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party. One key feature of the 2016 and 2022 visualizations is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-color saturation. The 2016 visualization reveals that the political leaning of 6th congressional district has changed from Democratic party to Republican party.The 2022 visualization reveals that the political leaning of 1st and 9th districts has changed from Democratic party to Republican party. Additionally, 4th congressional district has changed from Republican party to Democratic party.
-
 
 
 
 ```{r}
+
 #| label: Load new features into dataset
 #| output: false
 
@@ -496,32 +495,24 @@ The resultant visualization is a color-coded map of Arizona's congressional dist
 library(readxl)
 house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col_types = FALSE)
 
-house_with_New_features
 ```
 
 
 
 
 ```{r}
+
 #| label: Feature Extaction 1
 #| message: false
 #| warning: false
 #| output: false
 
-# ## Feature Extaraction and Data wrangling for voting methods
-# =======
-# ## Feature Extraction and Data wrangling for voting methods
-# >>>>>>> f990174785fb11d6cf2a913ff1e7c1e0a4121f7e
-# 
-# 1.  **Feature Extraction :** Created 2 new Features - Result( Win and Loss ) and Type_of_Voting , these were done by converting all categorical values in numerical and Created Function
-# 
-#     Extracting 1st Feature : Type_of_Voting
+
 
 
 library(readxl)
 house_with_New_features <- read_csv('data/house_with_New_features.csv', show_col_types = FALSE)
 
-house_with_New_features
 
 # Function to determine the category based on conditions
 get_category <- function(row) {
@@ -543,8 +534,7 @@ get_category <- function(row) {
 # Apply the function to each row
 house_with_New_features$Type_of_Voting <- apply(house_with_New_features , 1, get_category)
 
-# Print the result
-print(house_with_New_features)
+
 
 ```
 
@@ -562,7 +552,7 @@ print(house_with_New_features)
 
 
 
-str(house_with_New_features)
+
 
 # Create a new column 'WinLoss' based on conditions
 house_with_New_features$RESULT <- ifelse(house_with_New_features$mode == "TOTAL" &
@@ -570,12 +560,12 @@ house_with_New_features$RESULT <- ifelse(house_with_New_features$mode == "TOTAL"
                        ave(house_with_New_features$mode, house_with_New_features$year, house_with_New_features$state, house_with_New_features$district, FUN = function(x) sum(x == "TOTAL")) > 1,
                      "Win", "Loss")
 
-# Print the result
-print(house_with_New_features)
+
 ```
 
 
     ```{r}
+    
     #| label: Data Wrangling Q.2
     #| output: false
 
@@ -608,7 +598,7 @@ print(house_with_New_features)
     custom_colors <- c("#009688", "#FF9800")
 
     ```
->>>>>>> f2c9b4ccef533d148e75285d35ccbd68e077f8bc
+
 
 ```{r fig.width = 16, fig.asp = 0.618}
 #| label: Data Visualization Q.2
@@ -647,6 +637,8 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
 
 ## Discussion
 
-The visual representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. An interesting trend emerges from examining Arizona's congressional district maps: while the political setting remains relatively stable over short periods, such as between elections just a few years apart, a decade-long observation reveals significant changes in party representation across districts, indicating shifts in voter attitudes and party affiliations. The analysis of Arizona's electoral data over the past decade shows varying success rates for conventional voting methods, with a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This highlights the ongoing difficulty write-in candidates face in gaining political success in Arizona, despite traditional voting procedures maintaining dominance. These visual representations provide valuable insights into evolving political dynamics and voter preferences within the state.
+The first visualization is a color-coded map of Arizona's congressional districts in 2012, based on the political party that won each seat. Each district is assigned a color that represents the winning party blue for Democrats and red for Republicans.The representation offers a visual picture of Arizona's political distribution in 2012, highlighting regions of Democratic and Republican strength and providing insights into regional political processes. This localisation reveals the political leaning of most of the congressional districts in Arizona during that election cycle was towards the Democratic party. One key feature of the 2016 and 2022 visualizations is the use of transparency to highlight shifts in political representations. Districts with a party change are displayed with a lower opacity, distinguishing them from those with no change, which keep full-color saturation. The 2016 visualization reveals that the political leaning of 6th congressional district has changed from Democratic party to Republican party.The 2022 visualization reveals that the political leaning of 1st and 9th districts has changed from Democratic party to Republican party. Additionally, 4th congressional district has changed from Republican party to Democratic party.
+
+The second representation of the data offers a detailed description of election outcomes by voting type from 2012 to 2022, distinguishing between victories and defeats through color-coded bars and labeled percentages. The analysis of Arizona's electoral data over the past decade shows varying success rates for conventional voting methods, with a significant decline in 2020 followed by a notable recovery in 2022. In contrast, candidates utilizing write-in approaches consistently faced electoral setbacks year after year. This highlights the ongoing difficulty write-in candidates face in gaining political success in Arizona, despite traditional voting procedures maintaining dominance. These visual representations provide valuable insights into evolving political dynamics and voter preferences within the state.
 
 
