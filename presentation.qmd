@@ -1,5 +1,5 @@
 ---
-title: "Analyzing US House of Represenative voting trends"
+title: "Analyzing voting trends in the US House of Representatives"
 subtitle: "INFO 526 - Spring 2024 - Project 1"
 author: "The Power of Voters: Christian Ortmann, Sachin Patil, Abhishek Kumar, Tejas Bhawari, Monica Kommareddy, Nick Ferrante"
 title-slide-attributes:

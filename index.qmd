@@ -564,7 +564,7 @@ house_with_New_features$RESULT <- ifelse(house_with_New_features$mode == "TOTAL"
 ```
 
 
-    ```{r}
+```{r}
     
     #| label: Data Wrangling Q.2
     #| output: false
@@ -596,8 +596,7 @@ house_with_New_features$RESULT <- ifelse(house_with_New_features$mode == "TOTAL"
 
     # Custom color palette
     custom_colors <- c("#009688", "#FF9800")
-
-    ```
+```
 
 
 ```{r fig.width = 16, fig.asp = 0.618}
