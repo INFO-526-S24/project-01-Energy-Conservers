@@ -658,7 +658,7 @@ voting_result_counts_arizona <- voting_result_counts_arizona %>%
 custom_colors <- c("#009688", "#FF9800")
 ```
 
-```{r}
+```{r fig.width = 16, fig.asp = 0.618}
 #| label: Data Visualization Q.2
 
 # Visualization - Enhanced Horizontally Stacked Bar Plot for Arizona with Percentage Labels
