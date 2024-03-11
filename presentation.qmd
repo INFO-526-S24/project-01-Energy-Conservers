@@ -670,3 +670,5 @@ Win or Loss ?? Does it affected by Voting pattern
 
 
 ## Conclusion
+
+Voting trends can vary on a national and local scale.
