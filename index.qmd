@@ -57,13 +57,13 @@ This dataset contains observations for elections held over 47 years from 1976 to
 
 ## EDA
 
+Summary Statistics for Dataset
 ```{r}
     #| label: EDA
     #| message: false
     #| warning: false
 house_with_New_features <- read_csv('data/house_with_New_features.csv')
 
-house_with_New_features
 
 # Summary statistics for each column
 for (col in names(house_with_New_features)) {
@@ -114,18 +114,18 @@ ggplot(total_votes_by_year, aes(x = year, y = totalvotes)) +
 
 ```{r}
 # Filter data for the year 2022
-total_votes_2022 <- house_with_New_features %>%
-  filter(year == 2022) %>%
-  group_by(state) %>%
-  summarise(total_votes = sum(totalvotes, na.rm = TRUE))
-
-# Plot the total votes by state on a US map for the year 2022 with state abbreviations as labels
-usmap::plot_usmap(data = total_votes_2022, values = "total_votes", color = "skyblue", labels = TRUE) +
-  scale_fill_continuous(labels = scales::comma_format()) +
-  labs(title = "Total Votes by State in 2022",
-       fill = "Total Votes") +
-  theme(plot.title = element_text(size = 20),
-        legend.text = element_text(size = 11))
+# total_votes_2022 <- house_with_New_features %>%
+#   filter(year == 2022) %>%
+#   group_by(state) %>%
+#   summarise(total_votes = sum(totalvotes, na.rm = TRUE))
+# 
+# # Plot the total votes by state on a US map for the year 2022 with state abbreviations as labels
+# usmap::plot_usmap(data = total_votes_2022, values = "total_votes", color = "skyblue", labels = TRUE, label_color = 'white') + 
+#   scale_fill_continuous(labels = scales::comma_format()) +
+#   labs(title = "Total Votes by State in 2022",
+#        fill = "Total Votes") +
+#   theme(plot.title = element_text(size = 20),
+#         legend.text = element_text(size = 11))
 
 
 ```
