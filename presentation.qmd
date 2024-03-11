@@ -99,12 +99,12 @@ elec16to20 <- elec |>
 Election Results
 :::
 
-How did US voting trends change election results throughout the 2016-2020 presidential term?
+How did US voting trends change election results from 2016-2020?
 
 ::: {.fragment .fade-in}
 ### Analysis
 
-To answer this question we will look at which party won in each state for the years 2016, 2018, and 2020 to identify patterns and significant changes that occurred in the election results.
+To answer this question we will look at voting metrics to understand party majority and voter sentiment in each state for the years 2016, 2018, and 2020. This will identify patterns and significant changes that occurred in the election results.
 :::
 
 ##  {auto-animate="true"}
