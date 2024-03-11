@@ -624,4 +624,10 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
 
 ## Conclusion
 
-Voting trends can vary on a national and local scale.
+-   On a national scale, it is not uncommon for the majority representation in the House to not reflect the voting results of the general population
+
+-   It is common for voters to support the opposite party of the current president in midterm elections
+
+-   Regarding state districts, change does occur, though it may take years for it to be realized
+
+-   It is rare that write in votes effectively produce a winning candidate.
