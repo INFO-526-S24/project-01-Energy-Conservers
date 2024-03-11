@@ -95,7 +95,6 @@ elec16to20 <- elec |>
 
 
 ## Question 1
-Election Results
 How did US voting trends change election results from 2016-2020?
 
 ::: {.fragment .fade-in}
@@ -259,11 +258,6 @@ us2020
 -   Evident trends can be seen such as supporting the opposite party of the current president in midterm elections
 
 ## Question 2 
-
-::: {style="margine-top: 0px;"}
-Arizona Congressional Districts
-:::
-
 How often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?
 
 ::: {.fragment .fade-in}
