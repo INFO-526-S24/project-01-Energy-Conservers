@@ -10,6 +10,6 @@ This project was developed by The Power of the Voters For [INFO 526 - Data Analy
 
 -   Nick Ferrante: 1st Year, MS Data Science, Specializing in AI/ML (e.g., year, major, etc.).
 
--   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
+-   Team member 3:Abhishek Kumar: 1st Year, MS Data Science, Researcher, VIP project: Road Safety. 
 
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
+-   Sachin Patil : 2nd Year , MS Information Science . Specializing in ML
