@@ -596,8 +596,8 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
        x = "Type of Voting") +
   scale_fill_manual(values = custom_colors) +  # Set custom colors
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,size = 16),  # Rotate labels by 90 degrees
-        axis.text.y = element_text(size = 16),
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,size = 18),  # Rotate labels by 90 degrees
+        axis.text.y = element_text(size = 18),
         plot.title = element_text(hjust = 0.5, size = 20, face = "bold"),
         legend.title = element_text(size = 18),
         legend.text = element_text(size = 18),
