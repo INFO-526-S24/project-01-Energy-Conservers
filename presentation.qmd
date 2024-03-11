@@ -1,5 +1,5 @@
 ---
-title: "Taking a look into voting trends and effects"
+title: "Analyzing US House of Represenative voting trends"
 subtitle: "INFO 526 - Spring 2024 - Project 1"
 author: "The Power of Voters: Christian Ortmann, Sachin Patil, Abhishek Kumar, Tejas Bhawari, Monica Kommareddy, Nick Ferrante"
 title-slide-attributes:
@@ -84,42 +84,14 @@ elec16to20 <- elec |>
 # US House Election Dataset
 
 ## Understanding the Dataset
-
+::: {.fragment .fade-in}
 -   Data sourced from MIT Election Data and Science Lab
+:::
 
 ::: {.fragment .fade-in}
 -   Contains observations from elections in the House of Representatives over a span of 47 years starting in 1976 all the way up to 2022 and encompasses a total of 32,452 recorded events. Each event is represented with 20 attributes.
 :::
 
-::: {.fragment .fade-in}
--   For our analysis some of the most important variables will be:
-
-    ::: columns
-    ::: {.column width="33%"}
-    **`year`**
-    :::
-
-    ::: {.column width="33%"}
-    **`party`**
-    :::
-
-    ::: {.column width="34%"}
-    **`state_po`**
-    :::
-
-    ::: {.column width="33%"}
-    **`population`**
-    :::
-
-    ::: {.column width="33%"}
-    **`totalvotes`**
-    :::
-
-    ::: {.column width="34%"}
-    **`district`**
-    :::
-    :::
-:::
 
 ## Question 1 {auto-animate="true"}
 

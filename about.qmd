@@ -12,4 +12,4 @@ This project was developed by The Power of the Voters For [INFO 526 - Data Analy
 
 -   Team member 3: One sentence description of Team member 3 (e.g., year, major, etc.).
 
--   Team member 4: One sentence description of Team member 4 (e.g., year, major, etc.).
+-   Sachin Patil : 2nd Year , MS Information Science . Specializing in ML
