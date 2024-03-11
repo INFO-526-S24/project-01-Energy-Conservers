@@ -8,8 +8,6 @@ title-slide-attributes:
   data-background-opacity: "0.5"
   data-slide-number: none
 format:
-
-  
   revealjs:
     transition: convex
     theme:  ['data/customtheming.scss']
@@ -61,14 +59,7 @@ remotes::install_github("ropensci/USAboundariesData")
 # Plot theme
 ggplot2::theme_set(ggplot2::theme_minimal(base_size = 14))
 
-# For better figure resolution
-knitr::opts_chunk$set(
-  fig.retina = 3, 
-  dpi = 300, 
-  fig.width = 6, 
-  fig.asp = 0.618, 
-  fig.align = "center"
-  )
+
 ```
 
 ```{r}
@@ -102,14 +93,16 @@ How did US voting trends change election results from 2016-2020?
 
 To answer this question we will look at voting metrics to understand party majority and voter sentiment in each state for the years 2016, 2018, and 2020. This will identify patterns and significant changes that occurred in the election results.
 :::
+## 
 
-## Election Results
+::: {style="margin-top: -40px; font-size: 1em; font-weight: bold;"}
+Election Results
+:::
 
 ```{r}
 #| label: Data Wrangling
 
-
-for (date in c(2016, #aggregate state mode of party to determine which party has the 
+for (date in c(2016, #aggregate state mode of party to determine which party has the
                2018, #majority
                2020)) {
   result <- elec16to20 |>
@@ -142,10 +135,9 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 ```
 
 ::: panel-tabset
-## 2016
+### 2016
 
-```{r  fig.width = 14, fig.asp = 0.618 }
-#| label: Data Visualization
+```{r  fig.width = 14, fig.height = 8}
 #general plot just to get used to the function. We can add layers like a ggplot object
 #For Question 1 we want three maps of the US where each state is colored based on the winning party, then also a number for each state corresponding to the party that had the most votes
 
@@ -161,7 +153,7 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
                        color = winnerByTotalVotes),
                    stat = 'sf_coordinates',
                    size = 5,
-                   force = 0.01, 
+                   force = 0.006, 
                    min.segment.length = 0) +
   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) + 
   labs(
@@ -175,15 +167,14 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
     plot.caption = element_text(size = 20, hjust = 0.5),
     legend.text = element_text(size = 12, hjust = 0),
     legend.title = element_text(size = 16, hjust= 0),
-    legend.position = c(0.6,0.03)
+    legend.position = 'right'
   )
 
 us2016
 ```
+### 2018
 
-## 2018
-
-```{r fig.width = 14, fig.asp = 0.618 }
+```{r  fig.width = 14, fig.height = 8}
 us2018 <- plot_usmap(data = data2018,
            values = "winnerByHouseMajority",
            labels = FALSE) +
@@ -195,7 +186,7 @@ us2018 <- plot_usmap(data = data2018,
                        color = winnerByTotalVotes),
                    stat = 'sf_coordinates',
                    size = 5,
-                   force = 0.01,
+                   force = 0.006,
                    min.segment.length = 0) +
   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
   labs(
@@ -209,15 +200,15 @@ us2018 <- plot_usmap(data = data2018,
     plot.caption = element_text(size = 20, hjust = 0.5),
     legend.text = element_text(size = 12, hjust = 0),
     legend.title = element_text(size = 16, hjust= 0),
-    legend.position = c(0.6,0.03)
+    legend.position = 'right'
   )
 
 us2018
 ```
 
-## 2020
+### 2020
 
-```{r fig.width = 14, fig.asp = 0.618 }
+```{r  fig.width = 14, fig.height = 8}
 us2020 <- plot_usmap(data = data2020,
            values = "winnerByHouseMajority",
            labels = FALSE) +
@@ -229,7 +220,7 @@ us2020 <- plot_usmap(data = data2020,
                        color = winnerByTotalVotes),
                    stat = 'sf_coordinates',
                    size = 5,
-                   force = 0.01,
+                   force = 0.006,
                    min.segment.length = 0,
                    force_pull = 0.5) +
   scale_color_manual(name = 'Winner by Total Votes', values = c("REPUBLICAN"= "red", "DEMOCRAT"="blue")) +     guides(color = guide_legend(title = "Winner by Total Votes")) +
@@ -244,9 +235,8 @@ us2020 <- plot_usmap(data = data2020,
     plot.caption = element_text(size = 20, hjust = 0.5),
     legend.text = element_text(size = 12, hjust = 0),
     legend.title = element_text(size = 16, hjust= 0),
-    legend.position = c(0.6,0.03)
+    legend.position = 'right'
   )
-
 us2020
 ```
 :::
