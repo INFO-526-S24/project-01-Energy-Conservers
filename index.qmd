@@ -1,5 +1,5 @@
 ---
-title: "Analyzing Trends in House of Representatives from 2016-2020"
+title: "Analyzing Trends in the House of Representatives"
 subtitle: "INFO 526 - Project 1"
 author: "The Power of The Voters"
 format: 
