@@ -300,7 +300,19 @@ us2020
 
 ## Discussion
 
-The visualization of the House of Representatives broken down by district majority and popular vote majority provides multiple insights. 1) The sentiment of the general population is often overlooked by the electoral (district) system. 2) During a single presidency, the sentiment of the people will change significantly 3) Well known trends can be seen such as midterm elections supporting the opposite party of the incumbent president.
+The visualization of the House of Representatives broken down by district majority and popular vote majority provides multiple insights. 
+
+1) The sentiment of the general population is often overlooked by the electoral (district) system.
+  This is evident in the fact that the color of the state differs from the color of the label. This is due to the fact that some districts will have different population concentrations, so when one district    might have a large population and votes for one party and two other districts with less than 1/2 the population each vote for the opposite party, the district majority will favor the second and third example districts and the popular vote will favor the first more populous district.
+  
+2) During a single presidency, the sentiment of the people will change significantly.
+  In the 2018 plot, the house majority changes to Democrat for 49 of the 50 states. This is a well known trend that is typical of most presidencies where the House of Representatives will flip to the opposite party of the president in the midterm elections. It is reasonable to assume that if 2022 is analyzed, it would show a more red map with the house majority becoming Republican since it is the opposite party of the presidency currently in office in 2022.
+
+3) Some states show no change with each feature.
+  States on the west coast show no change in popular vote or house majority. Other states like Texas, see the House majority change over the time frame, but the popular vote majority stays the same way. This reveals that state as a population supports one party, while the district system will elect a different one based on how the districts are created. 
+
+
+
 
 # Question 2 : How often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?
 
