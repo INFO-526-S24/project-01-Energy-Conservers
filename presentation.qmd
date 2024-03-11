@@ -1,5 +1,5 @@
 ---
-title: "Taking a look into voting trends and effects"
+title: "Analyzing US House of Represenative voting trends"
 subtitle: "INFO 526 - Spring 2024 - Project 1"
 author: "The Power of Voters: Christian Ortmann, Sachin Patil, Abhishek Kumar, Tejas Bhawari, Monica Kommareddy, Nick Ferrante"
 title-slide-attributes:
@@ -84,42 +84,14 @@ elec16to20 <- elec |>
 # US House Election Dataset
 
 ## Understanding the Dataset
-
+::: {.fragment .fade-in}
 -   Data sourced from MIT Election Data and Science Lab
+:::
 
 ::: {.fragment .fade-in}
 -   Contains observations from elections in the House of Representatives over a span of 47 years starting in 1976 all the way up to 2022 and encompasses a total of 32,452 recorded events. Each event is represented with 20 attributes.
 :::
 
-::: {.fragment .fade-in}
--   For our analysis some of the most important variables will be:
-
-    ::: columns
-    ::: {.column width="33%"}
-    **`year`**
-    :::
-
-    ::: {.column width="33%"}
-    **`party`**
-    :::
-
-    ::: {.column width="34%"}
-    **`state_po`**
-    :::
-
-    ::: {.column width="33%"}
-    **`population`**
-    :::
-
-    ::: {.column width="33%"}
-    **`totalvotes`**
-    :::
-
-    ::: {.column width="34%"}
-    **`district`**
-    :::
-    :::
-:::
 
 ## Question 1 {auto-animate="true"}
 
@@ -127,12 +99,12 @@ elec16to20 <- elec |>
 Election Results
 :::
 
-How did US voting trends change election results throughout the 2016-2020 presidential term?
+How did US voting trends change election results from 2016-2020?
 
 ::: {.fragment .fade-in}
 ### Analysis
 
-To answer this question we will look at which party won in each state for the years 2016, 2018, and 2020 to identify patterns and significant changes that occurred in the election results.
+To answer this question we will look at voting metrics to understand party majority and voter sentiment in each state for the years 2016, 2018, and 2020. This will identify patterns and significant changes that occurred in the election results.
 :::
 
 ##  {auto-animate="true"}
@@ -569,31 +541,7 @@ azMap22 |>
 ```
 :::
 
-## Insight
-
--   It is not common for the party representation of a district to change in one or two elections
--   Doesn't mean that change doesn't occur
-
-## Question 2 {auto-animate="true"}
-
-::: {style="margine-top: 0px;"}
-Win & Loss ?? Influence of Voting Pattern in Arizona State
-:::
-
-Is voting methods played a significant role in these elections?
-
-::: {.fragment .fade-in}
-### Analysis
-
-------------------------------------------------------------------------
-:::
-
-##  {auto-animate="true" transition="none-out"}
-
-::: {style="margin-top: -80px; font-size: 1.5em; font-weight: bold;"}
-Win or Loss ?? Does it affected by Voting pattern
-:::
-
+## Voting Methods
 ```{r}
 #| label: Load new features into dataset
 
@@ -658,7 +606,7 @@ voting_result_counts_arizona <- voting_result_counts_arizona %>%
 custom_colors <- c("#009688", "#FF9800")
 ```
 
-```{r}
+```{r fig.width = 16, fig.asp = 0.618}
 #| label: Data Visualization Q.2
 
 # Visualization - Enhanced Horizontally Stacked Bar Plot for Arizona with Percentage Labels
@@ -693,5 +641,32 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
   coord_flip()  # Flip the coordinates to create a horizontally stacked bar chart
 
 ```
+
+## Insight
+
+-   It is not common for the party representation of a district to change in one or two elections
+-   Doesn't mean that change doesn't occur
+
+## Question 2 {auto-animate="true"}
+
+::: {style="margine-top: 0px;"}
+Win & Loss ?? Influence of Voting Pattern in Arizona State
+:::
+
+Is voting methods played a significant role in these elections?
+
+::: {.fragment .fade-in}
+### Analysis
+
+------------------------------------------------------------------------
+:::
+
+##  {auto-animate="true" transition="none-out"}
+
+::: {style="margin-top: -80px; font-size: 1.5em; font-weight: bold;"}
+Win or Loss ?? Does it affected by Voting pattern
+:::
+
+
 
 ## Conclusion
