@@ -1,5 +1,5 @@
 ---
-title: "Analyzing voting trends in the US House of Representatives"
+title: "Analyzing voting trends in the US House of Representatives "
 subtitle: "INFO 526 - Spring 2024 - Project 1"
 author: "The Power of Voters: Christian Ortmann, Sachin Patil, Abhishek Kumar, Tejas Bhawari, Monica Kommareddy, Nick Ferrante"
 title-slide-attributes:
@@ -8,6 +8,7 @@ title-slide-attributes:
   data-background-opacity: "0.5"
   data-slide-number: none
 format:
+
   
   revealjs:
     transition: convex
@@ -265,7 +266,7 @@ us2020
 -   The sentiment of people during a single presidency will change significantly
 -   Evident trends can be seen such as supporting the opposite party of the current president in midterm elections
 
-## Question 2 {auto-animate="true"}
+## Question 2 
 
 ::: {style="margine-top: 0px;"}
 Arizona Congressional Districts
@@ -279,11 +280,7 @@ How often did change occur in House representation from the years 2012-2022 in t
 To answer this question we will look at Arizona congressional district mappings in the years 2012, 2016, and 2022 to examine the changes that occur in district representation. We will also consider various voting methods and determine which played the largest roles in these elections.
 :::
 
-##  {auto-animate="true" transition="none-out"}
-
-::: {style="margin-top: -80px; font-size: 1.5em; font-weight: bold;"}
-Arizona Congressional Districts
-:::
+## Arizona Congressional Districts {transition="none-out"}
 
 ```{r}
 #| label: Arizona Congressional District Maps
@@ -439,11 +436,7 @@ azMap22 |>
 ```
 :::
 
-##  {transition="none-in"}
-
-::: {style="margin-top: -80px; font-size: 1.5em; font-weight: bold;"}
-Arizona Congressional Districts
-:::
+##  Arizona Congressional Districts {transition="none-in"}
 
 ::: panel-tabset
 ## 2012
@@ -646,27 +639,7 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
 
 -   It is not common for the party representation of a district to change in one or two elections
 -   Doesn't mean that change doesn't occur
-
-## Question 2 {auto-animate="true"}
-
-::: {style="margine-top: 0px;"}
-Win & Loss ?? Influence of Voting Pattern in Arizona State
-:::
-
-Is voting methods played a significant role in these elections?
-
-::: {.fragment .fade-in}
-### Analysis
-
-------------------------------------------------------------------------
-:::
-
-##  {auto-animate="true" transition="none-out"}
-
-::: {style="margin-top: -80px; font-size: 1.5em; font-weight: bold;"}
-Win or Loss ?? Does it affected by Voting pattern
-:::
-
+-   Voting methods have minimal influence on which party is elected
 
 
 ## Conclusion
