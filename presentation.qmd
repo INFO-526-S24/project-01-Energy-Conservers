@@ -76,6 +76,7 @@ elec16to20 <- elec |>
 # US House Election Dataset
 
 ## Understanding the Dataset
+
 ::: {.fragment .fade-in}
 -   Data sourced from MIT Election Data and Science Lab
 :::
@@ -84,8 +85,8 @@ elec16to20 <- elec |>
 -   Contains observations from elections in the House of Representatives over a span of 47 years starting in 1976 all the way up to 2022 and encompasses a total of 32,452 recorded events. Each event is represented with 20 attributes.
 :::
 
-
 ## Question 1
+
 How did US voting trends change election results from 2016-2020?
 
 ::: {.fragment .fade-in}
@@ -93,6 +94,7 @@ How did US voting trends change election results from 2016-2020?
 
 To answer this question we will look at voting metrics to understand party majority and voter sentiment in each state for the years 2016, 2018, and 2020. This will identify patterns and significant changes that occurred in the election results.
 :::
+
 ## 
 
 ::: {style="margin-top: -40px; font-size: 1em; font-weight: bold;"}
@@ -172,6 +174,7 @@ data2020 <- merge(genMaj2020, partyMaj2020) |>
 
 us2016
 ```
+
 ### 2018
 
 ```{r  fig.width = 14, fig.height = 8}
@@ -247,7 +250,8 @@ us2020
 -   The sentiment of people during a single presidency will change significantly
 -   Evident trends can be seen such as supporting the opposite party of the current president in midterm elections
 
-## Question 2 
+## Question 2
+
 How often did change occur in House representation from the years 2012-2022 in the state of Arizona and which voting methods played a significant role in these elections?
 
 ::: {.fragment .fade-in}
@@ -412,7 +416,7 @@ azMap22 |>
 ```
 :::
 
-##  Arizona Congressional Districts {transition="none-in"}
+## Arizona Congressional Districts {transition="none-in"}
 
 ::: panel-tabset
 ## 2012
@@ -511,6 +515,7 @@ azMap22 |>
 :::
 
 ## Voting Methods
+
 ```{r}
 #| label: Load new features into dataset
 
@@ -591,11 +596,11 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
        x = "Type of Voting") +
   scale_fill_manual(values = custom_colors) +  # Set custom colors
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,size = 14),  # Rotate labels by 90 degrees
-        axis.text.y = element_text(size = 14),
-        plot.title = element_text(hjust = 0.5, size = 18, face = "bold"),
-        legend.title = element_text(size = 16),
-        legend.text = element_text(size = 16),
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5,size = 18),  # Rotate labels by 90 degrees
+        axis.text.y = element_text(size = 18),
+        plot.title = element_text(hjust = 0.5, size = 20, face = "bold"),
+        legend.title = element_text(size = 18),
+        legend.text = element_text(size = 18),
         legend.position = "bottom",
         panel.grid.major.y = element_blank(),  # Remove horizontal grid lines
         panel.grid.minor.y = element_blank(),  # Remove horizontal grid lines
@@ -604,9 +609,9 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
         panel.background = element_rect(fill = "white"),  # Set panel background color
         plot.background = element_rect(fill = "#F5F5F5"),  # Set plot background color
         strip.background = element_rect(fill = "#E0E0E0", color = "white"),  # Set facet strip background color
-        strip.text = element_text(face = "bold",size = 16),  # Set strip text size
-        axis.title.y = element_text(size = 18),  # Set y-axis label size
-        axis.title.x = element_text(size = 18)) +  # Set x-axis label size
+        strip.text = element_text(face = "bold",size = 18),  # Set strip text size
+        axis.title.y = element_text(size = 20),  # Set y-axis label size
+        axis.title.x = element_text(size = 20)) +  # Set x-axis label size
   coord_flip()  # Flip the coordinates to create a horizontally stacked bar chart
 
 ```
@@ -617,7 +622,12 @@ ggplot(voting_result_counts_arizona, aes(x = reorder(factor(Type_of_Voting, leve
 -   Doesn't mean that change doesn't occur
 -   Voting methods have minimal influence on which party is elected
 
-
 ## Conclusion
 
-Voting trends can vary on a national and local scale.
+-   On a national scale, it is not uncommon for the majority representation in the House to not reflect the voting results of the general population
+
+-   It is common for voters to support the opposite party of the current president in midterm elections
+
+-   Regarding state districts, change does occur, though it may take years for it to be realized
+
+-   It is rare that write in votes effectively produce a winning candidate.
