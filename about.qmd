@@ -8,12 +8,12 @@ This project was developed by The Power of the Voters For [INFO 526 - Data Analy
 
 -   Christian Ortmann: 1st Year, MS Data Science, Researcher in the School of Mining and Mineral Resources
 
--   Nick Ferrante: 1st Year, MS Data Science, Specializing in AI/ML.
+-   Nick Ferrante: 1st Year, MS Data Science, Specializing in AI/ML
 
--   Abhishek Kumar: 1st Year, MS Data Science, Researcher, VIP project: Road Safety.
+-   Abhishek Kumar: 1st Year, MS Data Science, Researcher, VIP project: Road Safety
 
 -   Sachin Patil : 2nd Year , MS Information Science . Specializing in ML
 
 -   Tejas Bhawari : 1st Year, MS Data Science, RPA Developer
 
--   Kommareddy Monica Tejaswi : 1st Year, MS Data Science.
+-   Kommareddy Monica Tejaswi : 1st Year, MS Data Science
